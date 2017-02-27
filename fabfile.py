@@ -396,6 +396,7 @@ def devupdate():
     local('bower install')
     local('gulp')
 
+
 def devinit():
     os.chdir(os.path.dirname(__file__))
 
@@ -406,3 +407,9 @@ def devinit():
     local('.env/bin/python3 manage.py loaddata config/localsite.json', capture=False)
 
     _ascii_art('killer')
+
+
+def devenv():
+    os.chdir(os.path.dirname(__file__))
+    devsetup()
+    local('.env/bin/pip3 install --upgrade -r requirements.txt')
