@@ -374,6 +374,7 @@ def _pwdgen():
           + random.choice(allowedDigits) + random.choice(allowedDigits)
     return pwd
 
+
 def devsetup():
     os.chdir(os.path.dirname(__file__))
 
@@ -387,6 +388,7 @@ def devsetup():
         local(
             'cp -p src/website/local_settings.development.py src/website/local_settings.py',
             capture=False)
+
 
 def devupdate():
     os.chdir(os.path.dirname(__file__))
