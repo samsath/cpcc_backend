@@ -9,7 +9,7 @@ from rest_framework import routers
 admin.autodiscover()
 
 router = routers.SimpleRouter()
-router.register(r'accounts',AccountViewSet)
+#router.register(r'accounts',AccountViewSet)
 
 urlpatterns = [
     url(r'api-token-auth$', views.obtain_auth_token),

@@ -5,9 +5,9 @@ PROJECT_ROOT = os.path.dirname(
 
 
 def _project_config():
-    from ConfigParser import SafeConfigParser
+    import configparser
     config_file = os.path.join(PROJECT_ROOT, 'project.ini')
-    project_config = SafeConfigParser()
+    project_config = configparser.ConfigParser()
     project_config.read(config_file)
     return project_config
 project_config = _project_config()
@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     ]
 
-SECRET_KEY = ''
 
 ADMINS = (
     (u'sam', u'samhipwell@gmail.com'),
@@ -64,17 +63,30 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.webdesign',
+    'django.contrib.gis',
 
     'django_extensions',
     'flatblocks',
-    'behave_django',
+    #'lettuce.django',
 
-    #'corsheaders',
 
     #rest
     'rest_framework',
     'rest_framework.authtoken',
     'guardian',
+
+    #programs
+    'website.accounts',
+    'website.article',
+    'website.faq',
+    'website.membership',
+    'website.newsletter',
+    'website.clubsessions',
+    'website.calendar',
+    'website.homepage',
+    'website.enquiry',
+
+
 
 ]
 
@@ -82,7 +94,7 @@ MIDDLEWARE = [
     #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.clubsessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
