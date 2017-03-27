@@ -71,7 +71,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     event_set = CalendarEventSerializer(many=True, read_only=True)
     weather = WeatherTypeSerializer(read_only=True)
     trip_set = CalendarTripSerializer(read_only=True, many=True)
-    
+
     class Meta:
         models = Calendar
         fields = '__all__'
