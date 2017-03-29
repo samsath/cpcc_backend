@@ -5,6 +5,7 @@ from website.accounts.serialiers import AccountSerializer
 
 class NotificationSerializer(serializers.ModelSerializer):
     author = AccountSerializer(read_only=True)
+
     class Meta:
         model = Notification
         fields = '__all__'
