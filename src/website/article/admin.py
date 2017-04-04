@@ -30,7 +30,6 @@ class ArticleAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_editable = ('is_public','is_featured','sort_value',)
     list_filter = ('is_public','is_featured')
     search_fields = ('title','author__first_name','author__last_name',)
-    date_hierarchy = ('post_date',)
 
     fieldsets = (
         (_('Basic'),{

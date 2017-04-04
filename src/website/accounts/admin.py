@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django.template.response import TemplateResponse
-from django.conf.urls import url, patterns
+from django.conf.urls import url
 from .models import *
 from django.shortcuts import render
 from .form import UploadForm
@@ -71,10 +71,10 @@ class NewUserAdmin(UserAdmin):
 
     def get_urls(self):
 
-        return patterns('',
-                        (r'^(\d+)/change/password/$',
-                         self.admin_site.admin_view(self.user_change_password))
-                        ) + super(UserAdmin, self).get_urls()
+        return [
+                url(r'^(\d+)/change/password/$',
+                 self.admin_site.admin_view(self.user_change_password))
+                ] + super(UserAdmin, self).get_urls()
 
     def lookup_allowed(self, lookup, value):
         # See #20078: we don't want to allow any lookups involving passwords.

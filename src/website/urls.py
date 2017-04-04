@@ -13,20 +13,22 @@ from website.newsletter.views import NewsletterView
 
 admin.autodiscover()
 
-router = routers.SimpleRouter()
-router.register(r'article', ArticleViewSet)
-router.register(r'category', CategoryViewSet)
-router.register(r'sessions', SessionView)
-router.register(r'faq', FaqViewSet)
-router.register(r'notification', NotificationView)
-router.register(r'homepage', HomePageView)
-router.register(r'menu', MenuViews)
-router.register(r'membership', MembershipView)
-router.register(r'newsletter', NewsletterView)
+router_v1 = routers.SimpleRouter()
+router_v1.register(r'article', ArticleViewSet)
+router_v1.register(r'category', CategoryViewSet)
+router_v1.register(r'sessions', SessionView)
+router_v1.register(r'faq', FaqViewSet)
+router_v1.register(r'notification', NotificationView)
+router_v1.register(r'homepage', HomePageView)
+router_v1.register(r'menu', MenuViews)
+router_v1.register(r'membership', MembershipView)
+router_v1.register(r'newsletter', NewsletterView)
 
 
 urlpatterns = [
     url(r'api-token-auth$', views.obtain_auth_token),
-    url(r'^', include(router.urls)),
+    url(r'^api/v1/', include(router_v1.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^admin/', include(admin.site.urls)),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

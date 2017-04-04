@@ -1,11 +1,12 @@
+#!/usr/bin/env python3
 import os
+import configparser
 
 PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(__file__)))
 
 
 def _project_config():
-    import configparser
     config_file = os.path.join(PROJECT_ROOT, 'project.ini')
     project_config = configparser.ConfigParser()
     project_config.read(config_file)
@@ -17,6 +18,8 @@ PROJECT_NAME = project_config.get('project', 'name')
 DOMAIN = project_config.get('project', 'domain')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+SITE_ID = 1
 
 ###########################################################################
 #                            project settings                             #
@@ -55,14 +58,14 @@ USE_I18N = True
 
 
 INSTALLED_APPS = [
-	'django.contrib.auth',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'tinymce_4',
     'django.contrib.admin',
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'django.contrib.webdesign',
     'django.contrib.gis',
 
     'django_extensions',
@@ -72,8 +75,9 @@ INSTALLED_APPS = [
 
     #rest
     'rest_framework',
-    'rest_framework.authtoken',
+    #'rest_framework.authtoken',
     'guardian',
+    'knox',
 
     #programs
     'website.accounts',
@@ -86,18 +90,16 @@ INSTALLED_APPS = [
     'website.homepage',
     'website.enquiry',
 
-
-
 ]
 
 MIDDLEWARE = [
-    #'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.clubsessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.admindocs.middleware.XViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 
@@ -130,13 +132,13 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
-                'django.core.context_processors.request',
-                'website.context_processors.site',
+
             ],
         },
     },
@@ -145,18 +147,12 @@ TEMPLATES = [
 AUTH_USER_MODEL = 'accounts.User'
 ROOT_URLCONF = 'website.urls'
 
-WSGI_APPLICATION = ''
+
 
 AUTH_PASSWORD_VALIDATORS = [
 
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 #CORS_ORIGIN_ALLOW_ALL = True
 ###########################################################################
@@ -217,9 +213,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',
+        #'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',

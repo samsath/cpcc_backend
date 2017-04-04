@@ -1,13 +1,15 @@
 __author__ = 'sam'
 from django.db import models
-from tinymce.widgets import TinyMCE
+from tinymce_4.widgets import TinyMCEFullWidget
+
 
 def TextEditor():
-    return TinyMCE(attrs={'style': 'width: 50%; height: 20em;'})
+    return TinyMCEFullWidget(attrs={'style': 'width: 50%; height: 20em;'})
+
 
 class TinyMCEAdminMixin(object):
     formfield_overrides = {
-        models.TextField: {'widget': TinyMCE(attrs={'style': 'width:50%; height:20em;'})},
+        models.TextField: {'widget': TinyMCEFullWidget(attrs={'style': 'width:50%; height:20em;'})},
     }
 
     def get_queryset(self, request):

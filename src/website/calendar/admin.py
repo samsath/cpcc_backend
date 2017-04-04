@@ -11,16 +11,15 @@ class WeatherTypeAdmin(admin.ModelAdmin):
 
 class TideAdmin(admin.TabularInline):
     list_display = ('time','level',)
-    models = Tide
+    model = Tide
 
 
 class EventTabAdmin(admin.TabularInline):
-    models = Event
+    model = Event
 
 
 class CalendarAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('date','sun_rise','sun_set',)
-    date_hierarchy = ('date',)
     search_fields = ('date',)
     inlines = [TideAdmin,EventTabAdmin]
 
@@ -29,11 +28,10 @@ class EventAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('title','event_type','date','author','is_public','is_featured')
     list_editable = ('is_public','is_featured',)
     list_filter = ('event_type',)
-    date_hierarchy = ('date',)
     search_fields = ('title',)
     fieldsets = (
-        (_('Event'),{
-            'fields':{
+        (_('Event'), {
+            'fields': (
                 'title',
                 'event_type',
                 'date',
@@ -41,44 +39,41 @@ class EventAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
                 'end_time',
                 'author',
                 'description'
-            }
+            )
         }),
         (_('Settings'),{
-            'fields':{
+            'fields':(
                 'is_public',
                 'is_featured',
-            }
+            )
         })
     )
 
 
 class ExtraFieldsAdmin(admin.TabularInline):
-    models = ExtraFields
+    model = ExtraFields
 
 
 class TripAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
-    list_display = ('title','author','start_date','end_date','is_public','is_featured')
+    list_display = ('title','start_date','end_date','is_public','is_featured')
     list_editable = ('is_public','is_featured',)
-    list_filter = ('event_type',)
-    date_hierarchy = ('date',)
     search_fields = ('title',)
     fieldsets = (
         (_('Event'),{
-            'fields':{
+            'fields':(
                 'title',
                 'day',
                 'start_date',
                 'end_date',
-                'author',
                 'list_description',
                 'description'
-            }
+            )
         }),
         (_('Settings'),{
-            'fields':{
+            'fields':(
                 'is_public',
                 'is_featured',
-            }
+            )
         })
     )
     inlines = [ExtraFieldsAdmin,]

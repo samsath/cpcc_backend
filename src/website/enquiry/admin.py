@@ -9,8 +9,8 @@ class EnquiryAdmin(admin.ModelAdmin):
     list_display = ('email','first_name','last_name','created')
     search_fields = ('email','first_name','last_name',)
     fieldsets = (
-        (_('Message'),{
-            'fields':(
+        (_('Message'), {
+            'fields': (
                 'email',
                 'first_name',
                 'last_name',
@@ -18,7 +18,7 @@ class EnquiryAdmin(admin.ModelAdmin):
                 'created',
                 'modified',
             )
-        })
+        }),
     )
     readonly_fields = ('email','first_name','last_name','message','created','modified',)
 

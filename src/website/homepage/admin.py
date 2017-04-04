@@ -10,8 +10,8 @@ class NotificationAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_editable = ('is_public',)
     search_fields = ('title','message',)
     fieldsets = (
-        (_('Notification'),{
-            'fields':(
+        (_('Notification'), {
+            'fields': (
                 'title',
                 'message',
                 'start',
@@ -24,7 +24,7 @@ class NotificationAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
                 'is_public',
                 'is_featured',
             )
-        })
+        }),
     )
 
 
@@ -32,12 +32,12 @@ class HomagePageAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('title','is_public',)
     fieldsets = (
         (_('Items'),{
-            'fields':{
+            'fields':(
                 'title',
                 'description',
                 'is_public'
-            }
-        })
+            )
+        }),
     )
 
 
