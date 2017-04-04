@@ -27,6 +27,7 @@ router_v1.register(r'newsletter', NewsletterView)
 
 urlpatterns = [
     url(r'api-token-auth$', views.obtain_auth_token),
+    url(r'api/auth/', include('knox.urls')),
     url(r'^api/v1/', include(router_v1.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),

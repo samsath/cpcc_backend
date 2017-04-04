@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import configparser
+from datetime import timedelta
 
 PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(__file__)))
@@ -205,6 +206,14 @@ LOGGING = {
 ###########################################################################
 #                           REST_FRAMEWORK                             #
 ###########################################################################
+
+REST_KNOX = {
+  'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
+  'AUTH_TOKEN_CHARACTER_LENGTH': 64,
+  'TOKEN_TTL': timedelta(hours=10),
+  'USER_SERIALIZER': 'knox.serializers.UserSerializer',
+}
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.

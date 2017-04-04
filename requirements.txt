@@ -23,3 +23,4 @@ utide == 0.1.0
 django-grappelli == 2.9.1
 django-filebrowser == 3.7.2
 django-rest-knox == 3.0.0
+prospector == 0.12.4
