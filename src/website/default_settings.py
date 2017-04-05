@@ -80,6 +80,17 @@ INSTALLED_APPS = [
     'guardian',
     'knox',
 
+    'sortedm2m',
+     'taggit',
+    'easy_thumbnails',
+    'mediastore',
+    'mediastore.mediatypes.download',
+    'mediastore.mediatypes.embeded',
+    'mediastore.mediatypes.image',
+    'mediastore.mediatypes.pdf',
+    'mediastore.mediatypes.video',
+    'mediastore.mediatypes.map',
+
     #programs
     'website.accounts',
     'website.article',
@@ -148,7 +159,11 @@ TEMPLATES = [
 AUTH_USER_MODEL = 'accounts.User'
 ROOT_URLCONF = 'website.urls'
 
-
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+    },
+}
 
 AUTH_PASSWORD_VALIDATORS = [
 
