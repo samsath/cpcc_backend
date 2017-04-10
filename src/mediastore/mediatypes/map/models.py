@@ -10,7 +10,9 @@ class Map(Media, gismodel.Model):
     centre = gismodel.PointField(_('centre'))
     path = gismodel.LineStringField(_('Path'))
     start = gismodel.PointField(_('Start'))
-    end = gismodel.PointField(_('End'))
+    start_name = gismodel.CharField(_('Start Name'), max_length=255, blank=True, null=True)
+    end = gismodel.PointField(_('Middle or End'))
+    end_name = gismodel.CharField(_('Middle or End Name'), max_length=255, blank=True, null=True)
     objects = gismodel.GeoManager()
 
     class Meta:
