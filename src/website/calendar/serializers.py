@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from website.accounts.serializers import AccountSerializer
+from mediastore.api.serializers import MediaStoreSerializers
 
 
 class WeatherTypeSerializer(serializers.ModelSerializer):
@@ -24,6 +25,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class TripExtraSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = ExtraFields
         fields = '__all__'
@@ -31,6 +33,9 @@ class TripExtraSerializer(serializers.ModelSerializer):
 
 class TripSerializer(serializers.ModelSerializer):
     extrafields_set = TripExtraSerializer(many=True, read_only=True)
+    map = MediaStoreSerializers(read_only=True)
+    main_image = MediaStoreSerializers(read_only=True)
+    gallery = MediaStoreSerializers(read_only=True, many=True)
 
     class Meta:
         model = Trips
@@ -48,7 +53,9 @@ class CalendarTripSerializer(serializers.ModelSerializer):
 
 class CalendarEventSerializer(serializers.ModelSerializer):
     author = AccountSerializer(read_only=True)
-
+    map = MediaStoreSerializers(read_only=True)
+    main_image = MediaStoreSerializers(read_only=True)
+    gallery = MediaStoreSerializers(read_only=True, many=True)
     class Meta:
         model = Event
         fields = '__all__'

@@ -46,6 +46,20 @@ class MenuAdmin(admin.ModelAdmin):
     list_editable = ('sort_value',)
 
 
+class PageImagesAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
+    list_display = ('title','is_public',)
+    fieldsets = (
+        (_('Items'),{
+            'fields':(
+                'title',
+                'main_image',
+                'is_public'
+            )
+        }),
+    )
+
+
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(Homepage, HomagePageAdmin)
 admin.site.register(Menu, MenuAdmin)
+admin.site.register(PageImages, PageImagesAdmin)

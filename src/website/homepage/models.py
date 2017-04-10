@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField, ModificationDateTimeField)
+from mediastore.fields import MediaField, MultipleMediaField
 
 
 class Notification(Base):
@@ -26,6 +27,7 @@ class Homepage(models.Model):
     public = PublicManager()
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model':'image'}, related_name='homepage_main_image')
 
     def __unicode__(self):
         return self.title
@@ -54,3 +56,21 @@ class Menu(models.Model):
         verbose_name = 'Menu'
         verbose_name_plural = 'Menu'
         ordering = ['sort_value', ]
+
+
+class PageImages(models.Model):
+    title = models.CharField(_('Title'), max_length=255)
+    is_public = models.BooleanField(_('Public'), default=False)
+    object = models.Manager()
+    public = PublicManager()
+    created = CreationDateTimeField()
+    modified = ModificationDateTimeField()
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'image'},
+                            related_name='pageimage_main_image')
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Page Image'
+        verbose_name_plural = 'Page Images'

@@ -7,9 +7,11 @@ from rest_framework import routers
 from website.article.views import ArticleViewSet, CategoryViewSet
 from website.clubsessions.views import SessionView
 from website.faq.views import FaqViewSet
-from website.homepage.views import NotificationView, HomePageView, MenuViews
+from website.homepage.views import NotificationView, HomePageView, MenuViews, PageImageView
 from website.membership.views import MembershipView
 from website.newsletter.views import NewsletterView
+from mediastore.api.views import medialist, mediadetial
+
 
 admin.autodiscover()
 
@@ -23,6 +25,7 @@ router_v1.register(r'homepage', HomePageView)
 router_v1.register(r'menu', MenuViews)
 router_v1.register(r'membership', MembershipView)
 router_v1.register(r'newsletter', NewsletterView)
+router_v1.register(r'pageimages', PageImageView)
 
 
 urlpatterns = [
@@ -31,5 +34,7 @@ urlpatterns = [
     url(r'^api/v1/', include(router_v1.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/media/list$', medialist, name='medialist'),
+    url(r'^api/media/detail/(?P<slug>[^/]+)$', mediadetial, name='mediadetail'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,3 +16,8 @@ class HomePageView(viewsets.ReadOnlyModelViewSet):
 class MenuViews(viewsets.ReadOnlyModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+
+
+class PageImageView(viewsets.ReadOnlyModelViewSet):
+    queryset = PageImages.object.all().order_by('?')
+    serializer_class = PageImagesSerializer

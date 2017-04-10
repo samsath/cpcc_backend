@@ -39,6 +39,8 @@ class ArticleAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
                 'post_date',
                 'list_description',
                 'description',
+                'main_image',
+                'gallery',
             )
         }),
         (_('Settings'),{

@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField, ModificationDateTimeField)
+from mediastore.fields import MediaField, MultipleMediaField
 
 
 class WeatherTypes(models.Model):
@@ -61,6 +62,12 @@ class Event(Base):
     end_time = models.TimeField(_('End Time'), blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
+    map = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'map'},
+                          related_name='event_map')
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'image'},
+                            related_name='event_main_image')
+    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type_model': 'image'},
+                                 related_name='event_gallery')
 
     def __unicode__(self):
         return "{0} on {1}".format(self.title, self.date)
@@ -80,6 +87,12 @@ class Trips(Base):
     day = models.ForeignKey(Calendar)
     start_date = models.DateTimeField(_('Start Date and Time'), blank=True, null=True)
     end_date = models.DateTimeField(_('End Date and Time'), blank=True, null=True)
+    map = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'map'},
+                          related_name='trip_map')
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'image'},
+                            related_name='trips_main_image')
+    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type_model': 'image'},
+                                 related_name='trips_gallery')
 
     def __unicode__(self):
         return "{0} on {1}".format(self.title, self.day)

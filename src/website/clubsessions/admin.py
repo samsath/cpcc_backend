@@ -15,6 +15,7 @@ class SessionAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
                 'day_of_week',
                 'cost',
                 'description',
+                'location',
             )
         }),
         (_('Settings'), {

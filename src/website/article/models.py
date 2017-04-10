@@ -3,6 +3,7 @@ from website.accounts.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from mediastore.fields import MediaField, MultipleMediaField
 
 
 def categoryCount():
@@ -30,6 +31,8 @@ class Article(Base):
     author = models.ForeignKey(User, blank=True, null=True)
     sort_value = models.IntegerField(_('Sort Value'), default=articleCount())
     category = models.ManyToManyField(Category, blank=True, null=True)
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model':'image'}, related_name='article_main_image')
+    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type_model':'image'}, related_name='article_gallery')
 
     class Meta:
         verbose_name = 'Article'

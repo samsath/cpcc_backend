@@ -38,7 +38,10 @@ class EventAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
                 'start_time',
                 'end_time',
                 'author',
-                'description'
+                'description',
+                'map',
+                'main_image',
+                'gallery',
             )
         }),
         (_('Settings'),{
@@ -66,7 +69,10 @@ class TripAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
                 'start_date',
                 'end_date',
                 'list_description',
-                'description'
+                'description',
+                'map',
+                'main_image',
+                'gallery',
             )
         }),
         (_('Settings'),{
