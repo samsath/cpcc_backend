@@ -28,7 +28,7 @@ class MediaChoiceField(forms.ModelChoiceField):
 class MediaMultipleChoiceField(SortedMultipleChoiceField):
     def __init__(self, *args, **kwargs):
         self.rel = kwargs.pop('rel')
-        self.sorted = kwargs.pop('sorted', False)
+        self.sorted = kwargs.pop('sorted', True)
         mediatype = kwargs.pop('mediatype', None)
         queryset = Media.objects.all()
         if mediatype:

@@ -76,9 +76,12 @@ INSTALLED_APPS = [
 
     #rest
     'rest_framework',
+    'rest_framework_gis',
     #'rest_framework.authtoken',
     'guardian',
     'knox',
+
+    'django_templatequery',
 
     'sortedm2m',
      'taggit',
