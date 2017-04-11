@@ -85,7 +85,13 @@ class TripAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     inlines = [ExtraFieldsAdmin,]
 
 
+class PlaEventAdmin(admin.ModelAdmin):
+    list_display = ('eventid', 'title','created','modified')
+    filter_horizontal = ('calendar',)
+
+
 admin.site.register(WeatherTypes, WeatherTypeAdmin)
 admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Trips, TripAdmin)
+admin.site.register(PlaEvent, PlaEventAdmin)

@@ -73,12 +73,22 @@ class CalendarTideSerializer(serializers.ModelSerializer):
         )
 
 
+class PlaEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = PlaEvent
+        fields = '__all__'
+        exclude = ('calendar',)
+
+
 class CalendarSerializer(serializers.ModelSerializer):
     tide_set = CalendarTideSerializer(many=True, read_only=True)
     event_set = CalendarEventSerializer(many=True, read_only=True)
     weather = WeatherTypeSerializer(read_only=True)
     trip_set = CalendarTripSerializer(read_only=True, many=True)
+    plaevent_set = PlaEventSerializer(read_only=True, many=True)
 
     class Meta:
         models = Calendar
         fields = '__all__'
+
+

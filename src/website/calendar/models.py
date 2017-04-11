@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField, ModificationDateTimeField)
 from mediastore.fields import MediaField, MultipleMediaField
+from django.contrib.gis.db import models as gismodel
 
 
 class WeatherTypes(models.Model):
@@ -122,5 +123,49 @@ class ExtraFields(models.Model):
 
     class Meta:
         verbose_name = 'Extra Field'
-        verbose_name_plural = 'Trips'
+        verbose_name_plural = 'Extra Fields'
         ordering = ['sort_value',]
+
+
+class PlaEvent(gismodel.Model):
+    eventid = gismodel.IntegerField(_('Event ID'))
+    title = gismodel.CharField(_('Title'), max_length=255)
+    description = gismodel.TextField(_('Description'), null=True, blank=True)
+    club_name = gismodel.CharField(_('Club name'), max_length=255, blank=True, null=True)
+    club_location = gismodel.PointField(_('Club location'), blank=True, null=True)
+    from_name = gismodel.CharField(_('Location From Name'), max_length=255, blank=True, null=True)
+    from_location = gismodel.PointField(_('From location'), blank=True, null=True)
+    from_description = gismodel.TextField(_('From description'), blank=True, null=True)
+    from_date = gismodel.DateField(_('From Date'), blank=True, null=True)
+    from_time = gismodel.TimeField(_('From Time'), blank=True, null=True)
+    to_name = gismodel.CharField(_('Location To Name'), max_length=255, blank=True, null=True)
+    to_location = gismodel.PointField(_('To location'), blank=True, null=True)
+    to_description = gismodel.TextField(_('To description'), blank=True, null=True)
+    to_date = gismodel.DateField(_('To Date'), blank=True, null=True)
+    to_time = gismodel.TimeField(_('To Time'), blank=True, null=True)
+    river_closure = gismodel.NullBooleanField(_('River Closure'), default=None)
+    link = gismodel.CharField(_('Link'), max_length=255, blank=True, null=True)
+    group_type = gismodel.CharField(_('Type'), max_length=255, blank=True, null=True)
+    district_name_one = gismodel.CharField(_('District name one'), max_length=255, null=True, blank=True)
+    district_description_one = gismodel.CharField(_('District description one'), max_length=255, null=True, blank=True)
+    district_name_two = gismodel.CharField(_('District name two'), max_length=255, null=True, blank=True)
+    district_description_two = gismodel.CharField(_('District description two'), max_length=255, null=True, blank=True)
+    district_name_three = gismodel.CharField(_('District name three'), max_length=255, null=True, blank=True)
+    district_description_three = gismodel.CharField(_('District description three'), max_length=255, null=True, blank=True)
+    status_name = gismodel.CharField(_('Status name'), max_length=255, null=True, blank=True)
+    status_description = gismodel.CharField(_('Status description'), max_length=255, null=True, blank=True)
+
+    calendar = gismodel.ManyToManyField(Calendar, null=True, blank=True)
+    created = CreationDateTimeField()
+    modified = ModificationDateTimeField()
+
+    def __unicode__(self):
+        return "{0} - {1}".format(self.eventid, self.title)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.eventid, self.title)
+
+    class Meta:
+        verbose_name = 'PLA Event'
+        verbose_name_plural = 'PLA Events'
+        ordering = ['eventid',]
