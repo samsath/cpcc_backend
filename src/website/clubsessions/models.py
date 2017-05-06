@@ -44,6 +44,9 @@ class Session(Base):
         This will get the next active session for this day.
         :return: 
         '''
-        now = datetime.today()
+        day = datetime.today()
+        while day.weekday() != int(self.day_of_week):
+            day = day + timedelta(days=1)
+        cal = Calendar.objects.get(date=day)
 
         return None
