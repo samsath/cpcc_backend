@@ -5,13 +5,13 @@ from rest_framework.authtoken import views
 from django.conf.urls.static import static
 from rest_framework import routers
 from website.article.views import ArticleViewSet, CategoryViewSet
-from website.clubsessions.views import SessionView
+from website.clubsessions.views import SessionView, nextsession
 from website.faq.views import FaqViewSet
 from website.homepage.views import NotificationView, HomePageView, MenuViews, PageImageView
 from website.membership.views import MembershipView
 from website.newsletter.views import NewsletterView
 from mediastore.api.views import medialist, mediadetial
-
+from website.calendar.urls import calendarurl
 
 admin.autodiscover()
 
@@ -32,6 +32,10 @@ urlpatterns = [
     url(r'api-token-auth$', views.obtain_auth_token),
     url(r'api/auth/', include('knox.urls')),
     url(r'^api/v1/', include(router_v1.urls)),
+
+    url(r'^api/v1/calender/', include(calendarurl)),
+    url(r'^api/v1/nextsession$',nextsession),
+
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/media/list$', medialist, name='medialist'),

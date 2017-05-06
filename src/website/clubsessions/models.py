@@ -4,6 +4,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from mediastore.fields import MediaField, MultipleMediaField
+from website.calendar.models import *
+from datetime import datetime, timedelta
 
 def sessionCount():
     try:
@@ -42,4 +44,6 @@ class Session(Base):
         This will get the next active session for this day.
         :return: 
         '''
+        now = datetime.today()
+
         return None
