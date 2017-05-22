@@ -29,6 +29,12 @@ class Calendar(models.Model):
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
+    def __unicode__(self):
+        return str(self.date)
+
+    def __str__(self):
+        return str(self.date)
+
     class Meta:
         verbose_name = 'Calendar'
         verbose_name_plural = 'Calendar'
@@ -63,11 +69,11 @@ class Event(Base):
     end_time = models.TimeField(_('End Time'), blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
-    map = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'map'},
+    map = MediaField(blank=True, null=True, limit_choices_to={'content_type__model': 'map'},
                           related_name='event_map')
-    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'image'},
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type__model': 'image'},
                             related_name='event_main_image')
-    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type_model': 'image'},
+    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type__model': 'image'},
                                  related_name='event_gallery')
 
     def __unicode__(self):
@@ -88,11 +94,11 @@ class Trips(Base):
     day = models.ForeignKey(Calendar)
     start_date = models.DateTimeField(_('Start Date and Time'), blank=True, null=True)
     end_date = models.DateTimeField(_('End Date and Time'), blank=True, null=True)
-    map = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'map'},
+    map = MediaField(blank=True, null=True, limit_choices_to={'content_type__model': 'map'},
                           related_name='trip_map')
-    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'image'},
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type__model': 'image'},
                             related_name='trips_main_image')
-    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type_model': 'image'},
+    gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type__model': 'image'},
                                  related_name='trips_gallery')
 
     def __unicode__(self):

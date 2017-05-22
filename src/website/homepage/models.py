@@ -27,7 +27,7 @@ class Homepage(models.Model):
     public = PublicManager()
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
-    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model':'image'}, related_name='homepage_main_image')
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type__model':'image'}, related_name='homepage_main_image')
 
     def __unicode__(self):
         return self.title
@@ -65,7 +65,7 @@ class PageImages(models.Model):
     public = PublicManager()
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
-    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type_model': 'image'},
+    main_image = MediaField(blank=True, null=True, limit_choices_to={'content_type__model': 'image'},
                             related_name='pageimage_main_image')
 
     def __unicode__(self):

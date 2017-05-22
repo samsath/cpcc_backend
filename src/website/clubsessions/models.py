@@ -28,7 +28,7 @@ class Session(Base):
     cost = models.TextField(_('Cost'), blank=True, null=True )
     day_of_week = models.CharField(_('Day of Week'), max_length=10, choices=DAY_OF_WEEK)
     sort_value = models.IntegerField(_('Sort Value'), default=sessionCount())
-    location = MediaField(blank=True, null=True, limit_choices_to={'content_type_model':'map'}, related_name='session_map')
+    location = MediaField(blank=True, null=True, limit_choices_to={'content_type__model':'map'}, related_name='session_map')
 
     class Meta:
         verbose_name = 'Session'
