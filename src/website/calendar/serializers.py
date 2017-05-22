@@ -75,7 +75,7 @@ class CalendarTideSerializer(serializers.ModelSerializer):
 
 class PlaEventSerializer(serializers.ModelSerializer):
     class Meta:
-        models = PlaEvent
+        model = PlaEvent
         fields = '__all__'
         exclude = ('calendar',)
 
@@ -88,7 +88,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     plaevent_set = PlaEventSerializer(read_only=True, many=True)
 
     class Meta:
-        models = Calendar
+        model = Calendar
         fields = '__all__'
 
 

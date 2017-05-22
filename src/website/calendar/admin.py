@@ -5,17 +5,18 @@ from website.base.form import TinyMCEAdminMixin
 from django.utils.translation import ugettext_lazy as _
 
 
-class WeatherTypeAdmin(admin.ModelAdmin):
+class WeatherTypeAdmin(TinyMCEAdminMixin,admin.ModelAdmin):
     list_display = ('title','slug',)
 
 
-class TideAdmin(admin.TabularInline):
+class TideAdmin(TinyMCEAdminMixin,admin.TabularInline):
     list_display = ('time','level',)
     model = Tide
 
 
-class EventTabAdmin(admin.TabularInline):
+class EventTabAdmin(TinyMCEAdminMixin, admin.StackedInline):
     model = Event
+    extra = 1
 
 
 class CalendarAdmin(TinyMCEAdminMixin, admin.ModelAdmin):

@@ -3,5 +3,5 @@
 def order_queryset_by_pks(queryset, pks):
     object_list = dict((
         (unicode(key), value)
-        for key, value in queryset.in_bulk(pks).iteritems()))
+        for key, value in queryset.in_bulk(pks).items()))
     return [object_list[unicode(pk)] for pk in pks]

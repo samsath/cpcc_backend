@@ -155,7 +155,7 @@ class MediaSelectMultiple(ManyToManyRawIdWidget):
                             % (related_url, url, name))
             extra.append(u'<img src="%s" width="16" height="16" alt="%s" /></a>'
                             % (static('admin/img/selector-search.gif'), _('Lookup')))
-        if self.sorted:
+        if self.sorted and hasattr(attrs, 'class'):
             attrs['class'] = '%s sorted' % attrs['class']
         strvalue = ','.join([force_unicode(v) for v in (value or [])])
         output = [super(ForeignKeyRawIdWidget, self).render(name, strvalue, attrs)] + extra
