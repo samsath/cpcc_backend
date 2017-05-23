@@ -3,6 +3,12 @@ from django.contrib import admin
 from django.db import models
 from website.base.form import TinyMCEAdminMixin
 from django.utils.translation import ugettext_lazy as _
+from django.conf.urls import url
+from functools import update_wrapper
+from django.http import HttpResponseRedirect
+from django.template.response import TemplateResponse
+from django import forms
+
 
 
 class WeatherTypeAdmin(TinyMCEAdminMixin,admin.ModelAdmin):
@@ -96,3 +102,4 @@ admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Trips, TripAdmin)
 admin.site.register(PlaEvent, PlaEventAdmin)
+admin.site.register(TideData)

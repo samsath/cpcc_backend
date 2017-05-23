@@ -1,6 +1,10 @@
 from .models import *
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.gis.geos import GEOSGeometry
+from PyPDF2 import PdfFileReader
+import re
+import numpy as np
+
 
 
 def plaimport(jo):
@@ -58,3 +62,71 @@ def plaimport(jo):
         if jo['DistrictDescription3']:
             pla.district_description_three = jo['DistrictDescription3']
     pla.save()
+
+
+def yeargenerator(year):
+    '''
+    This generates the date for every day in a year
+    :param year: 
+    :return: 
+    '''
+    start = datetime(year=year, month=1, day=1)
+    end = datetime(year=year, month=12, day=31)
+    span = end - start
+    for i in range(span.days + 1):
+        yield (start + timedelta(days=i)).date()
+
+
+def calendarStartEndTide(Tideobject):
+    '''
+    Added the start and end tide level to the calendar 
+    :param Tideobject: TideData object
+    :return: Added the start and end tide level to the calendar
+    '''
+    raw = Tideobject.converted
+    year = datetime.fromtimestamp(raw[0][0]).date().year
+    time, level = zip(*raw)
+    for i in yeargenerator(year):
+        start = datetime(year=i.year, month=i.month,day=i.day,hour=0,minute=0, second=0).timestamp()
+        end = datetime(year=i.year, month=i.month,day=i.day,hour=23,minute=59, second=59).timestamp()
+        Calendar.data.addTide(start, np.interp(start, time, level))
+        Calendar.data.addTide(end, np.interp(end, time, level))
+
+
+def calendarinput(Tideobject):
+    '''
+    This converts the uploaded pdf into a correct format and adds it to the calendar
+    :param Tideobject: TideData object
+    :return: Calendar populated with tide information
+    '''
+    raw_pdf = Tideobject.file.path
+    input1 = PdfFileReader(open(raw_pdf, "rb"))
+
+    re_date = re.compile(r'(\w+ \d+ \w+)+')
+    re_time = re.compile(r'(\d+:\d+)+')
+    re_mesurements = re.compile(r'(\d+\.\d)+')
+
+    tides_times = []
+    tides_levels = []
+    tides_combined = []
+
+    for page in input1.pages:
+        page_data = page.extractText()
+        date = None
+        for item in page_data.split('\n'):
+            if re_date.match(item):
+                date = datetime.strptime(item.replace(' ', '') + '2017', '%a%d%b%Y')
+            if re_time.match(item):
+                time = datetime.strptime(item, '%H:%M').time()
+                date_item = datetime.combine(date, time)
+                tides_times.append(date_item.timestamp())
+            if re_mesurements.match(item):
+                tides_levels.append(float(item))
+
+    for tide, level in zip(tides_times, tides_levels):
+        Calendar.data.addTide(int(tide), level)
+        tides_combined.append([tide, level])
+
+    Tideobject.converted = tides_combined
+    Tideobject.inputted = True
+    Tideobject.save()

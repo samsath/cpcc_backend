@@ -6,6 +6,28 @@ from django.core.urlresolvers import reverse
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField, ModificationDateTimeField)
 from mediastore.fields import MediaField, MultipleMediaField
 from django.contrib.gis.db import models as gismodel
+from django.contrib.postgres.fields import ArrayField
+from datetime import datetime
+
+
+class TideData(models.Model):
+    file = models.FileField(upload_to='tides/%Y/')
+    inputted = models.BooleanField(_('Inputed data'), default=False)
+    converted = ArrayField(ArrayField(models.FloatField(null=True, blank=True)), default=[])
+    created = CreationDateTimeField()
+    modified = ModificationDateTimeField()
+
+    def __unicode__(self):
+        return 'Tide Data uploaded on {}'.format(self.created)
+
+    def __str__(self):
+        return 'Tide Data uploaded on {}'.format(self.created)
+
+    class Meta:
+        verbose_name = 'Tide Upload'
+        ordering = ['created']
+
+
 
 
 class WeatherTypes(models.Model):
@@ -20,6 +42,25 @@ class WeatherTypes(models.Model):
         return self.title
 
 
+class CalendarManager(models.Manager):
+    def addTide(self, timestamp, level ):
+        datereference = datetime.fromtimestamp(timestamp)
+        day, created = Calendar.objects.get_or_create(date=datereference.date())
+        tide = Tide(day=day,
+                    time=datereference.time(),
+                    level=level)
+        tide.save()
+
+    def addWeather(self, timestamp, sun_rise, sun_set, temperature, weather):
+        datereference = datetime.fromtimestamp(timestamp)
+        day, created = Calendar.objects.get_or_create(date=datereference.date())
+        day.sun_rise = sun_rise
+        day.sun_set = sun_set
+        day.temperature = temperature
+        day.weather = weather
+        day.save()
+
+
 class Calendar(models.Model):
     date = models.DateField(_('Date'))
     sun_rise = models.TimeField(_('Sun rise'), blank=True, null=True)
@@ -28,6 +69,9 @@ class Calendar(models.Model):
     weather = models.ForeignKey(WeatherTypes, blank=True, null=True)
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
+
+    objects = models.Manager()
+    data = CalendarManager()
 
     def __unicode__(self):
         return str(self.date)
