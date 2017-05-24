@@ -23,7 +23,7 @@ class Download(Media):
     file_extension = models.CharField(_('file extenstion'), max_length=12,
         null=True, blank=True, editable=False)
     file_size = models.PositiveIntegerField(_('file size'), editable=False)
-    count = models.PositiveIntegerField(_(u'download counter'), default=0)
+    count = models.PositiveIntegerField(_('download counter'), default=0)
 
     class Meta:
         app_label = 'mediastore'

@@ -65,8 +65,8 @@ class Media(models.Model):
     name = models.CharField(max_length=120, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, blank=True, help_text=_(
-        u'Leave this field blank for autopopulating a unique tag '
-        u'based on the objects name.'
+        'Leave this field blank for autopopulating a unique tag '
+        'based on the objects name.'
     ))
 
     # categorization
@@ -91,7 +91,7 @@ class Media(models.Model):
         return '<%s: pk=%d "%s">' % (name, self.pk, self.name or '')
 
     def __unicode__(self):
-        return self.name or u''
+        return self.name or ''
 
     def get_media_type(self):
         if self.media_type:
@@ -137,7 +137,7 @@ def assign_media_types(sender, **kwargs):
             sender.media_type = sender._meta.object_name.lower()
         if sender.media_type in _media_type_registry:
             raise AssertionError(
-                u'There is already a registered media type "%s"' % sender.media_type)
+                'There is already a registered media type "%s"' % sender.media_type)
         _media_type_registry[sender.media_type] = sender
 
 signals.class_prepared.connect(

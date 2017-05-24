@@ -49,7 +49,7 @@ class FFmpegConverter(VideoConverterBase):
                 from PIL import Image
             except ImportError:
                 import Image
-        except ImportError, e:
+        except ImportError as e:
             self.stderr += (
                 'cannot import PIL. You need PIL installed '
                 'to use proportional scaling with ffmpeg backend.\n')
@@ -60,7 +60,7 @@ class FFmpegConverter(VideoConverterBase):
         ))
         try:
             actual_width, actual_height = Image.open(tfile).size
-        except IOError, e:
+        except IOError as e:
             self.stderr += e.args[0] + '\n'
             raise self.ConvertionError
         # delete sample thumbnail

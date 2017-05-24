@@ -129,17 +129,17 @@ def get_models(queryset, queryset_options=None):
         try:
             tokens = token.contents.split(None, 4)
         except ValueError:
-            raise template.TemplateSyntaxError(u'%r tag requires two or four arguments.' % token.contents.split()[0])
+            raise template.TemplateSyntaxError('%r tag requires two or four arguments.' % token.contents.split()[0])
         if len(tokens) == 3:
             tokens += [None, None]
         tag_name, as_, as_value, with_, options = tokens
         if as_ != 'as':
-            raise template.TemplateSyntaxError(u'%r\'s second argument must be "as".' % tag_name)
+            raise template.TemplateSyntaxError('%r\'s second argument must be "as".' % tag_name)
         queryset = QUERYSET
         if options is not None:
             options = parse_queryset_options(options)
             queryset = apply_queryset_options(queryset, options, queryset_options)
         if with_ is not None and with_ != 'with':
-            raise template.TemplateSyntaxError(u'%r\'s fourth argument must be "with".' % tag_name)
+            raise template.TemplateSyntaxError('%r\'s fourth argument must be "with".' % tag_name)
         return GetModelsNode(as_value, queryset)
     return func

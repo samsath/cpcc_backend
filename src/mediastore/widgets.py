@@ -29,7 +29,7 @@ def _set_class(attrs, class_name):
     return attrs
 
 def _get_string_as_list(value):
-    if type(value) in (unicode, str):
+    if type(value) in (str, str):
         return (value,)
     return value
 
@@ -90,16 +90,16 @@ class MediaSelect(ForeignKeyRawIdWidget):
 
             params = self.url_parameters()
             if params:
-                url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in params.items()])
+                url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in list(params.items())])
             else:
                 url = ''
             if "class" not in attrs:
                 attrs['class'] = 'vForeignKeyRawIdAdminField' # The JavaScript code looks for this hook.
             # TODO: "lookup_id_" is hard-coded here. This should instead use
             # the correct API to determine the ID dynamically.
-            extra.append(u'<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showMediaObjectLookupPopup(this);"> '
+            extra.append('<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showMediaObjectLookupPopup(this);"> '
                             % (related_url, url, name))
-            extra.append(u'<img src="%s" width="16" height="16" alt="%s" /></a>'
+            extra.append('<img src="%s" width="16" height="16" alt="%s" /></a>'
                             % (static('admin/img/selector-search.gif'), _('Lookup')))
         output = [super(ForeignKeyRawIdWidget, self).render(name, value, attrs)] + extra
         if value:
@@ -145,7 +145,7 @@ class MediaSelectMultiple(ManyToManyRawIdWidget):
 
             params = self.url_parameters()
             if params:
-                url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in params.items()])
+                url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in list(params.items())])
             else:
                 url = ''
             if "class" not in attrs:
@@ -163,7 +163,7 @@ class MediaSelectMultiple(ManyToManyRawIdWidget):
         if value:
             output.append(self.label_for_value(value))
         output.extend(_get_previews(value or [], name))
-        return mark_safe(u''.join(output))
+        return mark_safe(''.join(output))
 
 
 from django.forms.widgets import ChoiceWidget

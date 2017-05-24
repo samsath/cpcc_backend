@@ -42,7 +42,7 @@ def display_media_tag(node, mediatype=None):
         tokens = token.split_contents()
         tag_name = tokens[0]
         if len(tokens) < 2:
-            raise template.TemplateSyntaxError(u'%r expects at least one arguments.' % tag_name)
+            raise template.TemplateSyntaxError('%r expects at least one arguments.' % tag_name)
         varname = tokens[1]
         options = {}
         if len(tokens) > 2:
@@ -80,7 +80,7 @@ class MediaTypeRequirements(template.Node):
         tokens = token.split_contents()
         tag_name = tokens[0]
         if len(tokens) < 2:
-            raise template.TemplateSyntaxError(u'%r expects at least one arguments.' % tag_name)
+            raise template.TemplateSyntaxError('%r expects at least one arguments.' % tag_name)
         return cls(tokens[1:])
 
 

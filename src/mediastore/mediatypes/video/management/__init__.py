@@ -26,11 +26,11 @@ def get_next_item():
 
 def lock(update=False):
     if update == False and os.path.exists(LOCK_FILE):
-        print("It seems that there is already a process running " +\
+        print(("It seems that there is already a process running " +\
             "which proccesses the video queue. Please check and " +\
             "try again. If you are sure there is no process " +\
             "running, you can delete the " + LOCK_FILE + " file " +\
-            "or call the command with the argument 'unlock' again.")
+            "or call the command with the argument 'unlock' again."))
         return False
     f = file(LOCK_FILE, 'w')
     f.write(str(get_epoch()))

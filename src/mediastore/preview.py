@@ -28,7 +28,7 @@ def filter_media(media, limit_type=None):
         if isinstance(media, QuerySet):
             cts = get_content_types_for_type(limit_type)
             return media.filter(content_type__in=cts)
-        return list(filter(lambda o: o.get_media_type() == limit_type, media))
+        return list([o for o in media if o.get_media_type() == limit_type])
 
 
 def display_media(obj, context=None, extra_context=None,
@@ -45,7 +45,7 @@ def display_media(obj, context=None, extra_context=None,
     template_name_single = template_name_single or 'mediastore/types/%(mediatype)s/display.html'
     template_name_many = template_name_many or 'mediastore/types/%(mediatype)s/display_many.html'
 
-    result = u''
+    result = ''
 
     if isinstance(obj, (QuerySet, list, tuple)):
         many = True
@@ -53,11 +53,11 @@ def display_media(obj, context=None, extra_context=None,
         object_list = [x.object for x in obj]
         if len(object_list) == 0:
             context.pop()
-            return u''
+            return ''
         media_type = object_list[0].get_media_type()
         for obj in object_list:
             if obj.get_media_type() != media_type:
-                raise ValueError(u'Only media objects with the same type are allowed.')
+                raise ValueError('Only media objects with the same type are allowed.')
         context['object_list'] = object_list
         try:
             result = template.loader.render_to_string(
@@ -65,7 +65,7 @@ def display_media(obj, context=None, extra_context=None,
                 context,
             )
         except template.TemplateDoesNotExist:
-            result = u''
+            result = ''
             for obj in context['object_list']:
                 context.push()
                 context['object'] = obj

@@ -24,7 +24,7 @@ def get_media_types_tag(parser, token):
     try:
         tag_name, as_, as_var = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError(u'%r expects two arguments.' % tag_name)
+        raise template.TemplateSyntaxError('%r expects two arguments.' % tag_name)
     media_types = sorted(get_media_types())
     return GetMediaTypesNode(as_var, media_types)
 register.tag('get_media_types', get_media_types_tag)

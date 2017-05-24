@@ -22,7 +22,7 @@ from mediastore.conf import settings
 from mediastore.mediatypes.image.models import Image
 
 try:
-    from cStringIO import StringIO
+    from io import StringIO
 except ImportError:
     from io import StringIO
 
@@ -221,7 +221,7 @@ class ImageAdmin(MediaAdmin):
         context = {
             'title': _('Add multiple %s') % opts.verbose_name_plural,
             'adminform': adminForm,
-            'is_popup': request.REQUEST.has_key('_popup'),
+            'is_popup': '_popup' in request.REQUEST,
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,

@@ -8,7 +8,7 @@ def get_file_extension(filename):
 
 
 def has_file_extension(filename, extensions):
-    if not isinstance(extensions, (types.ListType, types.TupleType)):
+    if not isinstance(extensions, (list, tuple)):
         extensions = (extensions,)
     fileext = get_file_extension(filename).lower()
     return fileext in [x.lower() for x in extensions]

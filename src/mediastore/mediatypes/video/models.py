@@ -55,7 +55,7 @@ class QueueItem(models.Model):
         app_label = 'mediastore'
 
     def __unicode__(self):
-        return u"Queue: %s" % unicode(self.related_video)
+        return "Queue: %s" % str(self.related_video)
 
     def append_error_message(self, backend, exception):
         self.error_message += (
@@ -120,8 +120,8 @@ class QueueItem(models.Model):
         self.related_video.save()
 
     def process(self):
-        print("process queue item #%s, file: %s ..." % (
-            self.pk, self.related_video.file))
+        print(("process queue item #%s, file: %s ..." % (
+            self.pk, self.related_video.file)))
         Backend = convert.get_convert_backend()
         backend = Backend()
 

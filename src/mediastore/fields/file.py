@@ -7,12 +7,12 @@ from mediastore.utils.files import has_file_extension
 
 class FileFormField(forms.FileField):
     default_error_messages = {
-        'invalid': _(u"No file was submitted. Check the encoding type on the form."),
-        'missing': _(u"No file was submitted."),
-        'empty': _(u"The submitted file is empty."),
-        'max_length': _(u'Ensure this filename has at most %(max)d characters (it has %(length)d).'),
-        'wrong_extension': _(u'Ensure that you only upload %(extensions)s files.'),
-        'validation_failed': _(u'Ensure that you upload a valid file.'),
+        'invalid': _("No file was submitted. Check the encoding type on the form."),
+        'missing': _("No file was submitted."),
+        'empty': _("The submitted file is empty."),
+        'max_length': _('Ensure this filename has at most %(max)d characters (it has %(length)d).'),
+        'wrong_extension': _('Ensure that you only upload %(extensions)s files.'),
+        'validation_failed': _('Ensure that you upload a valid file.'),
     }
 
     def __init__(self, *args, **kwargs):

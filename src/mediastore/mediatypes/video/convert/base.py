@@ -38,7 +38,7 @@ class VideoConverterBase(object):
         return [arg % config for arg in [bin] + list(args)]
 
     def execute_command(self, args):
-        print ' '.join(args)
+        print(' '.join(args))
         try:
             self.stdout += ('Executing: "%s", %s\n' % (
                 ' '.join(args), datetime.now()))
@@ -54,7 +54,7 @@ class VideoConverterBase(object):
             self.stdout += process.stdout.read() + '\n'
             self.stderr += process.stderr.read() + '\n'
             self.stdout += 'Exit code: %d\n' % process.returncode
-        except self.ConvertionError, e:
+        except self.ConvertionError as e:
             self.stderr += 'Convertion failed:\n%s\n' % e.args[0]
             self.failed = True
             raise

@@ -26,7 +26,7 @@ def admin_preview_media(*args, **kwargs):
 
 
 class MediaTypeFilter(SimpleListFilter):
-    title = _(u'Mediatype')
+    title = _('Mediatype')
     parameter_name = 'content_type__model'
 
     def lookups(self, request, model_admin):
@@ -46,7 +46,7 @@ class MediaTypeFilter(SimpleListFilter):
 
 
 class SelectedFilter(SimpleListFilter):
-    title = _(u'Selected')
+    title = _('Selected')
     parameter_name = 'pk__in'
 
     def lookups(self, request, model_admin):
@@ -144,7 +144,7 @@ class MediaModelAdmin(admin.ModelAdmin):
             return self.cleaned_data
 
     def add_view(self, request, *args, **kwargs):
-        if request.GET.has_key('type'):
+        if 'type' in request.GET:
             model = get_model_for_type(request.GET['type'])
             url = urlresolvers.reverse(
                 '%s:%s_%s_add' % (
@@ -153,7 +153,7 @@ class MediaModelAdmin(admin.ModelAdmin):
                     model._meta.object_name.lower(),
                 )
             )
-            if request.REQUEST.has_key('_popup'):
+            if '_popup' in request.REQUEST:
                 url += '?_popup=1'
             return HttpResponseRedirect(url)
         change_form = self.form
