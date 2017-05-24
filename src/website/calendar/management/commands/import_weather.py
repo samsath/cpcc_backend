@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Import the weathre information"
+    help = "Import the weather information"
 
     def handle(self, **options):
         params = {

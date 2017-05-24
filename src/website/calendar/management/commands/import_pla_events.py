@@ -1,18 +1,20 @@
 import json
-import urllib.request
+import requests
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from ...imports import plaimport
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = "Import the pla events"
 
-    def handle_noargs(self, **options):
-        urlData = "http://services.pla.co.uk:4444/api/events"
-        webURL = urllib.request.urlopen(urlData)
-        data = webURL.read()
-        encoding = webURL.info().get_content_charset('utf-8')
-        jsonobject = json.loads(data.decode(encoding))
-        for item in jsonobject:
-            plaimport(item)
+    def handle(self, **options):
+        r = requests.get("http://services.pla.co.uk:4444/api/events")
+        if r.status_code == 200:
+            for item in r.json():
+                try:
+                    plaimport(item)
+                except Exception as exp:
+                    print(exp)
+        else:
+            print(r.status_code)

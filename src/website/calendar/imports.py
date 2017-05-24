@@ -6,64 +6,6 @@ import re
 import numpy as np
 
 
-
-def plaimport(jo):
-    pla, created = PlaEvent.objects.get_or_create(eventid=jo['EventID'], title=jo['EventName'])
-    if not created:
-        pla.status_name = jo['StatusName']
-        pla.status_description = jo['StatusDescription']
-    else:
-        if jo['StatusName']:
-            pla.status_name = jo['StatusName']
-        if jo['StatusDescription']:
-            pla.status_description = jo['StatusDescription']
-        if jo['EventDescription']:
-            pla.description = jo['EventDescription']
-        if jo['EventClubName']:
-            pla.club_name = jo['EventClubName']
-        if jo['EventClubLatitude']:
-            pla.club_location = GEOSGeometry('POINT('+jo['EventClubLatitude']+' '+jo['EventClubLongitude']+')')
-        if jo['EventFromName']:
-            pla.from_name = jo['EventFromName']
-        if jo['EventFromLatitude']:
-            pla.from_location = GEOSGeometry('POINT('+jo['EventFromLatitude']+' '+jo['EventFromLongitude']+')')
-        if jo['EventFromDescription']:
-            pla.from_description = jo['EventFromDescription']
-        if jo['EventDate']:
-            pla.from_date = datetime.strptime(jo['EventDate'][:19], "%Y-%m-%dT%H:%M:%S").date()
-        if jo['EventFromTime']:
-            pla.from_time = datetime.strptime(jo['EventFromTime'], "%H:%M:%S").time()
-        if jo['EventToName']:
-            pla.to_name = jo['EventToName']
-        if jo['EventToLatitude']:
-            pla.to_location = GEOSGeometry('POINT('+jo['EventToLatitude']+' '+jo['EventToLongitude']+')')
-        if jo['EventToDescription']:
-            pla.to_description = jo['EventToDescription']
-        if jo['EventDate']:
-            pla.to_date = datetime.strptime(jo['EventDate'][:19], "%Y-%m-%dT%H:%M:%S").date()
-        if jo['EventToTime']:
-            pla.to_time = datetime.strptime(jo['EventToTime'], "%H:%M:%S").time()
-        if jo['EventIsClosure']:
-            pla.river_closure = jo['EventIsClosure']
-        if jo['EventLink']:
-            pla.link = jo['EventLink']
-        if jo['categoryName']:
-            pla.group_type = jo['categoryName']
-        if jo['DistrictName1']:
-            pla.district_name_one = jo['DistrictName1']
-        if jo['DistrictDescription1']:
-            pla.district_description_one = jo['DistrictDescription1']
-        if jo['DistrictName2']:
-            pla.district_name_two = jo['DistrictName2']
-        if jo['DistrictDescription2']:
-            pla.district_description_two = jo['DistrictDescription2']
-        if jo['DistrictName3']:
-            pla.district_name_three = jo['DistrictName3']
-        if jo['DistrictDescription3']:
-            pla.district_description_three = jo['DistrictDescription3']
-    pla.save()
-
-
 def yeargenerator(year):
     '''
     This generates the date for every day in a year
@@ -75,6 +17,88 @@ def yeargenerator(year):
     span = end - start
     for i in range(span.days + 1):
         yield (start + timedelta(days=i)).date()
+
+
+def dategenerator(start, end):
+    '''
+    This turns to start and end dates to each date inbetween
+    :param start: date object
+    :param end: date object
+    :return: date object
+    '''
+    span = end - start
+    for i in range(span.days + 1):
+        element = (start + timedelta(days=i))
+        try:
+            yield element.date()
+        except:
+            yield element
+
+
+def plaimport(jo):
+    pla, created = PlaEvent.objects.get_or_create(eventid=jo['EventID'], title=jo['EventName'])
+    if not created:
+        pla.status_name = jo['StatusName']
+        pla.status_description = jo['StatusDescription']
+    else:
+        if 'StatusName' in jo:
+            pla.status_name = jo['StatusName']
+        if 'StatusDescription' in jo:
+            pla.status_description = jo['StatusDescription']
+        if 'EventDescription' in jo:
+            pla.description = jo['EventDescription']
+        if 'EventClubName' in jo:
+            pla.club_name = jo['EventClubName']
+        if 'EventClubLatitude' in jo:
+            pla.club_location = GEOSGeometry('POINT('+str(jo['EventClubLatitude'])+' '+str(jo['EventClubLongitude'])+')')
+        if 'EventFromName' in jo:
+            pla.from_name = jo['EventFromName']
+        if 'EventFromLatitude' in jo:
+            pla.from_location = GEOSGeometry('POINT('+str(jo['EventFromLatitude'])+' '+str(jo['EventFromLongitude'])+')')
+        if 'EventFromDescription' in jo:
+            pla.from_description = jo['EventFromDescription']
+        if 'EventDate' in jo:
+            pla.from_date = datetime.strptime(jo['EventDate'][:19], "%Y-%m-%dT%H:%M:%S").date()
+        if 'EventFromTime' in jo:
+            pla.from_time = datetime.strptime(jo['EventFromTime'], "%H:%M:%S").time()
+        if 'EventToName' in jo:
+            pla.to_name = jo['EventToName']
+        if 'EventToLatitude' in jo:
+            pla.to_location = GEOSGeometry('POINT('+str(jo['EventToLatitude'])+' '+str(jo['EventToLongitude'])+')')
+        if 'EventToDescription' in jo:
+            pla.to_description = jo['EventToDescription']
+        if 'EventToDate' in jo:
+            pla.to_date = datetime.strptime(jo['EventToDate'][:19], "%Y-%m-%dT%H:%M:%S").date()
+        if 'EventToTime' in jo:
+            pla.to_time = datetime.strptime(jo['EventToTime'], "%H:%M:%S").time()
+        if 'EventIsClosure' in jo:
+            pla.river_closure = jo['EventIsClosure']
+        if 'EventLink' in jo:
+            pla.link = jo['EventLink']
+        if 'categoryName' in jo:
+            pla.group_type = jo['categoryName']
+        if 'DistrictName1' in jo:
+            pla.district_name_one = jo['DistrictName1']
+        if 'DistrictDescription1' in jo:
+            pla.district_description_one = jo['DistrictDescription1']
+        if 'DistrictName2' in jo:
+            pla.district_name_two = jo['DistrictName2']
+        if 'DistrictDescription2' in jo:
+            pla.district_description_two = jo['DistrictDescription2']
+        if 'DistrictName3' in jo:
+            pla.district_name_three = jo['DistrictName3']
+        if 'DistrictDescription3' in jo:
+            pla.district_description_three = jo['DistrictDescription3']
+
+        if pla.from_date:
+            if pla.to_date:
+                for date in dategenerator(pla.from_date, pla.to_date):
+                    cal, create = Calendar.objects.get_or_create(date=date)
+                    pla.calendar.add(cal)
+            else:
+                cal, create = Calendar.objects.get_or_create(date=pla.from_date)
+                pla.calendar.add(cal)
+    pla.save()
 
 
 def calendarStartEndTide(Tideobject):
