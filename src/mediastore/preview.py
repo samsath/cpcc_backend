@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import types
+
 from django.db.models.query import QuerySet
 from django import template
 from .models import Media
@@ -8,7 +8,7 @@ from .utils import get_content_types_for_type
 
 def _get_template_names(templates, mediatype):
     # ``templates`` is a single template string
-    if isinstance(templates, basestring):
+    if isinstance(templates, str):
         templates = (templates,)
     templates = list(templates)
     for i, template_name in enumerate(templates):
@@ -36,7 +36,7 @@ def display_media(obj, context=None, extra_context=None,
         limit_type=None):
     if context is None:
         context = template.Context()
-    if isinstance(context, types.DictType):
+    if isinstance(context, dict):
         context = template.Context(context)
     context.push()
     if extra_context:
@@ -47,7 +47,7 @@ def display_media(obj, context=None, extra_context=None,
 
     result = u''
 
-    if isinstance(obj, (QuerySet, types.ListType, types.TupleType)):
+    if isinstance(obj, (QuerySet, list, tuple)):
         many = True
         obj = filter_media(obj, limit_type=limit_type)
         object_list = [x.object for x in obj]
@@ -80,7 +80,7 @@ def display_media(obj, context=None, extra_context=None,
         media_type = obj.get_media_type()
         result = template.loader.render_to_string(
             _get_template_names(template_name_single, media_type)[0],
-            context,
+            {'object':obj.object},
         )
 
     if extra_context:

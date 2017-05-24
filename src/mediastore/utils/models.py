@@ -2,6 +2,6 @@
 
 def order_queryset_by_pks(queryset, pks):
     object_list = dict((
-        (unicode(key), value)
+        (str(key), value)
         for key, value in queryset.in_bulk(pks).items()))
-    return [object_list[unicode(pk)] for pk in pks]
+    return [object_list[str(pk)] for pk in pks]

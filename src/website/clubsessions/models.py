@@ -16,13 +16,13 @@ def sessionCount():
 
 class Session(Base):
     DAY_OF_WEEK = (
-        (0,_('Monday')),
-        (1,_('Tuesday')),
-        (2,_('Wednesday')),
-        (3,_('Thursday')),
-        (4,_('Friday')),
-        (5,_('Saturday')),
-        (6,_('Sunday')),
+        ('0',_('Monday')),
+        ('1',_('Tuesday')),
+        ('2',_('Wednesday')),
+        ('3',_('Thursday')),
+        ('4',_('Friday')),
+        ('5',_('Saturday')),
+        ('6',_('Sunday')),
     )
     description = models.TextField(_('Description'), blank=True, null=True)
     cost = models.TextField(_('Cost'), blank=True, null=True )

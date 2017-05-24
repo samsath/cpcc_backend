@@ -52,6 +52,7 @@ def _get_previews(values, field_name):
 
 class _AdminSiteDummy(object):
     _registry = {}
+    name = 'mediastore'
 
 
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
@@ -89,9 +90,9 @@ class MediaSelect(ForeignKeyRawIdWidget):
 
             params = self.url_parameters()
             if params:
-                url = u'?' + u'&amp;'.join([u'%s=%s' % (k, v) for k, v in params.items()])
+                url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in params.items()])
             else:
-                url = u''
+                url = ''
             if "class" not in attrs:
                 attrs['class'] = 'vForeignKeyRawIdAdminField' # The JavaScript code looks for this hook.
             # TODO: "lookup_id_" is hard-coded here. This should instead use
@@ -102,9 +103,9 @@ class MediaSelect(ForeignKeyRawIdWidget):
                             % (static('admin/img/selector-search.gif'), _('Lookup')))
         output = [super(ForeignKeyRawIdWidget, self).render(name, value, attrs)] + extra
         if value:
-            output.append(self.label_for_value(value))
+            output.append(self.label_and_url_for_value(value))
         output.extend(_get_previews([value] if value else [], name))
-        return mark_safe(u''.join(output))
+        return mark_safe(''.join(str(v) for v in output))
 
 
 from django.contrib.admin.widgets import ManyToManyRawIdWidget
@@ -144,16 +145,16 @@ class MediaSelectMultiple(ManyToManyRawIdWidget):
 
             params = self.url_parameters()
             if params:
-                url = u'?' + u'&amp;'.join([u'%s=%s' % (k, v) for k, v in params.items()])
+                url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in params.items()])
             else:
-                url = u''
+                url = ''
             if "class" not in attrs:
                 attrs['class'] = 'vManyToManyRawIdAdminField' # The JavaScript code looks for this hook.
             # TODO: "lookup_id_" is hard-coded here. This should instead use
             # the correct API to determine the ID dynamically.
-            extra.append(u'<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showMediaObjectLookupPopup(this);"> '
+            extra.append('<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showMediaObjectLookupPopup(this);"> '
                             % (related_url, url, name))
-            extra.append(u'<img src="%s" width="16" height="16" alt="%s" /></a>'
+            extra.append('<img src="%s" width="16" height="16" alt="%s" /></a>'
                             % (static('admin/img/selector-search.gif'), _('Lookup')))
         if self.sorted and hasattr(attrs, 'class'):
             attrs['class'] = '%s sorted' % attrs['class']
@@ -195,7 +196,7 @@ class MediaTypeRenderer(ChoiceWidget):
             yield MediaTypeInput(self.name, self.value, self.attrs.copy(), choice, i)
 
     def render(self):
-        return mark_safe(u'\n'.join([w for w in self]))
+        return mark_safe('\n'.join([w for w in self]))
 
 
 class MediaTypeSelect(forms.RadioSelect):

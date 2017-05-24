@@ -3,9 +3,10 @@ from django.contrib import admin
 from django.db import models
 from website.base.form import TinyMCEAdminMixin
 from django.utils.translation import ugettext_lazy as _
+from mediastore.admin import ModelAdmin
 
 
-class SessionAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
+class SessionAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','day_of_week','cost','is_public','is_featured','sort_value',)
     list_editable = ('is_public','is_featured','sort_value')
     fieldsets = (
@@ -13,8 +14,20 @@ class SessionAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
             'fields':(
                 'title',
                 'day_of_week',
-                'cost',
+            )
+        }),
+        (_('Description'),{
+            'fields':(
                 'description',
+            )
+        }),
+        (_('Cost'),{
+            'fields':(
+                'cost',
+            )
+        }),
+        (_('Location'),{
+            'fields':(
                 'location',
             )
         }),
