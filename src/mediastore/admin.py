@@ -181,7 +181,7 @@ class MediaModelAdmin(admin.ModelAdmin):
                             form.cleaned_data['model_name'],
                         )
                     )
-                    if request.REQUEST.get('_popup', None):
+                    if request.GET.get('_popup', None):
                         url += '?_popup=1'
                     return HttpResponseRedirect(url)
             response = super(MediaModelAdmin, self).\

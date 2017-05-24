@@ -4,8 +4,9 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from mediastore.fields import MediaField, MultipleMediaField
-from website.calendar.models import *
+from website.calendar.models import Calendar
 from datetime import datetime, timedelta
+
 
 def sessionCount():
     try:
@@ -44,9 +45,14 @@ class Session(Base):
         This will get the next active session for this day.
         :return: 
         '''
-        day = datetime.today()
-        while day.weekday() != int(self.day_of_week):
-            day = day + timedelta(days=1)
-        cal = Calendar.objects.get(date=day)
+        def getnext(date, day):
+            event = None
+            while event is None:
+                date = date + timedelta(days=1)
+                if date.weekday() == int(day):
+                    cal = Calendar.objects.get(date=date)
+                    if cal.free:
+                        event = cal
+            return event
 
-        return None
+        return getnext(datetime.today(), self.day_of_week)

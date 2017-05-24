@@ -23,7 +23,7 @@ class Homepage(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     is_public = models.BooleanField(_('Public'), default=False)
     description = models.TextField()
-    object = models.Manager()
+    objects = models.Manager()
     public = PublicManager()
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
@@ -61,7 +61,7 @@ class Menu(models.Model):
 class PageImages(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     is_public = models.BooleanField(_('Public'), default=False)
-    object = models.Manager()
+    objects = models.Manager()
     public = PublicManager()
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()

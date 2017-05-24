@@ -6,12 +6,7 @@ from .models import *
 class MapSerialiers(GeoFeatureModelSerializer):
     class Meta:
         model = Map
-        geo_field = (
-            'centre',
-            'start',
-            'end',
-            'path',
-        )
+        geo_field = 'centre'
         fields = (
             'id',
             'name',
@@ -21,4 +16,7 @@ class MapSerialiers(GeoFeatureModelSerializer):
             'created',
             'start_name',
             'end_name',
+            'start',
+            'end',
+            'path',
             )

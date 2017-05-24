@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db import models
 from website.base.form import TinyMCEAdminMixin
 from django.utils.translation import ugettext_lazy as _
-
+from mediastore.admin import ModelAdmin
 
 class NotificationAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('title','message','start','end','is_public')
@@ -46,7 +46,7 @@ class MenuAdmin(admin.ModelAdmin):
     list_editable = ('sort_value',)
 
 
-class PageImagesAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
+class PageImagesAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','is_public',)
     fieldsets = (
         (_('Items'),{
@@ -61,5 +61,5 @@ class PageImagesAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
 
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(Homepage, HomagePageAdmin)
-admin.site.register(Menu, MenuAdmin)
+#admin.site.register(Menu, MenuAdmin)
 admin.site.register(PageImages, PageImagesAdmin)

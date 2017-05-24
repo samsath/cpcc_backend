@@ -19,5 +19,5 @@ class MenuViews(viewsets.ReadOnlyModelViewSet):
 
 
 class PageImageView(viewsets.ReadOnlyModelViewSet):
-    queryset = PageImages.object.all().order_by('?')
+    queryset = PageImages.objects.all().order_by('?')
     serializer_class = PageImagesSerializer

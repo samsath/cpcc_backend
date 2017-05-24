@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.db import models
 from website.base.form import TinyMCEAdminMixin
 from django.utils.translation import ugettext_lazy as _
+from mediastore.admin import ModelAdmin
 
 
 class CategoryAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
@@ -25,7 +26,7 @@ class CategoryAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     )
 
 
-class ArticleAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
+class ArticleAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','author','post_date','is_public','is_featured','sort_value',)
     list_editable = ('is_public','is_featured','sort_value',)
     list_filter = ('is_public','is_featured')

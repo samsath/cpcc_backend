@@ -79,6 +79,13 @@ class Calendar(models.Model):
     def __str__(self):
         return str(self.date)
 
+    @property
+    def free(self):
+        eventtype = self.event_set.values_list('event_type', flat=True)
+        if 'closed' in eventtype or 'cancel' in eventtype:
+            return False
+        return True
+
     class Meta:
         verbose_name = 'Calendar'
         verbose_name_plural = 'Calendar'
@@ -101,6 +108,7 @@ class Tide(models.Model):
 
 class Event(Base):
     EVENT_TYPE =(
+        ('cancel', _('Cancel')),
         ('closed',_('Closed')),
         ('notice',_('Notice')),
         ('event',_('Event')),

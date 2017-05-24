@@ -37,6 +37,7 @@ def _get_string_as_list(value):
 def _get_previews(values, field_name):
     output = []
     output.append('<div class="previews">')
+    values = list(filter(None,values))
     objs = order_queryset_by_pks(
         Media.objects.filter(pk__in=values),
         values)
@@ -158,12 +159,12 @@ class MediaSelectMultiple(ManyToManyRawIdWidget):
                             % (static('admin/img/selector-search.gif'), _('Lookup')))
         if self.sorted and hasattr(attrs, 'class'):
             attrs['class'] = '%s sorted' % attrs['class']
-        strvalue = ','.join([force_unicode(v) for v in (value or [])])
+        strvalue = ','.join([str(v) for v in (value or [])])
         output = [super(ForeignKeyRawIdWidget, self).render(name, strvalue, attrs)] + extra
         if value:
-            output.append(self.label_for_value(value))
+            output.append(self.label_and_url_for_value(value))
         output.extend(_get_previews(value or [], name))
-        return mark_safe(''.join(output))
+        return mark_safe(''.join(str(v) for v in output))
 
 
 from django.forms.widgets import ChoiceWidget
