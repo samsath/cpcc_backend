@@ -3,10 +3,12 @@ from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from .models import *
 
 
-class MapSerialiers(GeoFeatureModelSerializer):
+class MapSerialiers(serializers.ModelSerializer):
+    centre = serializers.SerializerMethodField()
+    path = serializers.SerializerMethodField()
+
     class Meta:
         model = Map
-        geo_field = 'centre'
         fields = (
             'id',
             'name',
@@ -14,9 +16,12 @@ class MapSerialiers(GeoFeatureModelSerializer):
             'slug',
             'content_type',
             'created',
-            'start_name',
-            'end_name',
-            'start',
-            'end',
+            'centre',
             'path',
             )
+
+    def get_centre(self, obj):
+        return obj.getcentre()
+
+    def get_path(self, obj):
+        return obj.getpath()

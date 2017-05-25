@@ -47,7 +47,6 @@ class CalendarTripSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trips
-        fields = '__all__'
         exclude = ('day',)
 
 
@@ -56,9 +55,9 @@ class CalendarEventSerializer(serializers.ModelSerializer):
     map = MediaStoreSerializers(read_only=True)
     main_image = MediaStoreSerializers(read_only=True)
     gallery = MediaStoreSerializers(read_only=True, many=True)
+
     class Meta:
         model = Event
-        fields = '__all__'
         exclude = ('date', )
 
 
@@ -76,7 +75,6 @@ class CalendarTideSerializer(serializers.ModelSerializer):
 class PlaEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlaEvent
-        fields = '__all__'
         exclude = ('calendar',)
 
 
