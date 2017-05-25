@@ -7,7 +7,7 @@ from rest_framework import routers
 from website.article.views import ArticleViewSet, CategoryViewSet
 from website.clubsessions.views import SessionView, nextsession
 from website.faq.views import FaqViewSet
-from website.homepage.views import NotificationView, HomePageView, MenuViews, PageImageView
+from website.homepage.views import NotificationView, HomePageView, MenuViews, PageImageView, homepageimage
 from website.membership.views import MembershipView
 from website.newsletter.views import NewsletterView
 from mediastore.api.views import medialist, mediadetial
@@ -35,6 +35,7 @@ urlpatterns = [
 
     url(r'^api/v1/calender/', include(calendarurl)),
     url(r'^api/v1/nextsession$',nextsession),
+    url(r'^api/v1/homepageimage',homepageimage),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),

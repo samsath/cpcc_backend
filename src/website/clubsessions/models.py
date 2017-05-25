@@ -26,10 +26,12 @@ class Session(Base):
         ('6',_('Sunday')),
     )
     description = models.TextField(_('Description'), blank=True, null=True)
+    list_description = models.CharField(_('List Description'), blank=True, null=True, max_length=255)
     cost = models.TextField(_('Cost'), blank=True, null=True )
     day_of_week = models.CharField(_('Day of Week'), max_length=10, choices=DAY_OF_WEEK)
     sort_value = models.IntegerField(_('Sort Value'), default=sessionCount())
     location = MediaField(blank=True, null=True, limit_choices_to={'content_type__model':'map'}, related_name='session_map')
+    club = models.BooleanField(_('At Club'), default=False)
 
     class Meta:
         verbose_name = 'Session'

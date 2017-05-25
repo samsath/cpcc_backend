@@ -72,11 +72,13 @@ INSTALLED_APPS = [
     'django_extensions',
     'flatblocks',
     #'lettuce.django',
+    'corsheaders',
 
 
     #rest
     'rest_framework',
     'rest_framework_gis',
+    'django_filters',
     #'rest_framework.authtoken',
     'guardian',
     'knox',
@@ -110,6 +112,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -117,6 +120,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    'localhost:4200',
+    '127.0.0.1:9000'
+)
 
 # Media/Static file handling
 # --------------------------

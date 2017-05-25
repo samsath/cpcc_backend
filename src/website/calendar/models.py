@@ -86,6 +86,10 @@ class Calendar(models.Model):
             return False
         return True
 
+    @property
+    def tide(self):
+        return [{'x':x.seconds, 'y':x.level} for x in self.tide_set.order_by('time')]
+
     class Meta:
         verbose_name = 'Calendar'
         verbose_name_plural = 'Calendar'
@@ -98,6 +102,12 @@ class Tide(models.Model):
     level = models.FloatField(_('Level'))
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
+
+    @property
+    def seconds(self):
+        current = datetime.combine(self.day.date, self.time)
+        start = datetime.combine(self.day.date, datetime.min.time())
+        return (current - start).seconds
 
     def __unicode__(self):
         return "{0} @ {1}".format(self.level, self.time)

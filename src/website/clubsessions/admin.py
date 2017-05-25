@@ -13,7 +13,9 @@ class SessionAdmin(TinyMCEAdminMixin, ModelAdmin):
         (_('Session'), {
             'fields':(
                 'title',
+                'list_description',
                 'day_of_week',
+                'club',
             )
         }),
         (_('Description'),{
