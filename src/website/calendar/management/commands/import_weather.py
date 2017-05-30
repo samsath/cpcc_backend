@@ -25,7 +25,7 @@ class Command(BaseCommand):
                     date = datetime.strptime(day['date'], '%Y-%m-%d').timestamp()
                     sun_rise = datetime.strptime(day['astro']['sunrise'], '%I:%M %p').time()
                     sun_set = datetime.strptime(day['astro']['sunset'], '%I:%M %p').time()
-                    temp = day['day']['avgtemp_c']
+                    temp = day['day']['maxtemp_c']
                     weath, creat = WeatherTypes.objects.get_or_create(title=day['day']['condition']['text'], class_code=day['day']['condition']['code'])
                     Calendar.data.addWeather(int(date),sun_rise, sun_set, temp, weath)
                 except Exception as exp:

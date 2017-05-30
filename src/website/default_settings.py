@@ -106,6 +106,7 @@ INSTALLED_APPS = [
     'website.calendar',
     'website.homepage',
     'website.enquiry',
+    'website.abouts',
 
 ]
 
