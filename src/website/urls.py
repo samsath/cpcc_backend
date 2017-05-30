@@ -26,7 +26,7 @@ router_v1.register(r'homepage', HomePageView)
 router_v1.register(r'menu', MenuViews)
 router_v1.register(r'membership', MembershipView)
 router_v1.register(r'newsletter', NewsletterView)
-router_v1.register(r'pageimages', PageImageView)
+router_v1.register(r'pageimage', PageImageView)
 router_v1.register(r'about', AboutViewSet)
 
 

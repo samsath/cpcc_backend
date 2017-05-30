@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+
 class NotificationView(viewsets.ReadOnlyModelViewSet):
     queryset = Notification.public.all()
     serializer_class = NotificationSerializer

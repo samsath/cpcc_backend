@@ -5,11 +5,11 @@ from .serializers import *
 
 class ArticleViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Article.public.all()
-    serializers = ArticleSerialiers
+    serializer_class = ArticleSerialiers
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.public.all()
-    serializers = CategorySerialiers
+    serializer_class = CategorySerialiers
 
 #todo need to sort of the permissions and the posting of data.

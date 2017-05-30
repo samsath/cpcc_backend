@@ -14,6 +14,7 @@ class NotificationSerializer(serializers.ModelSerializer):
 
 class HomepageSerializer(serializers.ModelSerializer):
     main_image = MediaStoreSerializers(read_only=True)
+
     class Meta:
         model = Homepage
         fields = '__all__'

@@ -28,13 +28,14 @@ class NotificationAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     )
 
 
-class HomagePageAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
+class HomagePageAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','is_public',)
     fieldsets = (
         (_('Items'),{
             'fields':(
                 'title',
                 'description',
+                'main_image',
                 'is_public'
             )
         }),

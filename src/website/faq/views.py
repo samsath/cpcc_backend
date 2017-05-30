@@ -5,4 +5,4 @@ from .serializers import *
 
 class FaqViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Faq.public.all()
-    serializers_class = FaqSerializer
+    serializer_class = FaqSerializer
