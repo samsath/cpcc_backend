@@ -37,4 +37,5 @@ class ArticleSerialiers(serializers.ModelSerializer):
             'author',
             'main_image',
             'gallery',
+            'slug',
         )
