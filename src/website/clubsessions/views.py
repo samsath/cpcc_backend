@@ -28,7 +28,6 @@ def nextsession(request):
             'content':ses.list_description,
             'tide':cal.tide
         }
-
         return JsonResponse(obj)
     except:
-        return ""
+        return JsonResponse({})

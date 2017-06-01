@@ -4,6 +4,17 @@ from website.accounts.serializers import AccountSerializer
 from mediastore.api.serializers import MediaStoreSerializers
 
 
+class CalendarBasicSerializer(serializers.ModelSerializer):
+    tide = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Calendar
+        fields = '__all__'
+
+    def get_tide(self, obj):
+        return obj.tide
+
+
 class WeatherTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeatherTypes
@@ -36,6 +47,7 @@ class TripSerializer(serializers.ModelSerializer):
     map = MediaStoreSerializers(read_only=True)
     main_image = MediaStoreSerializers(read_only=True)
     gallery = MediaStoreSerializers(read_only=True, many=True)
+    day = CalendarBasicSerializer(read_only=True)
 
     class Meta:
         model = Trips
@@ -88,5 +100,4 @@ class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calendar
         fields = '__all__'
-
 
