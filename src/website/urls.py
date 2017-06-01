@@ -11,7 +11,7 @@ from website.homepage.views import NotificationView, HomePageView, MenuViews, Pa
 from website.membership.views import MembershipView
 from website.newsletter.views import NewsletterView
 from mediastore.api.views import medialist, mediadetial
-from website.calendar.urls import calendarurl
+from website.calendar.urls import calendarurl, TripViewSet
 from website.abouts.views import AboutViewSet
 
 admin.autodiscover()
@@ -28,6 +28,7 @@ router_v1.register(r'membership', MembershipView)
 router_v1.register(r'newsletter', NewsletterView)
 router_v1.register(r'pageimage', PageImageView)
 router_v1.register(r'about', AboutViewSet)
+router_v1.register(r'trips', TripViewSet)
 
 
 urlpatterns = [

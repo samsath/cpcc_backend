@@ -8,7 +8,7 @@ from functools import update_wrapper
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django import forms
-
+from mediastore.admin import ModelAdmin
 
 
 class WeatherTypeAdmin(TinyMCEAdminMixin,admin.ModelAdmin):
@@ -64,7 +64,7 @@ class ExtraFieldsAdmin(admin.TabularInline):
     model = ExtraFields
 
 
-class TripAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
+class TripAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','start_date','end_date','is_public','is_featured')
     list_editable = ('is_public','is_featured',)
     search_fields = ('title',)
