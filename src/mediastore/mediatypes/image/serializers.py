@@ -7,6 +7,7 @@ class ImageSerializer(serializers.ModelSerializer):
     medium = serializers.SerializerMethodField('get_medium_crop')
     large = serializers.SerializerMethodField('get_large_crop')
     original = serializers.SerializerMethodField('get_original_image')
+    src = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
@@ -23,3 +24,6 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_original_image(self, img):
         return img.get_original()
+
+    def get_src(self, obj):
+        return obj.file.url

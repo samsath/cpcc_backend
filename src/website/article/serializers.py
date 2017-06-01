@@ -21,6 +21,8 @@ class ArticleSerialiers(serializers.ModelSerializer):
     author = AccountSerializer(read_only=True)
     main_image = MediaStoreSerializers(read_only=True)
     gallery = MediaStoreSerializers(read_only=True, many=True)
+    next = serializers.SerializerMethodField()
+    prev = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
@@ -38,4 +40,18 @@ class ArticleSerialiers(serializers.ModelSerializer):
             'main_image',
             'gallery',
             'slug',
+            'prev',
+            'next'
         )
+
+    def get_next(self, obj):
+        try:
+            return obj.get_next().slug
+        except:
+            return ""
+
+    def get_prev(self, obj):
+        try:
+            return obj.get_prev().slug
+        except:
+            return ""
