@@ -280,6 +280,102 @@ def deploy(rev=None):
     restart()
 
 
+@_require_environment
+def create_user():
+    with settings(warn_only=True):
+        sudo('useradd --home %(path)s %(user)s' % env.config)
+        sudo('gpasswd -a %(user)s projects' % env.config)
+        sudo('gpasswd -a www-data %(user)s' % env.config)
+        sudo('gpasswd -a sam %(user)s' % env.config)
+
+@_require_environment
+def setup(mysql_root_password=None):
+    '''
+    * symlink services to /etc/service/<project_name>-<service>
+    * symlink and nginx config to /etc/nginx/sites-available
+    * symlink and nginx config from /etc/nginx/sites-available to
+      /etc/nginx/sites-enabled
+    * reload nginx
+    '''
+    port = _determine_port()
+    template_config = {
+        u'USER': env.config['user'],
+        u'PATH': env.config['path'],
+        u'PROJECT_NAME': env.config['name'],
+        u'DOMAIN': env.config['domain'],
+        u'PORT': port,
+        u'DBNAME': env.config['dbname'],
+        u'DBUSER': env.config['dbname'],
+    }
+    with cd(env.config['path']):
+        if not files.exists(env.config['local_settings']):
+            if mysql_root_password:
+                mysql_user_password = _get_mysql_password(mysql_root_password)
+                context = template_config.copy()
+                context.update({
+                    u'DBPASSWORD': mysql_user_password,
+                    u'SECRET_KEY': _generate_secret_key(),
+                })
+                files.upload_template(
+                    u'src/website/local_settings.example.py',
+                    context=context,
+                    destination=env.config['local_settings'])
+        context = template_config.copy()
+        files.upload_template(
+            u'config/nginx.conf.template',
+            context=context,
+            destination=u'config/nginx.conf')
+        for service in env.config['services']:
+            files.upload_template(
+                u'services/%s.template' % service,
+                context=context,
+                destination=u'services/%s' % service)
+
+    for service_config in _services():
+        local_config = env.config.copy()
+        local_config.update(service_config)
+        if not files.exists('/etc/service/%(service_name)s/run' % local_config):
+            sudo('mkdir -p /etc/service/%(service_name)s' % local_config)
+            sudo('ln -s %(path)s/services/%(service)s /etc/service/%(service_name)s/run' % local_config)
+    if not files.exists('/etc/nginx/sites-available/%(name)s.conf' % env.config):
+        sudo('ln -s %(path)s/config/nginx.conf /etc/nginx/sites-available/%(name)s.conf' % env.config)
+    if not files.exists('/etc/nginx/sites-enabled/%(name)s.conf' % env.config):
+        sudo('ln -s /etc/nginx/sites-available/%(name)s.conf /etc/nginx/sites-enabled' % env.config)
+
+    setup_fs_permissions()
+    reload_webserver()
+    restart()
+
+@_require_environment
+def install(root_password=None):
+    while not root_password:
+        root_password = raw_input(u'Please enter db password')
+    create_user()
+
+    # create project's parent directory
+    if not files.exists(env.config['root']):
+        sudo('mkdir -p %s' % env.config['root'])
+        sudo('chown {user}:{user} -R {root}'.format(**env.config))
+        sudo('chmod g+w -R {root}'.format(**env.config))
+
+    # git clone
+    if not files.exists(env.config['path']):
+        sudo('git clone {repository} {path}'.format(**env.config), user=env.config['repo_manager'])
+    else:
+        update()
+
+    setup_fs_permissions()
+
+    network.disconnect_all()
+
+    setup_virtualenv()
+    pip_install()
+
+    setup(root_password)
+
+    print(green(u'Success!\n\n\n\n'),yellow(u'The project should be running now'))
+
+
 def _services():
     for service in env.config['services']:
         service_config = {
@@ -327,6 +423,7 @@ def status():
         for service_config in _services():
             sudo('svstat /etc/service/%(service_name)s' % service_config)
 
+
 @_require_environment
 def setup_fs_permissions():
     with cd(env.config['path']):
@@ -337,6 +434,7 @@ def setup_fs_permissions():
         for service in env.config['services']:
             with settings(warn_only=True):
                 sudo('chmod +x services/%s' % service)
+
 
 def _determine_port():
     port = env.config['django_port']
