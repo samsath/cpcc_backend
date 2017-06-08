@@ -91,7 +91,7 @@ class PlaEventSerializer(serializers.ModelSerializer):
 
 
 class CalendarSerializer(serializers.ModelSerializer):
-    tide_set = CalendarTideSerializer(many=True, read_only=True)
+    tide = serializers.SerializerMethodField()
     event_set = CalendarEventSerializer(many=True, read_only=True)
     weather = WeatherTypeSerializer(read_only=True)
     trip_set = CalendarTripSerializer(read_only=True, many=True)
@@ -100,4 +100,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calendar
         fields = '__all__'
+
+    def get_tide(self, obj):
+        return obj.tide
 

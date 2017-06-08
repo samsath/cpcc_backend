@@ -88,7 +88,7 @@ class Calendar(models.Model):
 
     @property
     def tide(self):
-        return [{'x':x.seconds, 'y':x.level} for x in self.tide_set.order_by('time')]
+        return [{'x':x.minutes, 'y':x.level} for x in self.tide_set.order_by('time')]
 
     class Meta:
         verbose_name = 'Calendar'
@@ -108,6 +108,12 @@ class Tide(models.Model):
         current = datetime.combine(self.day.date, self.time)
         start = datetime.combine(self.day.date, datetime.min.time())
         return (current - start).seconds
+
+    @property
+    def minutes(self):
+        current = datetime.combine(self.day.date, self.time)
+        start = datetime.combine(self.day.date, datetime.min.time())
+        return int((current - start).seconds / 60 )
 
     def __unicode__(self):
         return "{0} @ {1}".format(self.level, self.time)

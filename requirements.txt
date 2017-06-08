@@ -32,3 +32,4 @@ git+https://github.com/djangonauts/django-rest-framework-gis.git
 requests == 2.14.2
 python-resize-image == 1.1.11
 wand == 0.4.4
+django-braces == 1.11.0

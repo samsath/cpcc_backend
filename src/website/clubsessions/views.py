@@ -20,14 +20,19 @@ def nextsession(request):
     try:
         ses = sessions[0][0]
         cal = ses.get_next_session()
+        if cal.weather:
+            weather = cal.weather.class_code
+        else:
+            weather = ''
         obj = {
             'date':cal.date.strftime('%A %d %B %Y'),
             'club':ses.club,
             'temp':str(cal.temperature),
-            'weather':cal.weather.class_code,
+            'weather':weather,
             'content':ses.list_description,
             'tide':cal.tide
         }
         return JsonResponse(obj)
-    except:
+    except Exception as exp:
+        print(exp)
         return JsonResponse({})
