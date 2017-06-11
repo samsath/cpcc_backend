@@ -102,5 +102,8 @@ class CalendarSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_tide(self, obj):
-        return obj.tide
+        try:
+            return obj.tide
+        except:
+            return []
 

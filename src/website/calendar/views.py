@@ -22,8 +22,8 @@ def monthData(request, year, month):
 def dayData(request, year, month, day):
     dates = Calendar.objects.filter(date__year=year,
                                     date__month=month,
-                                    date__day=day)
-    return Response(CalendarSerializer(instance=dates, many=True).data)
+                                    date__day=day).first()
+    return Response(CalendarSerializer(instance=dates).data)
 
 
 class TripViewSet(viewsets.ReadOnlyModelViewSet):
