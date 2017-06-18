@@ -8,10 +8,23 @@ from rest_framework.response import Response
 from braces.views import CsrfExemptMixin
 
 
-class EnquiryView(CsrfExemptMixin, APIView):
-    authentication_classes = []
-
-    def post(self, request, format=None):
+def enquirtview(request):
+    if request.method == "POST":
         json_data = json.loads(request.body.decode("utf-8"))
-        print(json_data)
-        return Response({'detail':'Works'})
+        enquir = Enquiry.objects.get_or_create(email=json_data['email'],
+                                              first_name=json_data['name'],
+                                              message=json_data['comment'])
+        enquir.save()
+        return JsonResponse({'data':True})
+    return JsonResponse({'get':False})
+
+
+def newsletteradd(request):
+    if request.method == "POST":
+        json_data = json.loads(request.body.decode("utf-8"))
+        newsletter = NewsletterSignup.objects.get_or_create(email=json_data['email'],
+                                                            name=json_data['name'],
+                                                            subscribe=True)
+        newsletter.save()
+        return JsonResponse({'data':True})
+    return JsonResponse({'get':False})

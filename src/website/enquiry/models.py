@@ -7,14 +7,13 @@ from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField, M
 
 class Enquiry(models.Model):
     email = models.EmailField()
-    first_name = models.CharField(_('First Name'), max_length=255)
-    last_name = models.CharField(_('Last Name'), max_length=255)
+    name = models.CharField(_('Name'), max_length=255)
     message = models.TextField(_('Message'))
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 
     def get_full_name(self):
-        return "{0} {1}".format(self.first_name, self.last_name)
+        return "{0} {1}".format(self.name)
 
     def __unicode__(self):
         return self.email
@@ -23,3 +22,23 @@ class Enquiry(models.Model):
         verbose_name = 'Enquiry'
         verbose_name_plural = 'Enquiries'
         ordering = ['created', ]
+
+
+class NewsletterSignup(models.Model):
+    email = models.EmailField()
+    name = models.CharField(max_length=255,blank=True, null=True)
+    subscribe = models.NullBooleanField(default=None)
+    mailchimp_register = models.BooleanField(default=False)
+    created = CreationDateTimeField()
+    modified = ModificationDateTimeField()
+
+    def __unicode__(self):
+        return self.email
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = 'Newsletter signup'
+        verbose_name_plural = 'Newsletter signup'
+        ordering = ['created',]

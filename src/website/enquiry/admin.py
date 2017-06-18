@@ -6,20 +6,19 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class EnquiryAdmin(admin.ModelAdmin):
-    list_display = ('email','first_name','last_name','created')
-    search_fields = ('email','first_name','last_name',)
+    list_display = ('email','name','created')
+    search_fields = ('email','name',)
     fieldsets = (
         (_('Message'), {
             'fields': (
                 'email',
-                'first_name',
-                'last_name',
+                'name',
                 'message',
                 'created',
                 'modified',
             )
         }),
     )
-    readonly_fields = ('email','first_name','last_name','message','created','modified',)
+    readonly_fields = ('email','name','message','created','modified',)
 
 admin.site.register(Enquiry,EnquiryAdmin)

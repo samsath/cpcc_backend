@@ -34,6 +34,7 @@ class WeatherTypes(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     slug = AutoSlugField(populate_from=('title',), unique=True, overwrite=True)
     class_code = models.CharField(_('Code'), max_length=255)
+    icon = models.CharField(_('Icon'), max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return self.title

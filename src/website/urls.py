@@ -13,7 +13,7 @@ from website.newsletter.views import NewsletterView
 from mediastore.api.views import medialist, mediadetial
 from website.calendar.urls import calendarurl, TripViewSet
 from website.abouts.views import AboutViewSet
-from website.enquiry.views import EnquiryView
+from website.enquiry.views import enquirtview, newsletteradd
 
 admin.autodiscover()
 
@@ -41,7 +41,8 @@ urlpatterns = [
     url(r'^api/v1/nextsession$',nextsession),
     url(r'^api/v1/homepageimage',homepageimage),
 
-    url(r'^api/v1/enquiry$', EnquiryView),
+    url(r'^api/v1/enquiry$', enquirtview),
+    url(r'^api/v1/newsletter$', newsletteradd),
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
