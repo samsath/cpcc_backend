@@ -11,9 +11,9 @@ from braces.views import CsrfExemptMixin
 def enquirtview(request):
     if request.method == "POST":
         json_data = json.loads(request.body.decode("utf-8"))
-        enquir = Enquiry.objects.get_or_create(email=json_data['email'],
-                                              first_name=json_data['name'],
-                                              message=json_data['comment'])
+        enquir, created = Enquiry.objects.get_or_create(email=json_data['email'],
+                                               name=json_data['name'],
+                                               message=json_data['comment'])
         enquir.save()
         return JsonResponse({'data':True})
     return JsonResponse({'get':False})
@@ -22,7 +22,7 @@ def enquirtview(request):
 def newsletteradd(request):
     if request.method == "POST":
         json_data = json.loads(request.body.decode("utf-8"))
-        newsletter = NewsletterSignup.objects.get_or_create(email=json_data['email'],
+        newsletter, created = NewsletterSignup.objects.get_or_create(email=json_data['email'],
                                                             name=json_data['name'],
                                                             subscribe=True)
         newsletter.save()
