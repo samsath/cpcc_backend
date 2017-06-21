@@ -1,0 +1,40 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container">
+  <div class="row height-spacer"></div>
+  <div class="row">
+
+    <div *ngFor="let section of sections">
+      <div class="col " [ngClass]="{'s12 m12 l9':column == 1, 's12 m12 l6':column == 2, 's12 m12 l4':column >= 3}">
+        <div class="card-panel">
+          <div class="boxarea-action" *ngIf="paginate">
+            <a href="#">Previous</a>
+            <a href="#">Next</a>
+          </div>
+          <div class="boxarea-header">
+            <h1>{{ section.title }}</h1>
+          </div>
+          <div class="boxarea-content" [innerHTML]="section.description | safeHtml"></div>
+
+          <div class="boxarea-content" [innerHTML]="section.cost | safeHtml"></div>
+
+          <div class="boxarea-map">
+            <div leaflet class="leafletmap"
+                 [leafletOptions]="section.options"
+            ></div>
+          </div>
+
+          <div class="card-action">
+            <a href="/session">Find us</a>
+            <a href="/faq">FAQ</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="imagespacer"></div>

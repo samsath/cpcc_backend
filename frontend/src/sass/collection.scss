@@ -1,0 +1,40 @@
+.collection{
+  border:none;
+
+  a.collection-item{
+    height:40px;
+    color:$main;
+    border-color:$main;
+    border:1px solid $main;
+    margin-bottom:5px;
+    cursor:pointer;
+
+    transition: background 1s, color 1s;
+    transition-timing-function: ease-in-out;
+
+    &:last-child{
+      border-bottom:1px solid;
+    }
+
+    &:hover{
+      background-color:$main;
+      color:$background;
+    }
+
+    &:not(.active):hover{
+      background-color:$main;
+      color:$background;
+    }
+  }
+}
+
+.imagegroup{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+
+  .imagethumb{
+    margin-right:10px;
+    margin-top:10px;
+  }
+}

@@ -96,10 +96,11 @@ ENV/
 /out-tsc
 
 # dependencies
-/node_modules
-
+/frontend/node_modules
+/logs
 # IDEs and editors
 /.idea
+/media
 .project
 .classpath
 .c9/

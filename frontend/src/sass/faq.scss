@@ -1,0 +1,40 @@
+
+.collapsible-header{
+  border: 2px solid $main;
+  color:$main;
+
+  transition: all 1s, color 0.5s;
+  transition-timing-function: ease-in-out;
+
+  h1.icon.q{
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    padding-right: 15px;
+  }
+
+  &.active{
+    background-color: $main;
+    color:$background;
+  }
+}
+
+.collapsible-body{
+  padding-left: 20px;
+
+  h1.icon.a{
+      margin: 0;
+      display: inline-block;
+      position: relative;
+      top: 4px;
+      padding-right: 15px;
+  }
+  p{
+    display: inline-block;
+    width: calc(100% - 50px);
+    vertical-align: top;
+    position: relative;
+    margin-top: 0px;
+  }
+}

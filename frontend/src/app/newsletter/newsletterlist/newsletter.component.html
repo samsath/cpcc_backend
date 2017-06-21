@@ -1,0 +1,31 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container">
+  <div class="row"></div>
+  <div class="row">
+
+    <div class="col s12 m12 l9">
+      <div class="card-panel">
+        <h1>Newsletter</h1>
+        <p></p>
+        <div class="collection" >
+          <a routerLink="/newsletter/{{ news.slug }}"class="collection-item" *ngFor="let news of newsletters">
+            <div class="col s2">
+              {{ news.number}}
+            </div>
+            <div class="col s8">
+              {{ news.title }}
+            </div>
+            <div class="col s2">
+              {{ news.postdate }}
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <app-next-session></app-next-session>
+  </div>
+</div>

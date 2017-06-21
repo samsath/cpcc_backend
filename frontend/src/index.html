@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chiswick Pier Canoe Club</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    .loadingsize{
+      position: absolute;
+      width:100%;
+      height:100%;
+    }
+
+    .loadingimage {
+      position: relative;
+      background-image: url(assets/images/CPCClogo.png);
+      background-size: 200px 200px;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      margin-top: 20%;
+      opacity: 1;
+      animation: fade 2s linear;
+    }
+
+
+    @keyframes fade {
+      0%,100% { opacity: 0 }
+      50% { opacity: 1 }
+    }
+  </style>
+
+</head>
+<body>
+<header>
+  <div class="navbar-fixed">
+    <nav >
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo"><span class="logoelement"></span><p>Chiswick Canoe Pier Club</p></a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse" materialize="sideNav"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/about">About</a></li>
+          <li><a href="/membership" >Membership</a></li>
+          <li><a href="/enquiry">Enquiries</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/article">Articles</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/session">Sessions</a></li>
+          <li><a href="/trips">Trips</a></li>
+          <li><a href="/newsletter">Newsletter</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo" >
+          <li><a href="/about">About</a></li>
+          <li><a href="/membership">Membership</a></li>
+          <li><a href="/enquiry">Enquiries</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/article">Articles</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/session">Sessions</a></li>
+          <li><a href="">Trips</a></li>
+          <li><a href="/newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<app-root><div class="loadingsize"><div class="loadingimage"></div></div></app-root>
+<script language="JavaScript">
+  document.addEventListener('DOMContentLoaded', function(){
+    if (document.querySelectorAll(".button-collapse")) {
+      $(".button-collapse").sideNav();
+    }
+  }, false);
+</script>
+</body>
+</html>

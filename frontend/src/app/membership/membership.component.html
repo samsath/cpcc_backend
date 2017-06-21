@@ -1,0 +1,44 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container">
+  <div class="row height-spacer"></div>
+  <div class="row">
+
+    <div *ngIf="featured">
+      <div class="col s12">
+        <div class="card-panel">
+          <div class="boxarea-header">
+            <h1>{{ featured?.title }}</h1>
+            <a href="{{ featured?.download?.download.file }}" target="_blank" class="btn download">Download Form</a>
+          </div>
+
+          <p class="date" *ngIf="featured.from_date">From {{ featured.from_date| date:'d/M/yy'}} to {{ featured.end_date| date:'d/M/yy'}}</p>
+          <div class="boxarea-content" [innerHTML]="featured?.description | safeHtml"></div>
+
+          <div class="boxarea-content" [innerHTML]="featured?.cost | safeHtml"></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let member of members">
+      <div class="col " [ngClass]="{'s12 m12 l9':column == 1, 's12 m12 l6':column == 2, 's12 m12 l4':column >= 3}" *ngIf="!member.is_featured">
+        <div class="card-panel">
+
+          <div class="boxarea-header">
+            <h1>{{ member.title }}</h1>
+          </div>
+          <p class="date" *ngIf="member.from_date">From {{ member.from_date| date:'d/M/yy'}} to {{ member.end_date| date:'d/M/yy'}}</p>
+          <div class="boxarea-content" [innerHTML]="member.description | safeHtml"></div>
+
+          <div class="boxarea-content" [innerHTML]="member.cost | safeHtml"></div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="imagespacer"></div>

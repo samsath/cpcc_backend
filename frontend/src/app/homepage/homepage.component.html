@@ -1,0 +1,13 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + images?.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container wow fadeIn">
+  <div class="row height-spacer"></div>
+  <div class="row">
+
+    <app-content-area [column]="1" [title]="home.title" [content]="home.description" [paginate]="False" *ngFor="let home of homepage"></app-content-area>
+    <app-next-session></app-next-session>
+  </div>
+</div>
+<div class="imagespacer"></div>

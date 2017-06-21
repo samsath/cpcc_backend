@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&subset=latin-ext,tamil');
+@import "sass/variables";
+@import "./app/mainheader/mainheader.component";
+@import "./app/app.component";
+@import "./sass/cards";
+@import "./sass/enquiry";
+@import "./sass/faq";
+@import "./sass/collection";
+@import "./sass/navbar";
+@import "./sass/mainimage";
+@import "./sass/calendar";
+
+.main-logo{
+  background-image: url('assets/images/logo.svg');
+  background-size:contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height:100%;
+  width:100%;
+}
+
+/// Override the container width to fix in the different elements
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+@media only screen and (min-width: 601px) {
+  .container {
+    width: 85%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 90%;
+  }
+}
+
+.leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+  opacity: 0;
+}
+
+.text-right{
+  text-align:right;
+}

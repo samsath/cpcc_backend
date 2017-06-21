@@ -1,0 +1,43 @@
+@import "../../sass/variables";
+
+:host{
+  .leafletmap{
+    height:200px;
+    width:200px;
+  }
+
+  .card-content{
+    color:$body;
+
+
+  }
+  .card{
+    border: 1px solid $main;
+    background: $background;
+
+    transition: background 1s, color 1s;
+    transition-timing-function: ease-in-out;
+
+    &:hover {
+      background: $main;
+      color: $background;
+      border: 1px solid $main;
+
+      .card-content{
+        color: $background;
+
+        .date{
+          color:$background;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width:758px){
+    .leafletmap{
+      height:200px;
+      width:100px;
+    }
+  }
+
+}

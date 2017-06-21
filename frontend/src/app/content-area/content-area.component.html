@@ -1,0 +1,17 @@
+<div class="col " [ngClass]="{'s12 m12 l9':column == 1, 's12 m12 l6':column == 2, 's12 m12 l4':column >= 3}">
+  <div class="card-panel">
+    <div class="boxarea-action" *ngIf="paginate">
+      <a href="#">Previous</a>
+      <a href="#">Next</a>
+    </div>
+    <div class="boxarea-header">
+      <h1>{{ title }}</h1>
+    </div>
+    <div class="boxarea-content" [innerHTML]="content | safeHtml">
+
+    </div>
+    <div class="box-area-action">
+
+    </div>
+  </div>
+</div>

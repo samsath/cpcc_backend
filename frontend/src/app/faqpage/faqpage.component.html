@@ -1,0 +1,24 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container">
+  <div class="row"></div>
+  <div class="row">
+
+    <div class="col s12 m12 l9">
+      <div class="card-panel">
+        <h1>FAQ</h1>
+        <p></p>
+        <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
+          <li *ngFor="let faq of faqs">
+            <div class="collapsible-header"><h1 class="icon q">Q</h1>{{ faq.question }}</div>
+            <div class="collapsible-body"><h1 class="icon a">A</h1><p [innerHTML]="faq.answer| safeHtml"></p></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <app-next-session></app-next-session>
+  </div>
+</div>
+<div class="imagespacer"></div>

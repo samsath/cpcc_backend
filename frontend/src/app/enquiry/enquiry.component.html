@@ -1,0 +1,84 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="imagespacer half"></div>
+<div class="container wow fadeIn">
+  <div class="row height-spacer"></div>
+  <div class="row">
+    <!-- This is for main section -->
+    <div class="col s12 m12 l9">
+      <div class="card-panel">
+        <h1>Enquiries</h1>
+        <p>If you have a question or would like more information about the club and what we do.<br>
+        Please fill in the form below or send us an email and we shall get back in contact with you shortly.</p>
+
+        <div>
+          <p *ngIf="maincomplete">Thank you for sending us a message, we shall be in touch shortly.</p>
+          <form [formGroup]="mainForm" (ngSubmit)="mainsend(mainForm.value)" class="formhalf">
+            <div class="input-field">
+              <input id="message_email" type="email" class="validate" name="email" [formControl]="mainForm.controls['email']" required>
+              <label for="message_email">Email</label>
+            </div>
+
+            <div class="input-field">
+              <input id="message_name" type="text" class="validate" name="name" [formControl]="mainForm.controls['name']" required>
+              <label for="message_name">Name</label>
+            </div>
+
+            <div class="input-field">
+              <textarea id="message_text" class="materialize-textarea" name="comment" [formControl]="mainForm.controls['comment']" required></textarea>
+              <label for="message_text">Comment</label>
+            </div>
+
+            <div class="input-field">
+              <button class="waves-effect waves-light btn" type="submit">Send</button>
+            </div>
+
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- This is for the left col -->
+    <div class="col s12 m12 l3">
+      <!-- get in touch box -->
+        <div class="card session-card">
+          <div class="card-content">
+            <span class="card-title">Get in Touch</span>
+            <p>If you want to join us or contact us for information.</p>
+          </div>
+          <div class="card-action">
+            <a href="mailto:enquiry@club.com">Email </a>
+          </div>
+        </div>
+
+        <!-- mailing list subscribe -->
+        <div class="card session-card">
+          <form class="card-content" [formGroup]="mailForm" (ngSubmit)="mailsend(mailForm.value)">
+            <span class="card-title">Subscribe to the Mailing list</span>
+            <p *ngIf="mailcomplete">Thank you for signing up, you should receive a email shortly.</p>
+            <div class="input-field">
+              <input id="sub_email" type="email" class="validate" name="email" [formControl]="mailForm.controls['email']" required>
+              <label for="sub_email">Email</label>
+            </div>
+
+            <div class="input-field">
+              <input id="sub_name" type="text" class="validate" name="name" [formControl]="mailForm.controls['name']" required>
+              <label for="sub_name">Name</label>
+            </div>
+
+            <div class="input-field">
+              <button class="waves-effect waves-light btn" type="submit">Send</button>
+            </div>
+
+          </form>
+
+        </div>
+
+
+    </div>
+  </div>
+</div>
+<div class="imagespacer"></div>

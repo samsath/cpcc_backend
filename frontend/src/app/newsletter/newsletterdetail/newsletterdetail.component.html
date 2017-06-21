@@ -1,0 +1,22 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="container">
+  <div class="row"></div>
+  <div class="row">
+
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+        <div class="boxarea-action">
+          <a href="#">Previous</a>
+          <a href="#">Next</a>
+        </div>
+        <div class="boxarea-header">
+          <h1>{{ newsletter.number }}{{ newsletter.title }}</h1>
+        </div>
+        <div class="boxarea-content" [innerHTML]="newsletter.newsletter | safeHtml">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container wow fadeIn">
+  <div class="row height-spacer"></div>
+  <div class="row">
+    <app-content-area [column]="1" [title]="about.title" [content]="about.description" *ngFor="let about of abouts"></app-content-area>
+    <app-next-session></app-next-session>
+  </div>
+</div>
+<div class="imagespacer"></div>

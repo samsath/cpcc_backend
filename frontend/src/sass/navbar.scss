@@ -1,0 +1,63 @@
+.navbar-fixed{
+
+  nav{
+    color:$main;
+    background-color:$background;
+    z-index:10000000;
+
+    .brand-logo{
+      color:$main;
+      font-size:1.3rem;
+
+      p{
+        margin: 2px 66px;
+        color:$darkblue;
+      }
+
+      span.logoelement{
+        width:65px;
+        height:100%;
+        background-image: url("assets/images/CPCClogo.png");
+        background-size: 50px 50px;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+
+    ul{
+      a{
+        font-size:1.2rem;
+        color:$main;
+      }
+    }
+
+    a{
+      color:$main;
+    }
+    .side-nav{
+      background: $main;
+      background: -webkit-linear-gradient(left, $main , $background);
+      background: -o-linear-gradient(right, $main, $background);
+      background: -moz-linear-gradient(right, $main, $background);
+      background: linear-gradient(to right, $main , $background);
+      li{
+        a{
+          color:$background;
+        }
+      }
+    }
+
+  }
+
+  .container{
+    width:100%;
+  }
+}
+
+#sidenav-overlay{
+  z-index: 990;
+}
+
+
+
