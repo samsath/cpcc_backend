@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 from __future__ import with_statement
 import hashlib
 import os
