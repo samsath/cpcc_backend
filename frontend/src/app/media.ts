@@ -22,9 +22,30 @@ export class Location {
   }
 }
 
+export class Image{
+  id: number;
+  small: string;
+  medium: string;
+  large: string;
+  original: string;
+  src: string;
+  description: string;
+  slug: string;
+  created: string;
+  file: string;
+  width: number;
+  height: number;
+  mimetype: string;
+  content_type: number;
+
+  constructor( values: Object = {}) {
+    Object.assign(this, values);
+  }
+}
+
 export class Media {
   id:number;
-  image:Object;
+  image:Image;
   download:Object;
   embeded:Object;
   map:Location;

@@ -7,7 +7,7 @@ export function routerTransition() {
   return fadeInOut();
 }
 
-function fadeInOut() {
+export function fadeInOut() {
   return trigger('routerTransition', [
     state('void', style({position:'fixed', width:'100%'}) ),
     state('*', style({position:'fixed', width:'100%'}) ),

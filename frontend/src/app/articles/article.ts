@@ -4,7 +4,7 @@ export class Article {
   pk: number;
   title: string;
   post_date: string;
-  main_image: Object;
+  main_image: Media;
   is_featured: boolean;
   is_public: boolean;
   slug: string;
@@ -14,6 +14,8 @@ export class Article {
   sort_value: number;
   category: Array<Object>;
   gallery: Array<Media>;
+  prev: string;
+  next: string;
 
   constructor(values: Object = {}){
     Object.assign(this, values);

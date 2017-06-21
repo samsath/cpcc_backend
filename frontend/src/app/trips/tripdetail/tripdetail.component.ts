@@ -18,7 +18,7 @@ export class TripdetailComponent implements OnInit {
   public slug;
   private _album = [];
 
-  private colour:Array<any> = [{
+  public colour:Array<any> = [{
       backgroundColor: '#fff',
       borderColor: '#2287b0',
       pointBackgroundColor: '#2287b0',
@@ -27,7 +27,7 @@ export class TripdetailComponent implements OnInit {
       pointHoverBorderColor: '#2287b0'
     }];
 
-  private tideoptions: any = {
+  public tideoptions: any = {
     responsive:false,
     maintainAspectRatio: true,
     legend:{display:false},
