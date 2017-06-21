@@ -243,8 +243,10 @@ def npm_install():
     '''
     * install JS dependencies
     '''
-    with cd(env.config['path']):
+    with cd(env.config['frontend']):
         run('npm install')
+        run('npm run build --aot --prod')
+        run('npm run precache')
 
 
 @_require_environment
