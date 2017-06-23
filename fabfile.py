@@ -290,6 +290,7 @@ def create_user():
         sudo('gpasswd -a %(user)s projects' % env.config)
         sudo('gpasswd -a www-data %(user)s' % env.config)
         sudo('gpasswd -a sam %(user)s' % env.config)
+        sudo('gpasswd -a %(user)s sam' % env.config)
 
 @_require_environment
 def setup(mysql_root_password=None):
@@ -351,8 +352,6 @@ def setup(mysql_root_password=None):
 
 @_require_environment
 def install(root_password=None):
-    while not root_password:
-        root_password = raw_input(u'Please enter db password')
     create_user()
 
     # create project's parent directory
