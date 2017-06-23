@@ -15,10 +15,12 @@ TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': '%(DBNAME)s',
-        'USER': '%(DBUSER)s',
-        'PASSWORD': '%(DBPASSWORD)s',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'cpcc',
+        'USER': 'cpcc',
+        'PASSWORD': 'cpcccpcc',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -53,11 +55,11 @@ EMAIL_FILE_PATH = os.path.join(PROJECT_ROOT, 'logs/emails/')
 #                        media / static files urls                        #
 ###########################################################################
 
-MEDIA_URL = 'http://media.%(DOMAIN)s/'
+MEDIA_URL = 'http://%(DOMAIN)s/media/'
 
-STATIC_URL = 'http://static.%(DOMAIN)s/'
+STATIC_URL = 'http://%(DOMAIN)s/static/'
 COMPRESS_URL = STATIC_URL
-
+CURRENT_SYSTEM = "staging.chiswickcanoe.co.uk"
 
 ###########################################################################
 #                              secret sauce                               #
