@@ -353,6 +353,7 @@ def setup(mysql_root_password=None):
 @_require_environment
 def install(root_password=None):
     create_user()
+    stop()
 
     # create project's parent directory
     if not files.exists(env.config['root']):
@@ -374,6 +375,14 @@ def install(root_password=None):
     pip_install()
 
     setup(root_password)
+
+    migratedb()
+    npm_install()
+    collectstatic()
+    start()
+    reload_webserver()
+    setup_fs_permissions()
+    
 
     print(green(u'Success!\n\n\n\n'),yellow(u'The project should be running now'))
 
