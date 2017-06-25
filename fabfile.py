@@ -275,8 +275,7 @@ def deploy(rev=None):
     * restart services
     '''
     update(rev=rev)
-    npm_install()
-    bower_install()
+    #npm_install()
     pip_install()
     migratedb()
     collectstatic()
