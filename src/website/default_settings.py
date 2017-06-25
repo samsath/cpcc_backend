@@ -299,11 +299,10 @@ APIXU_DAYS = 10
 ###########################################################################
 #                          local settings import                          #
 ###########################################################################
-'''
+
 try:
     from .local_settings import *
     if 'apply_settings' in globals():
         apply_settings(globals())
 except ImportError:
     pass
-'''
