@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     'www.%s.' % DOMAIN,
     'localhost',
     '127.0.0.1',
+    'staging.chiswickcanoe.co.uk',
     ]
 
 
@@ -300,7 +301,7 @@ APIXU_DAYS = 10
 ###########################################################################
 
 try:
-    from local_settings import *
+    from .local_settings import *
     if 'apply_settings' in globals():
         apply_settings(globals())
 except ImportError:
