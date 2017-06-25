@@ -313,17 +313,14 @@ def setup(mysql_root_password=None):
     }
     with cd(env.config['path']):
         if not files.exists(env.config['local_settings']):
-            if mysql_root_password:
-                mysql_user_password = _get_mysql_password(mysql_root_password)
-                context = template_config.copy()
-                context.update({
-                    u'DBPASSWORD': mysql_user_password,
-                    u'SECRET_KEY': _generate_secret_key(),
-                })
-                files.upload_template(
-                    u'src/website/local_settings.example.py',
-                    context=context,
-                    destination=env.config['local_settings'])
+            context = template_config.copy()
+            context.update({]
+                u'SECRET_KEY': _generate_secret_key(),
+            })
+            files.upload_template(
+                u'src/website/local_settings.example.py',
+                context=context,
+                destination=env.config['local_settings'])
         context = template_config.copy()
         files.upload_template(
             u'config/nginx.conf.template',
@@ -382,7 +379,7 @@ def install(root_password=None):
     start()
     reload_webserver()
     setup_fs_permissions()
-    
+
 
     print(green(u'Success!\n\n\n\n'),yellow(u'The project should be running now'))
 
