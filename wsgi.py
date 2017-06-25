@@ -1,4 +1,4 @@
- import manage
+import manage
 
 manage.setup_pythonpath()
 manage.setup_django_settings()
