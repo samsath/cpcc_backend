@@ -314,7 +314,7 @@ def setup(mysql_root_password=None):
     with cd(env.config['path']):
         if not files.exists(env.config['local_settings']):
             context = template_config.copy()
-            context.update({]
+            context.update({
                 u'SECRET_KEY': _generate_secret_key(),
             })
             files.upload_template(
