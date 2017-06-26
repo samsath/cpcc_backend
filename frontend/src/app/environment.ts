@@ -1,3 +1,3 @@
 export const environment = {
-  API_ENDPOINT: 'http://127.0.0.1:8000/api/v1/'
+  API_ENDPOINT: 'http://staging.chiswickcanoe.co.uk/api/v1/'
 };
