@@ -334,9 +334,9 @@ def setup(mysql_root_password=None):
     for service_config in _services():
         local_config = env.config.copy()
         local_config.update(service_config)
-        if not files.exists('/etc/service/%(service_name)s/run' % local_config):
-            sudo('mkdir -p /etc/service/%(service_name)s' % local_config)
-            sudo('ln -s %(path)s/services/%(service)s /etc/service/%(service_name)s/run' % local_config)
+        if not files.exists('/service/%(service_name)s/run' % local_config):
+            sudo('mkdir -p /service/%(service_name)s' % local_config)
+            sudo('ln -s %(path)s/services/%(service)s /service/%(service_name)s/run' % local_config)
     if not files.exists('/etc/nginx/sites-available/%(name)s.conf' % env.config):
         sudo('ln -s %(path)s/config/nginx.conf /etc/nginx/sites-available/%(name)s.conf' % env.config)
     if not files.exists('/etc/nginx/sites-enabled/%(name)s.conf' % env.config):
