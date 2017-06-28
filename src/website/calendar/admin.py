@@ -97,9 +97,14 @@ class PlaEventAdmin(admin.ModelAdmin):
     filter_horizontal = ('calendar',)
 
 
+class TideDataAdmin(admin.ModelAdmin):
+    list_display = ('file', 'created',)
+    readonly_fields = ('inputted','converted',)
+
+
 admin.site.register(WeatherTypes, WeatherTypeAdmin)
 admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Trips, TripAdmin)
 admin.site.register(PlaEvent, PlaEventAdmin)
-admin.site.register(TideData)
+admin.site.register(TideData, TideDataAdmin)
