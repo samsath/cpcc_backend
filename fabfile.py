@@ -399,7 +399,7 @@ def start():
     * start all services
     '''
     for service_config in _services():
-        sudo('svc -u /etc/service/%(service_name)s' % service_config)
+        sudo('svc -u /service/%(service_name)s' % service_config)
 
 
 @_require_environment
@@ -408,7 +408,7 @@ def stop():
     * stop all services
     '''
     for service_config in _services():
-        sudo('svc -d /etc/service/%(service_name)s' % service_config)
+        sudo('svc -d /service/%(service_name)s' % service_config)
 
 
 @_require_environment
@@ -428,7 +428,7 @@ def status():
     '''
     with settings(warn_only=True):
         for service_config in _services():
-            sudo('svstat /etc/service/%(service_name)s' % service_config)
+            sudo('svstat /service/%(service_name)s' % service_config)
 
 
 @_require_environment
