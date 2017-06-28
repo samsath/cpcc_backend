@@ -23,7 +23,13 @@ export class SessiondataService {
             session.options = {
               layers: [
                 L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', { maxZoom: 18 }),
-                L.marker({lat: coord[1], lng: coord[0]})
+                L.marker({lat: coord[1], lng: coord[0]},{
+                  icon: L.icon({
+                    iconSize: [41,41],
+                    iconAnchor: [20, 0],
+                    iconUrl:'/static/map.png',
+                  })
+                })
               ],
               zoom: 14,
               zoomControl:false,
