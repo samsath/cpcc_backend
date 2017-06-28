@@ -7,8 +7,8 @@ from mediastore.admin import ModelAdmin
 
 
 class AboutAdmin(TinyMCEAdminMixin, ModelAdmin):
-    list_display = ('title','is_public','modified')
-    list_editable = ('is_public',)
+    list_display = ('title','is_public','modified','sort_value',)
+    list_editable = ('is_public','sort_value',)
 
     fieldsets = (
         (_('Basic'),{
@@ -26,6 +26,7 @@ class AboutAdmin(TinyMCEAdminMixin, ModelAdmin):
         (_('Settings'),{
             'fields':(
                 'is_public',
+                'sort_value',
             )
         })
     )
