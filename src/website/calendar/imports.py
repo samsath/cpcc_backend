@@ -9,8 +9,8 @@ import numpy as np
 def yeargenerator(year):
     '''
     This generates the date for every day in a year
-    :param year: 
-    :return: 
+    :param year:
+    :return:
     '''
     start = datetime(year=year, month=1, day=1)
     end = datetime(year=year, month=12, day=31)
@@ -101,21 +101,42 @@ def plaimport(jo):
     pla.save()
 
 
+def getRange(arr, number, range=50):
+    '''
+    This converts a large list into a small array that allows us to get a better value
+    :param arr: The array
+    :param number: The number to find in the in the arr
+    :param range: the number either side of the number to get the full amount
+    :return: a tuple of the smaller array with the index of the start and end possition.
+    '''
+
+    centernum = min(arr,key=lambda x:abs(x-number))
+    index = arr.index(centernum)
+    count = len(arr)
+    start = 0
+    last = count
+    if index > (start + range):
+        start = index - range
+    if index < (last - range):
+        last = index + (range + 1)
+    return (arr[start:last], start, last)
+
+
 def calendarStartEndTide(Tideobject):
     '''
-    Added the start and end tide level to the calendar 
+    Added the start and end tide level to the calendar.
     :param Tideobject: TideData object
     :return: Added the start and end tide level to the calendar
     '''
     raw = Tideobject.converted
     year = datetime.fromtimestamp(raw[0][0]).date().year
     time, level = zip(*raw)
-    #todo make this time, level be grouped in 30 as it generated a better sample
     for i in yeargenerator(year):
-        start = datetime(year=i.year, month=i.month,day=i.day,hour=0,minute=0, second=0).timestamp()
-        end = datetime(year=i.year, month=i.month,day=i.day,hour=23,minute=59, second=59).timestamp()
-        Calendar.data.addTide(start, np.interp(start, time, level))
-        Calendar.data.addTide(end, np.interp(end, time, level))
+        start = datetime(year=i.year, month=i.month, day=i.day, hour=0, minute=0, second=0).timestamp()
+        timearray, indexstart, indexfinish = getRange(time, start)
+        end = datetime(year=i.year, month=i.month, day=i.day, hour=23, minute=59, second=59).timestamp()
+        Calendar.data.addTide(start, np.interp(start, time[indexstart:indexfinish], level[indexstart:indexfinish]))
+        Calendar.data.addTide(end, np.interp(end, time[indexstart:indexfinish], level[indexstart:indexfinish]))
 
 
 def calendarinput(Tideobject):
