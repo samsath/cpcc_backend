@@ -26,7 +26,7 @@ export class SessiondataService {
                 L.marker({lat: coord[1], lng: coord[0]},{
                   icon: L.icon({
                     iconSize: [41,41],
-                    iconAnchor: [20, 0],
+                    iconAnchor: [20, 40],
                     iconUrl:'/static/map.png',
                   })
                 })
