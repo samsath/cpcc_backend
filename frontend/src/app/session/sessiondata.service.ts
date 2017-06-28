@@ -27,7 +27,7 @@ export class SessiondataService {
                   icon: L.icon({
                     iconSize: [41,41],
                     iconAnchor: [20, 40],
-                    iconUrl:'/static/map.png',
+                    iconUrl:'/static/map.svg',
                   })
                 })
               ],
