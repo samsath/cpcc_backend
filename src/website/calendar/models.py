@@ -13,7 +13,7 @@ from datetime import datetime
 class TideData(models.Model):
     file = models.FileField(upload_to='tides/%Y/')
     inputted = models.BooleanField(_('Inputed data'), default=False)
-    converted = ArrayField(ArrayField(models.FloatField(null=True, blank=True)), default=[])
+    converted = ArrayField(ArrayField(models.FloatField(null=True, blank=True)), default=[],null=True, blank=True)
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()
 

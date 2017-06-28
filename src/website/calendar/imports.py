@@ -110,6 +110,7 @@ def calendarStartEndTide(Tideobject):
     raw = Tideobject.converted
     year = datetime.fromtimestamp(raw[0][0]).date().year
     time, level = zip(*raw)
+    #todo make this time, level be grouped in 30 as it generated a better sample
     for i in yeargenerator(year):
         start = datetime(year=i.year, month=i.month,day=i.day,hour=0,minute=0, second=0).timestamp()
         end = datetime(year=i.year, month=i.month,day=i.day,hour=23,minute=59, second=59).timestamp()
