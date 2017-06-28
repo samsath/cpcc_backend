@@ -28,11 +28,10 @@ class CategoryAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
 
 class ArticleAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','author','post_date','is_public','is_featured','sort_value',)
-    list_editable = ('is_public','is_featured','sort_value',)
     list_filter = ('is_public','is_featured')
     search_fields = ('title','author__first_name','author__last_name',)
 
-    fieldsets = (
+    full_fieldsets = (
         (_('Basic'),{
             'fields':(
                 'title',
@@ -54,7 +53,29 @@ class ArticleAdmin(TinyMCEAdminMixin, ModelAdmin):
         })
     )
 
+    basic_fieldsets = (
+        (_('Basic'),{
+            'fields':(
+                'title',
+                'author',
+                'post_date',
+                'list_description',
+                'description',
+                'main_image',
+                'gallery',
+            )
+        }),
+    )
+
     filter_horizontal = ('category',)
+
+    def get_fieldsets(self, request, obj=None):
+        if self.has_delete_permission(request):
+            return self.full_fieldsets
+        else:
+            return self.basic_fieldsets
+
+
 
 
 admin.site.register(Category, CategoryAdmin)

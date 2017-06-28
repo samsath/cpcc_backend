@@ -33,10 +33,9 @@ class CalendarAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
 
 class EventAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('title','event_type','date','author','is_public','is_featured')
-    list_editable = ('is_public','is_featured',)
     list_filter = ('event_type',)
     search_fields = ('title',)
-    fieldsets = (
+    full_fieldsets = (
         (_('Event'), {
             'fields': (
                 'title',
@@ -58,6 +57,30 @@ class EventAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
             )
         })
     )
+
+    basic_fieldsets = (
+        (_('Event'), {
+            'fields': (
+                'title',
+                'event_type',
+                'date',
+                'start_time',
+                'end_time',
+                'author',
+                'description',
+                'map',
+                'main_image',
+                'gallery',
+            )
+        }),
+    )
+
+    def get_fieldsets(self, request, obj=None):
+        if self.has_delete_permission(request):
+            return self.full_fieldsets
+        else:
+            return self.basic_fieldsets
+
 
 
 class ExtraFieldsAdmin(admin.TabularInline):
