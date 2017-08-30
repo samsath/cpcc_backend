@@ -15,6 +15,7 @@ export class Session {
   centre:Object;
   path:Array<Object>;
   options:Object;
+  link:string;
 
   constructor( values: Object = {}) {
     Object.assign(this, values);

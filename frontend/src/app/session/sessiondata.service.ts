@@ -34,7 +34,8 @@ export class SessiondataService {
               zoom: 14,
               zoomControl:false,
               center:L.latLng({lat: coord[1], lng: coord[0]})
-            }
+            };
+            session.link = 'https://www.google.com/maps/dir/?api=1&destination='+coord[1]+','+coord[0]+'';
           }
           this.addSession(session);
         }
