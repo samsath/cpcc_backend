@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { SessiondataService } from './sessiondata.service';
-import { environment } from '../environment';
+import { environment } from '../../environments/environment';
 import {routerTransition} from '../router.animations';
 
 

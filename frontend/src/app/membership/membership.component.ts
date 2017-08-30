@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MembershipService } from './membership.service';
 import { Http, Response } from '@angular/http';
-import { environment } from '../environment';
+import { environment } from '../../environments/environment';
 import {routerTransition} from '../router.animations';
 
 @Component({

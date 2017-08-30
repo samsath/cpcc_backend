@@ -3,7 +3,7 @@ import { Newsletter } from '../newsletter';
 import { NewsletterDataService } from '../newsletter-data.service'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Http, Response } from '@angular/http';
-import { environment } from '../../environment';
+import { environment } from '../../../environments/environment';
 import {routerTransition} from '../../router.animations';
 
 @Component({

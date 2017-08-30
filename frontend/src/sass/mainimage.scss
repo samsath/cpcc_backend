@@ -33,7 +33,11 @@
     background-image: url("assets/images/CPCClogo_border.png");
     -webkit-transition: background-image 1s ease-in-out;
     transition: background-image 1s ease-in-out;
-    pointer-events: auto;
+
+    &.map{
+      pointer-events: auto;
+    }
+
 
   }
 

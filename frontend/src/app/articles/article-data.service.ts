@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from './article';
-import {environment} from '../environment';
+import { environment } from '../../environments/environment';
 import {Http, Response} from '@angular/http';
 
 

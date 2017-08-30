@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Trip } from './trip';
-import {environment} from '../environment';
+import { environment } from '../../environments/environment';
 import { Http, Response } from '@angular/http';
 import * as L from 'leaflet';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from '../article';
 import { ArticleDataService } from '../article-data.service';
 import { Http, Response } from '@angular/http';
-import { environment } from '../../environment';
+import { environment } from '../../../environments/environment';
 import {routerTransition} from '../../router.animations';
 
 @Component({

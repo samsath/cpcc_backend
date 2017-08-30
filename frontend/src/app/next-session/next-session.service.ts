@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NextSession } from './next-session';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { environment } from '../environment';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()

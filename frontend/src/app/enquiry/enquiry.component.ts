@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { environment } from '../environment';
+import { environment } from '../../environments/environment';
 import {routerTransition} from '../router.animations';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 

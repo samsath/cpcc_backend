@@ -20,7 +20,7 @@ import calendar
 
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
-    slug = AutoSlugField(unique=True, populate_from=('first_name', 'last_name'))
+    slug = AutoSlugField(unique=True, populate_from=('first_name', 'username',))
     username = models.CharField(_('UserName'), max_length=255, unique=True)
     first_name = models.CharField(_('first name'), max_length=30)
     last_name = models.CharField(_('last name'), max_length=30, blank=True, null=True)
@@ -36,7 +36,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    REQUIRED_FIELDS = ['first_name', 'last_name',]
 
     class Meta:
         verbose_name = _('user')

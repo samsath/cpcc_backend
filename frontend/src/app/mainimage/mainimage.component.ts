@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Http, Response } from '@angular/http';
-import {environment} from '../environment';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-mainimage',

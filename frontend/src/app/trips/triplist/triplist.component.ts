@@ -3,7 +3,7 @@ import { Trip } from '../trip';
 import { TripdataService } from '../tripdata.service';
 import * as L from 'leaflet';
 import { Http, Response } from '@angular/http';
-import { environment } from '../../environment';
+import { environment } from '../../../environments/environment';
 import {routerTransition} from '../../router.animations';
 
 @Component({

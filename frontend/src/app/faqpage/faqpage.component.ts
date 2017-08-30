@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Faq } from './faq';
 import { FaqdataService } from './faqdata.service';
-import {environment} from '../environment';
+import { environment } from '../../environments/environment';
 import {routerTransition} from '../router.animations';
 
 @Component({
