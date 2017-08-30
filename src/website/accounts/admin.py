@@ -1,28 +1,18 @@
-from django.utils.translation import ugettext_lazy as _
+
 from django.contrib import admin
-from django.template.response import TemplateResponse
-from django.conf.urls import url
 from .models import *
-from django.shortcuts import render
-from .form import UploadForm
 from .admin_forms import (UserCreationForm, UserChangeForm,
                           AdminPasswordChangeForm)
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.db import transaction
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404
-from django.core.exceptions import PermissionDenied
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext, ugettext_lazy as _
-from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
-from django.utils.html import escape
-from django.contrib.admin.options import IS_POPUP_VAR
-from django.conf import settings
 from django.contrib.auth.admin import UserAdmin
-import re
+from django.contrib.auth.models import Group as _Group
 
+from django.contrib.admin.models import LogEntry, DELETION
+from django.utils.html import escape
+from django.core.urlresolvers import reverse
 
 csrf_protect_m = method_decorator(csrf_protect)
 sensitive_post_parameters_m = method_decorator(sensitive_post_parameters())
@@ -54,26 +44,64 @@ class NewUserAdmin(UserAdmin):
     filter_horizontal = ('groups', 'user_permissions',)
 
 
-class UserGroupAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-    filter_horizontal = ('controller','partner',)
-    fieldsets = (
-        (_('General Information'), {
-            'classes':('wide',),
-            'fields':(
-                'title',
-                'avatar',
-                'question_set',
-            ),
-        }),
-        (_('People'), {
-            'classes':('wide',),
-            'fields':(
-                'controller',
-                'partner',
+
+
+class LogEntryAdmin(admin.ModelAdmin):
+
+    date_hierarchy = 'action_time'
+
+    readonly_fields = ['action_flag',
+                       'action_time',
+                       'change_message',
+                       'content_type',
+                       'id',
+                       'object_id',
+                       'object_repr',
+                       'user']
+
+
+    list_filter = [
+        'content_type',
+        'action_flag'
+    ]
+
+    search_fields = [
+        'object_repr',
+        'change_message'
+    ]
+
+
+    list_display = [
+        'action_time',
+        'user',
+        'content_type',
+        'object_link',
+        'action_flag',
+        'change_message',
+    ]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+    def object_link(self, obj):
+        if obj.action_flag == DELETION:
+            link = escape(obj.object_repr)
+        else:
+            ct = obj.content_type
+            link = u'<a href="%s">%s</a>' % (
+                reverse('admin:%s_%s_change' % (ct.app_label, ct.model), args=[obj.object_id]),
+                escape(obj.object_repr),
             )
-        })
-    )
+        return link
+    object_link.allow_tags = True
+    object_link.admin_order_field = 'object_repr'
+    object_link.short_description = u'object'
 
 
+
+admin.site.register(LogEntry, LogEntryAdmin)
 admin.site.register(User, NewUserAdmin)

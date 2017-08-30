@@ -22,6 +22,9 @@ class Newsletter(Base):
         verbose_name = 'Newsletter'
         verbose_name_plural = 'Newsletters'
         ordering = ['postdate','sort_value',]
+        permissions = (
+            ('can_publish', 'Can publish this item'),
+        )
 
     def url(self):
         return None

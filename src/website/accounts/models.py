@@ -17,7 +17,6 @@ from django.core.mail import EmailMultiAlternatives
 import calendar
 
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     slug = AutoSlugField(unique=True, populate_from=('first_name', 'username',))

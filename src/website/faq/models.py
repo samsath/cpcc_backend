@@ -27,6 +27,9 @@ class Faq(models.Model):
         verbose_name = 'FAQ'
         verbose_name_plural = 'FAQ'
         ordering = ['-sort_value',]
+        permissions = (
+            ('can_publish', 'Can publish this item'),
+        )
 
     def url(self):
         return None

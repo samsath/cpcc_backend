@@ -38,6 +38,9 @@ class Article(Base):
         verbose_name = 'Article'
         verbose_name_plural = 'Articles'
         ordering = ['-sort_value',]
+        permissions = (
+            ('can_publish', 'Can publish this item'),
+        )
 
     def url(self):
         return None
