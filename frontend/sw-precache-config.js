@@ -6,6 +6,9 @@ module.exports = {
     'dist/**.html',
     'dist/**.js',
     'dist/**.css',
+    'dist/**.svg',
+    'dist/**.woff',
+    'dist/**.woff2',
     'dist/assets/images/*',
     'dist/assets/icons/*'
   ],
