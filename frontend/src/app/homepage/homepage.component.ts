@@ -13,6 +13,7 @@ import {routerTransition} from '../router.animations';
 export class HomepageComponent implements OnInit {
   title = 'Chiswick Pier Canoe Club';
   homepage;
+  notification;
   images;
   defaultImage = 'https://www.placecage.com/1000/1000';
   offset = 1000;
@@ -29,6 +30,10 @@ export class HomepageComponent implements OnInit {
 
       });
 
+    this.http.get(environment.API_ENDPOINT + 'notification')
+      .map((res: Response) => res.json()).subscribe( (json: Object) => {
+        this.notification = json;
+    })
 
 
   }
