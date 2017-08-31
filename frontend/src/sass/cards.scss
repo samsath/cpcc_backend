@@ -162,6 +162,14 @@ app-content-area{
     }
   }
 
+  .boxarea-content{
+    &.cost{
+      font-size: 53px;
+      text-align: center;
+      color: $main;
+    }
+  }
+
 
 }
 

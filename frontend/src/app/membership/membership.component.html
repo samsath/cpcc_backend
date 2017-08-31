@@ -27,14 +27,13 @@
         <div class="card-panel">
 
           <div class="boxarea-header">
-            <h1>{{ member.title }}</h1>
+            <h1 class="center">{{ member.title }}</h1>
           </div>
+          <div class="boxarea-content cost" [innerHTML]="member.cost | safeHtml"></div>
           <p class="date" *ngIf="member.from_date">From {{ member.from_date| date:'d/M/yy'}} to {{ member.end_date| date:'d/M/yy'}}</p>
           <div class="boxarea-content" [innerHTML]="member.description | safeHtml"></div>
 
-          <div class="boxarea-content" [innerHTML]="member.cost | safeHtml"></div>
-
-
+          <a *ngIf="member?.download?.download.file" href="{{ member?.download?.download.file }}" target="_blank" class="btn download mt20">Download Form</a>
         </div>
       </div>
     </div>

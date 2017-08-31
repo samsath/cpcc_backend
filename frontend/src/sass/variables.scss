@@ -47,3 +47,16 @@ input:not([type]).invalid + label:after, input:not([type]):focus.invalid + label
 
 .container{
 }
+
+.mt10{
+  margin-top:10px;
+}
+.mt20{
+  margin-top:20px;
+}
+.mt30{
+  margin-top:30px;
+}
+.mt40{
+  margin-top:40px;
+}

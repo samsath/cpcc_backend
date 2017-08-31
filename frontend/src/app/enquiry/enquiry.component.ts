@@ -52,7 +52,6 @@ export class EnquiryComponent implements OnInit {
 
 
   mainsend(form: any): void {
-    console.log(form);
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     headers.append('X-CSRFToken', this.getCookie('csrftoken'));
@@ -60,7 +59,6 @@ export class EnquiryComponent implements OnInit {
       .post(environment.API_ENDPOINT+'enquiry',
         JSON.stringify({ email: form.email, name: form.name, comment: form.comment }),{headers: headers})
       .subscribe( ret_data => {
-        console.log(ret_data);
         this.maincomplete = true;
         this.mainForm.reset();
       }, error => {
@@ -70,7 +68,6 @@ export class EnquiryComponent implements OnInit {
   }
 
   mailsend(form: any): void {
-    console.log(form);
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     headers.append('X-CSRFToken', this.getCookie('csrftoken'));
@@ -78,12 +75,10 @@ export class EnquiryComponent implements OnInit {
       .post(environment.API_ENDPOINT+'newsletter',
         JSON.stringify({ email: form.email, name: form.name }),{headers: headers})
       .subscribe( ret_data => {
-        console.log(ret_data);
         this.mailcomplete = true;
         this.mailForm.reset();
         form.reset();
       }, error => {
-        console.log(error.json());
       });
   }
 

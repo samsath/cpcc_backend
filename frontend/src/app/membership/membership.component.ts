@@ -36,7 +36,6 @@ export class MembershipComponent implements OnInit {
 
   get featured(){
     let featured = this.membershipService.getFeatureMembership();
-    console.log(featured);
     return featured;
   }
 

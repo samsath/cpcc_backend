@@ -72,7 +72,6 @@ export class EventsComponent implements OnInit {
   dayData(cell: CalendarMonthViewDay):void {
     this.extra.getDayRemote(cell.date).then((json: Object) =>{
       let item = new Eventdate(json);
-      console.log(item);
       cell['dayData'] = Object.assign(item);
       cell['tideData'] = [
         {data: item.tide, label: 'Tide'},

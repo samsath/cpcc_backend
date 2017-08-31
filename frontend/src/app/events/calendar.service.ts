@@ -25,7 +25,6 @@ export class CalendarService {
           this.calendar[day.date] = day;
         }
       });
-    console.log(this.calendar);
   }
 
 
