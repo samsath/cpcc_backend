@@ -1,9 +1,12 @@
+from django.forms import modelformset_factory
+
 from .models import *
 from django.contrib import admin
 from django.db import models
 from website.base.form import TinyMCEAdminMixin
 from django.utils.translation import ugettext_lazy as _
 from mediastore.admin import ModelAdmin
+from functools import partial
 
 
 class CategoryAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
@@ -28,7 +31,7 @@ class CategoryAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
 
 class ArticleAdmin(TinyMCEAdminMixin, ModelAdmin):
     list_display = ('title','author','post_date','is_public','is_featured','sort_value',)
-    list_filter = ('is_public','is_featured')
+    list_filter = ('is_public', 'is_featured')
     search_fields = ('title','author__first_name','author__last_name',)
 
     full_fieldsets = (
@@ -65,12 +68,17 @@ class ArticleAdmin(TinyMCEAdminMixin, ModelAdmin):
                 'gallery',
             )
         }),
+        (_('Settings'), {
+            'fields': (
+                'category',
+            )
+        })
     )
 
     filter_horizontal = ('category',)
 
     def get_fieldsets(self, request, obj=None):
-        if self.has_delete_permission(request):
+        if request.user.has_perm('can_publish'):
             return self.full_fieldsets
         else:
             return self.basic_fieldsets

@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 class NewsletterAdmin(admin.ModelAdmin):
     list_display = ('title','number','is_public','is_featured','sort_value')
     list_editable = ('is_public','is_featured','sort_value',)
-    fieldsets = (
+    full_fieldsets = (
         (_('Placement'),{
             'fields':(
                 'title',
@@ -30,5 +30,27 @@ class NewsletterAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+    basic_fieldsets = (
+        (_('Placement'), {
+            'fields': (
+                'title',
+                'number',
+                'postdate',
+                'author',
+            )
+        }),
+        (_('Newsletter'), {
+            'fields': (
+                'newsletter',
+            )
+        }),
+    )
+
+    def get_fieldsets(self, request, obj=None):
+        if request.user.has_perm('can_publish'):
+            return self.full_fieldsets
+        else:
+            return self.basic_fieldsets
 
 admin.site.register(Newsletter, NewsletterAdmin)

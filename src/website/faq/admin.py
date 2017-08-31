@@ -9,7 +9,8 @@ class FaqAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('question','answer','is_public','sort_value',)
     list_editable = ('is_public','sort_value',)
     search_fields = ('question','answer')
-    fieldsets = (
+
+    full_fieldsets = (
         (_('Faq'),{
             'fields':(
                 'question',
@@ -23,5 +24,20 @@ class FaqAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
             )
         })
     )
+
+    basic_fieldsets = (
+        (_('Faq'),{
+            'fields':(
+                'question',
+                'answer',
+            )
+        })
+    )
+
+    def get_fieldsets(self, request, obj=None):
+        if request.user.has_perm('can_publish'):
+            return self.full_fieldsets
+        else:
+            return self.basic_fieldsets
 
 admin.site.register(Faq, FaqAdmin)
