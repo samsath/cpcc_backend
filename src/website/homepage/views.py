@@ -4,11 +4,20 @@ from .serializers import *
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.db.models import Q
+from datetime import datetime
 
 
 class NotificationView(viewsets.ReadOnlyModelViewSet):
     queryset = Notification.public.all()
     serializer_class = NotificationSerializer
+
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        return Notification.public.filter(
+            (Q(start__lte=now) | Q(start__isnull=True))
+            &
+            (Q(end__gte=now) | Q(end__isnull=True)))
 
 
 class HomePageView(viewsets.ReadOnlyModelViewSet):

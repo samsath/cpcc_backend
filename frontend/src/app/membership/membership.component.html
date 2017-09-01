@@ -11,7 +11,7 @@
         <div class="card-panel">
           <div class="boxarea-header">
             <h1>{{ featured?.title }}</h1>
-            <a href="{{ featured?.download?.download.file }}" target="_blank" class="btn download">Download Form</a>
+            <a *ngIf="member?.download?.download.file" href="{{ featured?.download?.download.file }}" target="_blank" class="btn download">Download Form</a>
           </div>
 
           <p class="date" *ngIf="featured.from_date">From {{ featured.from_date| date:'d/M/yy'}} to {{ featured.end_date| date:'d/M/yy'}}</p>
