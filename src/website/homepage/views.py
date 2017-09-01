@@ -13,7 +13,7 @@ class NotificationView(viewsets.ReadOnlyModelViewSet):
     serializer_class = NotificationSerializer
 
     def get_queryset(self):
-        now = datetime.datetime.now()
+        now = datetime.now()
         return Notification.public.filter(
             (Q(start__lte=now) | Q(start__isnull=True))
             &
