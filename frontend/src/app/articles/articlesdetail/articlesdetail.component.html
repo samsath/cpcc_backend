@@ -6,10 +6,7 @@
   <div class="row wow fadeIn">
     <div class="col s12">
       <div class="card-panel">
-        <div class="boxarea-action">
-          <a routerLink='/article/{{ article?.prev }}' *ngIf="article?.prev">Previous</a>
-          <a routerLink='/article/{{ article?.next }}' *ngIf="article?.next">Next</a>
-        </div>
+
         <h1>{{ article?.title }}</h1>
         <div class="boxarea-content" [innerHTML]="article?.description | safeHtml"></div>
 
