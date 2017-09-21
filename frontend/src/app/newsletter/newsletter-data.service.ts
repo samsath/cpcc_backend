@@ -12,7 +12,7 @@ export class NewsletterDataService {
   constructor(private http: Http) { }
 
   getNewsletter(){
-    this.http.get(environment.API_ENDPOINT+'newsletter')
+    this.http.get(environment.API_ENDPOINT+'newsletter/')
       .map((res:Response) => res.json())
       .subscribe((json: Array<Object>) => {
         for(let item of json){
