@@ -21,7 +21,7 @@ class Newsletter(Base):
     class Meta:
         verbose_name = 'Newsletter'
         verbose_name_plural = 'Newsletters'
-        ordering = ['postdate','sort_value',]
+        ordering = ['-postdate','-sort_value',]
         permissions = (
             ('can_publish', 'Can publish this item'),
         )
