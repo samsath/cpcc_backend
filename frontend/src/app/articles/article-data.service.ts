@@ -25,7 +25,9 @@ export class ArticleDataService {
   }
 
   addArticle(article: Article ): ArticleDataService {
-    this.articles.push(article);
+    if(!this.articles.find(x => x.pk == article.pk)){
+      this.articles.push(article);
+    }
     return this;
   }
 
@@ -42,7 +44,9 @@ export class ArticleDataService {
       this.http.get(environment.API_ENDPOINT+'article/'+slug)
         .map((res:Response) => res.json())
         .subscribe((json: Object) =>{
-          return new Article(json);
+          let article =  new Article(json);
+          this.addArticle(article);
+          return article;
         })
     }else{
       return this.articles

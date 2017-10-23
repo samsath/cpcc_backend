@@ -14,10 +14,13 @@ export class SquareItemComponent implements OnInit {
   @Input()
   article: Article;
 
+  @Input()
+  endpoint: string;
+
   constructor(private router: Router) { }
 
-  goToArticle(){
-    this.router.navigate(['article/',this.article.slug]);
+  goToEndpoint(){
+    this.router.navigate([this.endpoint,this.article.slug]);
   }
 
   ngOnInit() {

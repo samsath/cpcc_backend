@@ -1,4 +1,4 @@
-<div class="card session-card" (click)="goToArticle()">
+<div class="card session-card" (click)="goToEndpoint()">
   <div class="card-image">
     <div class="imageelement" [ngStyle]="{'background-image': 'url(' + article.main_image.image?.small + ')'}"></div>
   </div>
@@ -8,6 +8,6 @@
     <p class="brief">{{ article.list_description }}</p>
   </div>
   <div class="card-action">
-    <a routerLink='/article/{{ article.slug }}' >Read more</a>
+    <a routerLink='/{{ endpoint }}/{{ article.slug }}' >Read more</a>
   </div>
 </div>

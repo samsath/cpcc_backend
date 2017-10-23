@@ -49,6 +49,9 @@ import { MembershipComponent } from './membership/membership.component';
 import { MembershipService } from './membership/membership.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CalendarService } from './events/calendar.service';
+import { GalleryService } from "./gallery/gallery.service";
+import { GallerylistComponent } from './gallery/gallerylist/gallerylist.component';
+import { GallerydetailComponent } from './gallery/gallerydetail/gallerydetail.component';
 
 
 const appRoutes: Routes = [
@@ -63,8 +66,10 @@ const appRoutes: Routes = [
   { path: 'newsletter/:slug', component:NewsletterdetailComponent },
   { path: 'trips', component:TriplistComponent },
   { path: 'trips/:slug', component:TripdetailComponent },
-  { path: 'events', component:EventsComponent },
+  { path: 'calendar', component:EventsComponent },
   { path: 'membership', component:MembershipComponent },
+  { path: 'gallery', component:GallerylistComponent },
+  { path: 'gallery/:slug', component:GallerydetailComponent },
   { path: '**', component:NotFoundComponent },
 
 ];
@@ -95,6 +100,8 @@ const appRoutes: Routes = [
     EventsComponent,
     MembershipComponent,
     NotFoundComponent,
+    GallerylistComponent,
+    GallerydetailComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -118,7 +125,8 @@ const appRoutes: Routes = [
     NewsletterDataService,
     TripdataService,
     MembershipService,
-    CalendarService
+    CalendarService,
+    GalleryService
   ],
   bootstrap: [AppComponent]
 })

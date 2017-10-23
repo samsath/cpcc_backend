@@ -1,0 +1,23 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + gallery?.main_image.image.file + ')'}" ></div>
+</div>
+<div class="imagespacer"></div>
+<div class="container">
+  <div class="row wow fadeIn">
+    <div class="col s12">
+      <div class="card-panel">
+
+        <h1>{{ gallery?.title }}</h1>
+        <div class="boxarea-content" [innerHTML]="gallery?.description | safeHtml"></div>
+
+        <div class="imagegroup">
+          <div class="imagethumb" *ngFor="let image of gallery?.gallery; let i=index">
+            <img [src]="image?.image.small" (click)="open(i)"/>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="imagespacer"></div>
