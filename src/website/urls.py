@@ -14,6 +14,7 @@ from mediastore.api.views import medialist, mediadetial
 from website.calendar.urls import calendarurl, TripViewSet
 from website.abouts.views import AboutViewSet
 from website.enquiry.views import enquirtview, newsletteradd
+from website.gallery.views import GalleryViewSet
 
 admin.autodiscover()
 
@@ -30,6 +31,7 @@ router_v1.register(r'newsletter', NewsletterView)
 router_v1.register(r'pageimage', PageImageView)
 router_v1.register(r'about', AboutViewSet)
 router_v1.register(r'trips', TripViewSet)
+router_v1.register(r'gallery', GalleryViewSet)
 
 
 urlpatterns = [
