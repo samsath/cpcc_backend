@@ -147,6 +147,7 @@ class Windy(models.Model):
     direction = models.FloatField(_('Direction'), blank=True, null=True)
     speed = models.FloatField(_('Speed'), blank=True, null=True)
     celsius = models.FloatField(_('celsius'), blank=True, null=True)
+    water_celsius = models.FloatField(_('water celsius'), blank=True, null=True)
 
     class Meta:
         verbose_name = 'Windy'
@@ -159,8 +160,8 @@ class Windy(models.Model):
     def winddirection(self):
         return 180.0 * math.atan2(self.ugrd, self.vgrd) / 3.141592653589793
 
-    def getCelsius(self):
-        return float(self.tmp) - 273.1499938964844
+    def getCelsius(self, temp):
+        return float(temp) - 273.1499938964844
 
 
 

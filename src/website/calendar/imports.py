@@ -250,5 +250,7 @@ def windyinport(data):
         wind.direction = wind.winddirection()
         wind.speed = wind.windspeed()
     if wind.tmp is not None:
-        wind.celsius = wind.getCelsius()
+        wind.celsius = wind.getCelsius(wind.tmp)
+    if wind.water_temp is not None:
+        wind.water_celsius = wind.getCelsius(wind.water_temp)
     wind.save()

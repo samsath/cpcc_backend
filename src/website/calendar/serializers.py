@@ -12,7 +12,7 @@ class WindySerializer(serializers.ModelSerializer):
             'direction',
             'speed',
             'celsius',
-            'water_temp',
+            'water_celsius',
             'cloud_base'
         )
 
