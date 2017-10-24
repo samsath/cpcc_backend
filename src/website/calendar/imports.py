@@ -176,3 +176,79 @@ def calendarinput(Tideobject):
     Tideobject.converted = tides_combined
     Tideobject.inputted = True
     Tideobject.save()
+
+
+EPOCH = datetime.fromtimestamp(0)
+
+
+def timestamp_to_datetime(timestamp, epoch=EPOCH):
+    # Ensure we deal with a `datetime`.
+    epoch = datetime.fromordinal(epoch.toordinal())
+
+    epoch_difference = timedelta_to_seconds(epoch - EPOCH)
+    adjusted_timestamp = timestamp - epoch_difference
+
+    date = datetime.fromtimestamp(adjusted_timestamp)
+
+    return date
+
+
+def timedelta_to_seconds(delta):
+    seconds = (delta.microseconds * 1e6) + delta.seconds + (delta.days * 86400)
+    seconds = abs(seconds)
+
+    return seconds
+
+
+def windyinport(data):
+    wind, created = Windy.objects.get_or_create(timestamp=data['timestamp'])
+    try:
+        date = datetime.strptime(data['date'], '%d.%m.%Y %H:%M')
+    except:
+        date = timestamp_to_datetime(data['timestamp'])
+    calendar, cal_created = Calendar.objects.get_or_create(date=date.date())
+    wind.day = calendar
+    wind.time = date.time()
+    if 'GUST' in data:
+        wind.gust = data['GUST']
+    if 'UGRD' in data:
+        wind.ugrd = data['UGRD']
+    if 'VGRD' in data:
+        wind.vgrd = data['VGRD']
+    if 'TMP' in data:
+        wind.tmp = data['TMP']
+    if 'PRATE' in data:
+        wind.prate = data['PRATE']
+    if 'CWAT' in data:
+        wind.cwat = data['CWAT']
+    if 'TCDC_LOW' in data:
+        wind.tcdc_low = data['TCDC_LOW']
+    if 'TCDC_MID' in data:
+        wind.tcdc_mid = data['TCDC_MID']
+    if 'TCDC_HIGH' in data:
+        wind.tcdc_high = data['TCDC_HIGH']
+    if 'RH' in data:
+        wind.rh = data['RH']
+    if 'PRES_OLD' in data:
+        wind.pres_old = data['PRES_OLD']
+    if 'PRES' in data:
+        wind.pres = data['PRES']
+    if 'DPT' in data:
+        wind.dpt = data['DPT']
+    if 'CLOUD_BASE' in data:
+        wind.cloud_base = data['CLOUD_BASE']
+    if 'swellDirection' in data:
+        wind.swellDirection = data['swellDirection']
+    if 'swellSize' in data:
+        wind.swellSize = data['swellSize']
+    if 'swellPeriod' in data:
+        wind.swellPeriod = data['swellPeriod']
+    if 'water_temp' in data:
+        wind.water_temp = data['water_temp']
+    wind.save()
+    if wind.ugrd is not None:
+        wind.direction = wind.winddirection()
+        wind.speed = wind.windspeed()
+    if wind.tmp is not None:
+        wind.celsius = wind.getCelsius()
+    wind.save()

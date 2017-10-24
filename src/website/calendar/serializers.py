@@ -4,6 +4,19 @@ from website.accounts.serializers import AccountSerializer
 from mediastore.api.serializers import MediaStoreSerializers
 
 
+class WindySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Windy
+        fields = (
+            'time',
+            'direction',
+            'speed',
+            'celsius',
+            'water_temp',
+            'cloud_base'
+        )
+
+
 class CalendarBasicSerializer(serializers.ModelSerializer):
     tide = serializers.SerializerMethodField()
 
@@ -96,6 +109,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     weather = WeatherTypeSerializer(read_only=True)
     trip_set = CalendarTripSerializer(read_only=True, many=True)
     plaevent_set = PlaEventSerializer(read_only=True, many=True)
+    windy_set = WindySerializer(read_only=True, many=True)
 
     class Meta:
         model = Calendar

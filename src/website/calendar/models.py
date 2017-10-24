@@ -8,6 +8,7 @@ from mediastore.fields import MediaField, MultipleMediaField
 from django.contrib.gis.db import models as gismodel
 from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
+import math
 
 
 class TideData(models.Model):
@@ -26,8 +27,6 @@ class TideData(models.Model):
     class Meta:
         verbose_name = 'Tide Upload'
         ordering = ['created']
-
-
 
 
 class WeatherTypes(models.Model):
@@ -121,6 +120,48 @@ class Tide(models.Model):
 
     def __str__(self):
         return "{0} @ {1}".format(self.level, self.time)
+
+
+class Windy(models.Model):
+    day = models.ForeignKey(Calendar, blank=True, null=True)
+    time = models.TimeField(_('Time'), blank=True, null=True)
+    timestamp = models.IntegerField(_('Timestamp'), blank=True, null=True)
+    gust = models.FloatField(_('GUST'), blank=True, null=True)
+    ugrd = models.FloatField(_('UGRD'), blank=True, null=True)
+    vgrd = models.FloatField(_('VGRD'), blank=True, null=True)
+    tmp = models.FloatField(_('Temperature'), blank=True, null=True)
+    prate = models.CharField(_('PRATE'),max_length=255, blank=True, null=True)
+    cwat = models.FloatField(_('CWAT'), blank=True, null=True)
+    tcdc_low = models.FloatField(_('TCDC_LOW'), blank=True, null=True)
+    tcdc_mid = models.FloatField(_('TCDC_MID'), blank=True, null=True)
+    tcdc_high = models.FloatField(_('TCDC_HIGH'), blank=True, null=True)
+    rh = models.FloatField(_('RH'), blank=True, null=True)
+    pres_old = models.FloatField(_('PRES_OLD'), blank=True, null=True)
+    pres = models.FloatField(_('PRES'), blank=True, null=True)
+    dpt = models.FloatField(_('DPT'), blank=True, null=True)
+    cloud_base = models.FloatField(_('CLOUD_BASE'), blank=True, null=True)
+    swellDirection = models.FloatField(_('swellDirection'), blank=True, null=True)
+    swellSize = models.FloatField(_('swellSize'), blank=True, null=True)
+    swellPeriod = models.FloatField(_('swellPeriod'), blank=True, null=True)
+    water_temp = models.FloatField(_('water_temp'), blank=True, null=True)
+    direction = models.FloatField(_('Direction'), blank=True, null=True)
+    speed = models.FloatField(_('Speed'), blank=True, null=True)
+    celsius = models.FloatField(_('celsius'), blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Windy'
+        verbose_name_plural = 'Windy'
+        ordering = ['day','time',]
+
+    def windspeed(self):
+        return math.sqrt(pow(float(self.ugrd), 2.0) + pow(float(self.vgrd), 2.0))
+
+    def winddirection(self):
+        return 180.0 * math.atan2(self.ugrd, self.vgrd) / 3.141592653589793
+
+    def getCelsius(self):
+        return float(self.tmp) - 273.1499938964844
+
 
 
 class Event(Base):
