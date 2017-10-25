@@ -2,19 +2,39 @@ from rest_framework import serializers
 from .models import *
 from website.accounts.serializers import AccountSerializer
 from mediastore.api.serializers import MediaStoreSerializers
+import math
 
 
 class WindySerializer(serializers.ModelSerializer):
+    hour = serializers.SerializerMethodField()
+    rain = serializers.SerializerMethodField()
+
     class Meta:
         model = Windy
         fields = (
-            'time',
+            'hour',
             'direction',
             'speed',
             'celsius',
             'water_celsius',
-            'cloud_base'
+            'cloud_base',
+            'rain',
         )
+
+    def get_hour(self, obj):
+        try:
+            return obj.time.hour
+        except:
+            return 0
+
+    def get_rain(self, obj):
+        try:
+            if obj.prate == 0:
+                return ''
+            return math.ceil(obj.prate)
+        except:
+            return ''
+
 
 
 class CalendarBasicSerializer(serializers.ModelSerializer):

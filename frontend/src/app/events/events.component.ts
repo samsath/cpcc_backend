@@ -2,10 +2,11 @@ import {Component, EventEmitter, OnInit, TemplateRef, ViewEncapsulation} from '@
 import { CalendarEvent, CalendarMonthViewDay } from 'angular-calendar';
 import {routerTransition} from '../router.animations';
 import { CalendarService } from './calendar.service';
-import { Eventdate } from './eventdate';
+import { Eventdate, Windy  } from './eventdate';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/Rx';
 import {MaterializeAction} from 'angular2-materialize';
+import { DomSanitizer } from '@angular/platform-browser';
 
 interface CppEvent extends CalendarEvent {
   type: String;
@@ -35,8 +36,8 @@ export class EventsComponent implements OnInit {
     {data: [], label: 'Tide'},
   ];
   tideoptionslarge: any = {
-    responsive:false,
-    maintainAspectRatio: false,
+    responsive:true,
+    maintainAspectRatio: true,
     legend:{display:false},
     tooltips :{
       enable:true,
@@ -82,7 +83,8 @@ export class EventsComponent implements OnInit {
 
   addExtraData: (day: CalendarMonthViewDay) => void;
 
-  constructor(public calser: CalendarService,) {
+  constructor(public calser: CalendarService,
+              private sanitizer: DomSanitizer) {
     this.addExtraData = (day: CalendarMonthViewDay): void => {
      day['extra'] = Object.assign(this.calser.getDay(day.date));
     }
@@ -98,6 +100,10 @@ export class EventsComponent implements OnInit {
     })
   };
 
+  getdirection(number: Windy): any{
+    return this.sanitizer.bypassSecurityTrustStyle('transform:rotate(' + number.direction +'deg)');
+  }
+
 
   dayData(cell: CalendarMonthViewDay):void {
     this.extra.getDayRemote(cell.date).then((json: Object) =>{
@@ -106,7 +112,8 @@ export class EventsComponent implements OnInit {
       cell['tideData'] = [
         {data: item.tide, label: 'Tide'},
       ];
-      cell['tideEvents'] = Object.assign(item.plaevent_set.length + item.event_set.length);
+      cell['plaEvents'] = Object.assign(item.plaevent_set.length );
+      cell['tideImportant'] = Object.assign(item.event_set.length);
       });
 
     const tide:Array<any> = [

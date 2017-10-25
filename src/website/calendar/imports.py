@@ -248,9 +248,9 @@ def windyinport(data):
     wind.save()
     if wind.ugrd is not None:
         wind.direction = wind.winddirection()
-        wind.speed = wind.windspeed()
+        wind.speed = math.ceil(wind.windspeed())
     if wind.tmp is not None:
-        wind.celsius = wind.getCelsius(wind.tmp)
+        wind.celsius = math.ceil(wind.getCelsius(wind.tmp))
     if wind.water_temp is not None:
-        wind.water_celsius = wind.getCelsius(wind.water_temp)
+        wind.water_celsius = math.ceil(wind.getCelsius(wind.water_temp))
     wind.save()

@@ -45,18 +45,8 @@ export class CalendarService {
 
   getDayRemote(date: Date): Promise<Eventdate>{
     let year = date.getFullYear();
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let day = date.getDate();
-    let str_year = year.toString();
-    let str_month = month.toString();
-    let str_day = day.toString();
-    if(str_month.length < 2){
-      str_month = '0'+str_month;
-    }
-    if (str_day.length < 2){
-      str_day = '0' + str_day;
-    }
-    let str_date = str_year + '-' + str_month + '-' + str_day;
     return this.http.get(environment.API_ENDPOINT + 'calender/' + year + '/' + month + '/' + day)
       .map((res: Response) => res.json()).toPromise();
   }
@@ -65,7 +55,7 @@ export class CalendarService {
   getDay(date: Date): Promise<Eventdate> {
 
     let year = date.getFullYear();
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let day = date.getDate();
     let str_year = year.toString();
     let str_month = month.toString();

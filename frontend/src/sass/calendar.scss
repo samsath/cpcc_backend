@@ -45,7 +45,25 @@
     bottom:0px;
 
     .chip{
-      width:100%;
+      width:98%;
+      font-size:13px;
+      line-height: 26px;
+      height:26px;
+      margin: 0 2px 4px 2px;
+
+      .close{
+        line-height:26px;
+      }
+
+      &.event{
+        background-color:$main;
+        color:white;
+      }
+
+      &.important{
+        background-color:$red;
+        color:white;
+      }
     }
   }
 
@@ -63,4 +81,44 @@
     margin:0px;
     padding-bottom:2px;
   }
+}
+
+.modal-header{
+  .btn-flat{
+    float:right;
+  }
+}
+
+.winddata{
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: baseline;
+  text-align: center;
+
+  p{
+    margin:0;
+    padding:0;
+    font-size:12px;
+  }
+
+  .wcol{
+    display:inline-block;
+    width: calc(100% / 25);
+
+    p{
+      height:22px;
+
+      i{
+        font-size:20px !important;
+      }
+    }
+  }
+}
+
+p.eventype{
+  text-transform: capitalize;
+  font-size:22px;
+  text-decoration: underline;
 }
