@@ -51,6 +51,11 @@ export class CalendarService {
       .map((res: Response) => res.json()).toPromise();
   }
 
+  getMonthData(year:string, month:string): Promise<Array<Eventdate>>{
+    return this.http.get(environment.API_ENDPOINT + 'calender/' + year + '/' + month )
+      .map((res: Response) => res.json()).toPromise();
+  }
+
 
   getDay(date: Date): Promise<Eventdate> {
 

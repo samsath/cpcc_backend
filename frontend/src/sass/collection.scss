@@ -38,3 +38,29 @@
     margin-top:10px;
   }
 }
+
+.collection.calendar {
+  a {
+    margin-top: 0px;
+    padding-top: 0px;
+
+    .flexalign {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      vertical-align: middle;
+      align-items: flex-start;
+      flex-flow: row;
+      height: 40px;
+      top: 0px;
+
+      p {
+        margin: 10px;
+      }
+
+      .chip{
+        margin-top:3px;
+      }
+    }
+  }
+}

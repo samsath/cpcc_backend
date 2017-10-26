@@ -19,7 +19,6 @@ interface CppEvent extends CalendarEvent {
   encapsulation: ViewEncapsulation.None,
   animations: [routerTransition()],
   styleUrls: ['./events.component.scss'],
-  host: {'[@routerTransition]': ''}
 })
 export class EventsComponent implements OnInit {
 
@@ -143,7 +142,7 @@ export class EventsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.calser.getCalendar(this.viewDate);
+    //this.calser.getCalendar(this.viewDate);
   }
 
 

@@ -1,0 +1,43 @@
+<div class="imagewrap">
+  <div class="imageelement" [ngStyle]="{'background-image': 'url(' + image?.file + ')'}" ></div>
+</div>
+<div class="container">
+  <div class="row "></div>
+  <div class="row">
+    <div class="col s12 m12 l9">
+      <div class="card-panel">
+        <h1>{{ viewDate| date:'longDate' }}</h1>
+        <div class="row">
+
+          <div class="col s6"><div class="btn btn-primary" (click)="previous()">Previous</div>
+            <div class="col s6"><div class="btn btn-primary" (click)="next()">Next</div></div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <div class="collection calendar" >
+                <a routerLink="/calendarlist/{{ day.date }}" class="collection-item" *ngFor="let day of days">
+                  <div class="flexalign">
+                    <p>{{ day.date| date:'mediumDate' }}</p>
+
+                    <div class="cal-actions" *ngIf="day?.plaevent_set.length > 0">
+                      <div class="chip event">
+                        <i class="close material-icons">warning</i>Events {{ day.plaevent_set.length }}
+                      </div>
+                    </div>
+
+                    <div class="cal-actions" *ngIf="day?.event_set.length > 0">
+                      <div class="chip important">
+                        <i class="close material-icons">warning</i>Important {{ day.event_set.length }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-next-session></app-next-session>
+    </div>
+  </div>
+</div>

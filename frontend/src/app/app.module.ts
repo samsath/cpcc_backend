@@ -52,6 +52,7 @@ import { CalendarService } from './events/calendar.service';
 import { GalleryService } from "./gallery/gallery.service";
 import { GallerylistComponent } from './gallery/gallerylist/gallerylist.component';
 import { GallerydetailComponent } from './gallery/gallerydetail/gallerydetail.component';
+import { EventlistComponent } from './events/eventlist/eventlist.component';
 
 
 const appRoutes: Routes = [
@@ -67,6 +68,7 @@ const appRoutes: Routes = [
   { path: 'trips', component:TriplistComponent },
   { path: 'trips/:slug', component:TripdetailComponent },
   { path: 'calendar', component:EventsComponent },
+  { path: 'calendarlist', component:EventlistComponent },
   { path: 'membership', component:MembershipComponent },
   { path: 'gallery', component:GallerylistComponent },
   { path: 'gallery/:slug', component:GallerydetailComponent },
@@ -102,6 +104,7 @@ const appRoutes: Routes = [
     NotFoundComponent,
     GallerylistComponent,
     GallerydetailComponent,
+    EventlistComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
