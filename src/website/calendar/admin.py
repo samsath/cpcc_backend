@@ -28,6 +28,7 @@ class EventTabAdmin(TinyMCEAdminMixin, admin.StackedInline):
 class CalendarAdmin(TinyMCEAdminMixin, admin.ModelAdmin):
     list_display = ('date','sun_rise','sun_set',)
     search_fields = ('date',)
+    date_hierarchy = 'date'
     inlines = [TideAdmin,EventTabAdmin]
 
 
