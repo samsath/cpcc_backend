@@ -3,7 +3,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django_extensions.db.fields import (AutoSlugField, CreationDateTimeField, ModificationDateTimeField)
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 class Enquiry(models.Model):
     email = models.EmailField()
@@ -22,6 +23,17 @@ class Enquiry(models.Model):
         verbose_name = 'Enquiry'
         verbose_name_plural = 'Enquiries'
         ordering = ['created', ]
+
+    def save(self, *args, **kwargs):
+        super(Enquiry, self).save(*args, **kwargs)
+        send_mail(
+            '[enquiry] From Chiswick Website',
+            'From {0} email: {1} \n {2}'.format(self.name, self.email, self.message),
+            settings.DEFAULT_FROM_EMAIL,
+            ['enquiries@chiswickcanoeclub.co.uk',],
+            fail_silently=False,
+        )
+
 
 
 class NewsletterSignup(models.Model):

@@ -50,7 +50,7 @@
             <p>If you want to join us or contact us for information.</p>
           </div>
           <div class="card-action">
-            <a href="mailto:enquiry@club.com">Email </a>
+            <a href="mailto:enquiries@chiswickcanoeclub.co.uk">Email </a>
           </div>
         </div>
 
@@ -66,7 +66,16 @@
 
             <div class="input-field">
               <input id="sub_name" type="text" class="validate" name="name" [formControl]="mailForm.controls['name']" required>
-              <label for="sub_name">Name</label>
+              <label for="sub_name">First Name</label>
+            </div>
+
+            <div class="input-field">
+              <input id="sub_lastname" type="text" class="validate" name="lastname" [formControl]="mailForm.controls['lastname']" required>
+              <label for="sub_lastname">Last Name</label>
+            </div>
+
+            <div class="hidden">
+              <input name="b_608521f94ccfeee308925028f_1068db21b2" tabindex="-1" value="" [formControl]="mailForm.controls['b_608521f94ccfeee308925028f_1068db21b2']" type="hidden">
             </div>
 
             <div class="input-field">
