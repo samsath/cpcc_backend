@@ -1,0 +1,76 @@
+<div class="imagewrap">
+
+</div>
+<div class="container">
+  <div class="row "></div>
+  <div class="row">
+    <div class="col s12 m12 l9">
+      <div class="card-panel">
+        <h1>{{ viewDate| date:'longDate' }}</h1>
+        <div class="row">
+          <div class="col s12 m6">
+            <canvas baseChart
+                    width="100%"
+                    [datasets]="tideData"
+                    [options]="tideoptionslarge"
+                    [colors]="tideColour"
+                    [chartType]="'line'"></canvas>
+            <div class="winddata">
+              <div class="wcol">
+                <p>hr</p>
+                <p></p>
+                <p>kt</p>
+                <p>°C</p>
+                <p><i class="material-icons">grain</i></p>
+              </div>
+              <div  *ngIf="day?.windy_set.length > 0">
+                <div class="wcol" *ngFor="let wind of day.windy_set">
+                  <p>{{ wind?.hour }}</p>
+                  <p><i class="material-icons" [style]="getdirection(wind)">arrow_upward</i></p>
+                  <p>{{ wind?.speed }}</p>
+                  <p>{{ wind?.celsius }}</p>
+                  <p>{{ wind?.rain }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6">
+            <ul>
+              <li><strong>Days Forecast</strong></li>
+              <li>Sun rise: {{ day?.sun_rise }}</li>
+              <li>Sun set: {{ day?.sun_set }}</li>
+              <li>Max temperature {{ day?.temperature }} C</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+      <div class="col s12">
+        <h4>Events today on the Thames</h4>
+        <div>
+          <div *ngIf="day?.event_set.length > 0">
+            <div *ngFor="let event of day.event_set" class="col s12 eventblock" >
+              <p class="eventype">{{ event?.event_type }}</p>
+              <p>{{ event?.title }}</p>
+              <p>{{event?.start_time }} - {{ event?.end_time }}</p>
+              <p [innerHTML]="event?.description"></p>
+            </div>
+          </div>
+          <div *ngIf="day?.plaevent_set.length > 0">
+            <div *ngFor="let event of day.plaevent_set" class="col s12 eventblock">
+              <p>{{ event?.title }} - {{ event?.club_name }}</p>
+              <p>Is river clsoed : {{ event?.river_closure }}</p>
+              <p>Direction: {{ event?.district_description_one }}</p>
+              <p>From: {{ event?.from_time}}</p>
+              <p>To: {{ event?.to_time}}</p>
+              <a href="{{ event?.link }}">Link to activity</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</div>

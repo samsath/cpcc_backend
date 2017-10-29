@@ -53,6 +53,7 @@ import { GalleryService } from "./gallery/gallery.service";
 import { GallerylistComponent } from './gallery/gallerylist/gallerylist.component';
 import { GallerydetailComponent } from './gallery/gallerydetail/gallerydetail.component';
 import { EventlistComponent } from './events/eventlist/eventlist.component';
+import { EvetndetailComponent } from './events/evetndetail/evetndetail.component';
 
 
 const appRoutes: Routes = [
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'trips/:slug', component:TripdetailComponent },
   { path: 'calendar', component:EventsComponent },
   { path: 'calendarlist', component:EventlistComponent },
+  { path: 'calendarlist/:date', component:EvetndetailComponent },
   { path: 'membership', component:MembershipComponent },
   { path: 'gallery', component:GallerylistComponent },
   { path: 'gallery/:slug', component:GallerydetailComponent },
@@ -105,6 +107,7 @@ const appRoutes: Routes = [
     GallerylistComponent,
     GallerydetailComponent,
     EventlistComponent,
+    EvetndetailComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

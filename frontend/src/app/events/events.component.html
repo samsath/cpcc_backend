@@ -50,13 +50,13 @@
                       [chartType]="'line'"></canvas>
             </div>
 
-            <div class="cal-actions" *ngIf="day?.plaEvents > 0">
+            <div class="cal-actions absolute" *ngIf="day?.plaEvents > 0">
               <div class="chip event">
                 <i class="close material-icons">warning</i>Events {{ day.plaEvents }}
               </div>
             </div>
 
-            <div class="cal-actions" *ngIf="day?.tideImportant > 0">
+            <div class="cal-actions absolute" *ngIf="day?.tideImportant > 0">
               <div class="chip important">
                 <i class="close material-icons">warning</i>Important {{ day.tideImportant }}
               </div>

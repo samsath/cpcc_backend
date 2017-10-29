@@ -27,15 +27,14 @@ export class ArticlesdetailComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe(params => {
-        this.slug = params['slug']
+        this.slug = params['slug'];
+        this.article = this.articleDataService.getArticleBySlug(this.slug);
+        if(this.article){
+          for (let gallery of this.article.gallery){
+            this._album.push(gallery.image);
+          }
+        }
       });
-    this.article = this.articleDataService.getArticleBySlug(this.slug);
-    if(this.article){
-      for (let gallery of this.article.gallery){
-        this._album.push(gallery.image);
-      }
-    }
-
   }
 
   open(index: number): void {
