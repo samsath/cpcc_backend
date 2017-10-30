@@ -52,13 +52,19 @@
 
             <div class="cal-actions absolute" *ngIf="day?.plaEvents > 0">
               <div class="chip event">
-                <i class="close material-icons">warning</i>Events {{ day.plaEvents }}
+                <i class="close material-icons">warning</i>Notice {{ day.plaEvents }}
               </div>
             </div>
 
             <div class="cal-actions absolute" *ngIf="day?.tideImportant > 0">
               <div class="chip important">
                 <i class="close material-icons">warning</i>Important {{ day.tideImportant }}
+              </div>
+            </div>
+
+            <div class="cal-actions absolute" *ngIf="day.dayData?.trips_set.length > 0">
+              <div class="chip go">
+                <i class="close material-icons">warning</i>Trip {{ day.dayData.trips_set.length }}
               </div>
             </div>
 
@@ -127,24 +133,35 @@
     <div class="row">
       <div class="col s12">
         <h4>Events today on the Thames</h4>
-        <div *ngIf="eventcount == 0">
-          <p>No events adertised today.</p>
-        </div>
-        <div *ngIf="eventcount > 0">
-          <div *ngFor="let event of daydata.event_set" class="col s12 eventblock">
-            <p class="eventype">{{ event?.event_type }}</p>
-            <p>{{ event?.title }}</p>
-            <p>{{event?.start_time }} - {{ event?.end_time }}</p>
-            <p [innerHTML]="event?.description"></p>
+        <div>
+          <div *ngIf="daydata?.trips_set.length > 0">
+            <h5>Club Trips</h5>
+            <div *ngFor="let event of daydata.trips_set" class="col s12 eventblock" >
+              <p>{{ event?.title }}</p>
+              <a routerLink='/trips/{{ event.slug }}'>Read more</a>
+              <p [innerHTML]="event?.list_description"></p>
+              <p [innerHTML]="event?.description"></p>
+            </div>
           </div>
-
-          <div *ngFor="let event of daydata.plaevent_set" class="col s12 eventblock">
-            <p>{{ event?.title }} - {{ event?.club_name }}</p>
-            <p>Is river clsoed : {{ event?.river_closure }}</p>
-            <p>Direction: {{ event?.district_description_one }}</p>
-            <p>From: {{ event?.from_time}}</p>
-            <p>To: {{ event?.to_time}}</p>
-            <a href="{{ event?.link }}">Link to activity</a>
+          <div *ngIf="daydata?.event_set.length > 0">
+            <h5>Club Notices</h5>
+            <div *ngFor="let event of daydata.event_set" class="col s12 eventblock" >
+              <p class="eventype">{{ event?.event_type }}</p>
+              <p>{{ event?.title }}</p>
+              <p>{{event?.start_time }} - {{ event?.end_time }}</p>
+              <p [innerHTML]="event?.description"></p>
+            </div>
+          </div>
+          <div *ngIf="daydata?.plaevent_set.length > 0">
+            <h5>PLA Notices</h5>
+            <div *ngFor="let event of daydata.plaevent_set" class="col s12 eventblock">
+              <p>{{ event?.title }} - {{ event?.club_name }}</p>
+              <p>Is river clsoed : {{ event?.river_closure }}</p>
+              <p>Direction: {{ event?.district_description_one }}</p>
+              <p>From: {{ event?.from_time}}</p>
+              <p>To: {{ event?.to_time}}</p>
+              <a href="{{ event?.link }}">Link to activity</a>
+            </div>
           </div>
         </div>
       </div>

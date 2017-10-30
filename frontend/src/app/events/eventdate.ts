@@ -27,6 +27,7 @@ export class Eventdate {
   weather: Weather;
   plaevent_set: Array<any>;
   windy_set: Array<Windy>;
+  trips_set: Array<any>;
   date: string;
   sun_rise: string;
   sun_set: string;

@@ -127,7 +127,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     tide = serializers.SerializerMethodField()
     event_set = CalendarEventSerializer(many=True, read_only=True)
     weather = WeatherTypeSerializer(read_only=True)
-    trip_set = CalendarTripSerializer(read_only=True, many=True)
+    trips_set = CalendarTripSerializer(read_only=True, many=True)
     plaevent_set = PlaEventSerializer(read_only=True, many=True)
     windy_set = WindySerializer(read_only=True, many=True)
 

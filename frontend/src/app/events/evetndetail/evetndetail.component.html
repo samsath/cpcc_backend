@@ -48,7 +48,17 @@
       <div class="col s12">
         <h4>Events today on the Thames</h4>
         <div>
+          <div *ngIf="day?.trips_set.length > 0">
+            <h5>Club Trips</h5>
+            <div *ngFor="let event of day.trips_set" class="col s12 eventblock" >
+              <p>{{ event?.title }}</p>
+              <a routerLink='/trips/{{ event.slug }}'>Read more</a>
+              <p [innerHTML]="event?.list_description"></p>
+              <p [innerHTML]="event?.description"></p>
+            </div>
+          </div>
           <div *ngIf="day?.event_set.length > 0">
+            <h5>Club Notices</h5>
             <div *ngFor="let event of day.event_set" class="col s12 eventblock" >
               <p class="eventype">{{ event?.event_type }}</p>
               <p>{{ event?.title }}</p>
@@ -57,6 +67,7 @@
             </div>
           </div>
           <div *ngIf="day?.plaevent_set.length > 0">
+            <h5>PLA Notices</h5>
             <div *ngFor="let event of day.plaevent_set" class="col s12 eventblock">
               <p>{{ event?.title }} - {{ event?.club_name }}</p>
               <p>Is river clsoed : {{ event?.river_closure }}</p>

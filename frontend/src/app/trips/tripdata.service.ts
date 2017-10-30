@@ -53,4 +53,9 @@ export class TripdataService {
       .pop()
   }
 
+  getRemoteTripBySlug(slug: string): Promise<Trip>{
+    return this.http.get(environment.API_ENDPOINT + 'trips/' + slug)
+    .map((res: Response) => res.json()).toPromise();
+  }
+
 }
