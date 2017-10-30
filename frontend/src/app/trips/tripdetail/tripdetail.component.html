@@ -1,5 +1,5 @@
 <div class="imagewrap">
-  <div class="imageelement map" leaflet [leafletOptions]="trip.options"></div>
+  <div class="imageelement map" leaflet [leafletOptions]="options"></div>
 </div>
 <div class="imagespacer"></div>
 <div class="container">
@@ -12,8 +12,8 @@
         </div>
         <div class="boxarea-content" [innerHTML]="trip?.description | safeHtml"></div>
 
-        <div class="imagegroup">
-          <div class="imagethumb" *ngFor="let image of trip?.gallery; let i=index">
+        <div class="imagegroup" *ngIf="trip.gallery.length > 0">
+          <div class="imagethumb" *ngFor="let image of trip.gallery; let i=index">
             <img [src]="image?.image.small" (click)="open(i)"/>
           </div>
         </div>
@@ -25,19 +25,20 @@
         <div class="card session-card">
           <div class="card-content">
             <p class="card-title">{{ trip?.start_date | date:'mediumDate' }}</p>
-
-            <div class="row" *ngFor="let extra of trip?.extrafields_set; let i=index">
-              <div class="col s12 m6">
-                <p class="brief"><strong>{{ extra.title}}</strong></p>
+            <div *ngIf="trip.extrafields_set.length > 0">
+              <div class="row" *ngFor="let extra of trip.extrafields_set; let i=index">
+                <div class="col s12 m6">
+                  <p class="brief"><strong>{{ extra.title}}</strong></p>
+                </div>
+                <div class="col s12 m6">
+                  <p class="brief">{{ extra.value}}</p>
+                </div>
               </div>
-              <div class="col s12 m6">
-                <p class="brief">{{ extra.value}}</p>
               </div>
-            </div>
-            <canvas baseChart style="width:100%;height:170px;"
+            <canvas baseChart style="width:100%;"
                     [datasets]="tideData"
-                    [options]="tideoptions"
-                    [colors]="colour"
+                    [options]="tideoptionslarge"
+                    [colors]="tideColour"
                     [chartType]="'line'"></canvas>
           </div>
         </div>
