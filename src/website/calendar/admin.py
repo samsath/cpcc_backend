@@ -104,6 +104,7 @@ class TripAdmin(TinyMCEAdminMixin, ModelAdmin):
                 'map',
                 'main_image',
                 'gallery',
+                'documents',
             )
         }),
         (_('Settings'),{

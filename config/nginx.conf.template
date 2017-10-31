@@ -1,10 +1,10 @@
 server {
-    server_name media.%(DOMAIN)s;
+    server_name media.%(DOMAIN)s media.chiswickcanoeclub.co.uk;
     root %(PATH)s/media;
     access_log  off;
 }
 server {
-    server_name static.%(DOMAIN)s;
+    server_name static.%(DOMAIN)s static.chiswickcanoeclub.co.uk;
     root %(PATH)s/media/static;
     access_log  off;
 
@@ -13,7 +13,7 @@ server {
     }
 }
 server {
-    server_name %(DOMAIN)s staging.chiswickcanoe.co.uk;
+    server_name %(DOMAIN)s staging.chiswickcanoe.co.uk chiswickcanoeclub.co.uk;
 
     access_log /var/log/nginx/%(PROJECT_NAME)s.access.log;
     client_max_body_size 100m;
@@ -122,6 +122,6 @@ server {
     error_page 404 index.html;
 }
 server {
-    server_name www.%(DOMAIN)s www.staging.chiswickcanoe.co.uk;
-    rewrite ^(.*) http://%(DOMAIN)s$1 permanent;
+    server_name www.%(DOMAIN)s www.staging.chiswickcanoe.co.uk www.chiswickcanoeclub.co.uk;
+    rewrite ^(.*) http://chiswickcanoeclub.co.uk$1 permanent;
 }

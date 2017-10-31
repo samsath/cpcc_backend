@@ -43,6 +43,7 @@ export class Trip {
   map:Media;
   main_image:Media;
   gallery:Array<Media>;
+  documents:Array<Media>;
   title: string;
   is_public:boolean;
   is_featured:boolean;

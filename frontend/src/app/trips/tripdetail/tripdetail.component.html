@@ -1,5 +1,5 @@
 <div class="imagewrap">
-  <div class="imageelement map" leaflet [leafletOptions]="options"></div>
+  <div class="imageelement map" leaflet [leafletOptions]="options" [leafletCenter]="center" [leafletFitBounds]="layer"></div>
 </div>
 <div class="imagespacer"></div>
 <div class="container">
@@ -11,6 +11,12 @@
           <h1>{{  trip?.title }}</h1>
         </div>
         <div class="boxarea-content" [innerHTML]="trip?.description | safeHtml"></div>
+
+        <div class="documentgroup" *ngIf="trip.documents.length > 0">
+          <div class="documentitem" *ngFor="let doc of trip.documents; let i=index">
+            <a *ngIf="doc?.download.file" href="{{ doc?.download.file }}" target="_blank" class="btn download">Download {{ doc?.download.name }}</a>
+          </div>
+        </div>
 
         <div class="imagegroup" *ngIf="trip.gallery.length > 0">
           <div class="imagethumb" *ngFor="let image of trip.gallery; let i=index">

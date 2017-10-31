@@ -211,6 +211,8 @@ class Trips(Base):
                             related_name='trips_main_image')
     gallery = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type__model': 'image'},
                                  related_name='trips_gallery')
+    documents = MultipleMediaField(blank=True, null=True, sorted=True, limit_choices_to={'content_type__model__in': ['download','pdf',]},
+                                 related_name='trips_document')
 
     def __unicode__(self):
         return "{0} on {1}".format(self.title, self.day)
@@ -221,7 +223,7 @@ class Trips(Base):
     class Meta:
         verbose_name = 'Trip'
         verbose_name_plural = 'Trips'
-        ordering = ['day',]
+        ordering = ['-day','-start_date','-end_date','title']
 
 
 class ExtraFields(models.Model):

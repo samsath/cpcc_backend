@@ -9,7 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // thirdparty
 import { MaterializeModule } from 'angular2-materialize';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { LeafletModule } from '@asymmetrik/angular2-leaflet';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts';
 import { LightboxModule } from 'angular2-lightbox';
@@ -112,6 +113,8 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes),
     CalendarModule.forRoot(),
+    LeafletModule.forRoot(),
+    LeafletDrawModule.forRoot(),
     MaterializeModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -119,7 +122,6 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     LazyLoadImageModule,
-    LeafletModule,
     ChartsModule,
     LightboxModule
   ],

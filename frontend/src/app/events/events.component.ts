@@ -111,8 +111,8 @@ export class EventsComponent implements OnInit {
       cell['tideData'] = [
         {data: item.tide, label: 'Tide'},
       ];
-      cell['plaEvents'] = Object.assign(item.plaevent_set.length );
-      cell['tideImportant'] = Object.assign(item.event_set.length);
+      cell['plaEvents'] = item.plaevent_set.length;
+      cell['tideImportant'] = item.event_set.length;
       });
 
     const tide:Array<any> = [
@@ -137,7 +137,7 @@ export class EventsComponent implements OnInit {
     cell['tideData'] = Object.assign(tide);
     cell['tideOptions'] = Object.assign(tideoptions);
     cell['tideColour'] = Object.assign(colour);
-    cell['tideEvents'] = Object.assign(0);
+    cell['tideEvents'] = 0;
   }
 
 

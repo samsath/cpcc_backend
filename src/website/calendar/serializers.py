@@ -80,6 +80,7 @@ class TripSerializer(serializers.ModelSerializer):
     map = MediaStoreSerializers(read_only=True)
     main_image = MediaStoreSerializers(read_only=True)
     gallery = MediaStoreSerializers(read_only=True, many=True)
+    documents = MediaStoreSerializers(read_only=True, many=True)
     day = CalendarBasicSerializer(read_only=True)
 
     class Meta:

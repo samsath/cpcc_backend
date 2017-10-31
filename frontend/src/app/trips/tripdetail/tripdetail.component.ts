@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Lightbox } from 'angular2-lightbox';
 import * as L from 'leaflet';
 import {routerTransition} from '../../router.animations';
+import {latLng} from "leaflet";
 
 @Component({
   selector: 'app-tripdetail',
@@ -18,10 +19,11 @@ export class TripdetailComponent implements OnInit {
   public slug;
   private _album = [];
   tideData: any[] = [{ data: [] }];
-  options: Object = {
-     layers: [
+  center = latLng(51.482293, -0.251203);
+  layer = [
             L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', { maxZoom: 18 }),
-          ],
+          ];
+  options = {
           zoom: 14,
           zoomControl:true,
   };
@@ -95,14 +97,14 @@ export class TripdetailComponent implements OnInit {
             let newpt = [pt[1], pt[0]];
             path.push(newpt);
           }
-          this.options = {
-            layers: [
+          this.center = L.latLng({lat: coord[1], lng: coord[0]});
+          this.layer = [
               L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', { maxZoom: 18 }),
               L.polyline(path,{color:'red'}),
-            ],
+            ];
+          this.options = {
             zoom: 14,
             zoomControl:true,
-            center:L.latLng({lat: coord[1], lng: coord[0]})
           }
           });
       });
