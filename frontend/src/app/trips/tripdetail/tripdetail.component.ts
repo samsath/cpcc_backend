@@ -15,14 +15,14 @@ import {latLng} from "leaflet";
   host: {'[@routerTransition]': ''}
 })
 export class TripdetailComponent implements OnInit {
+  mappath: any;
   trip: Trip;
   public slug;
   private _album = [];
   tideData: any[] = [{ data: [] }];
   center = latLng(51.482293, -0.251203);
-  layer = [
-            L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', { maxZoom: 18 }),
-          ];
+  layers = [];
+  baseLayers = {'Open Street Map': L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {maxZoom:18})};
   options = {
           zoom: 14,
           zoomControl:true,
@@ -98,10 +98,7 @@ export class TripdetailComponent implements OnInit {
             path.push(newpt);
           }
           this.center = L.latLng({lat: coord[1], lng: coord[0]});
-          this.layer = [
-              L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', { maxZoom: 18 }),
-              L.polyline(path,{color:'red'}),
-            ];
+          this.layers.push( L.polyline(path,{color:'red'}));
           this.options = {
             zoom: 14,
             zoomControl:true,

@@ -62,3 +62,7 @@ input:not([type]).invalid + label:after, input:not([type]):focus.invalid + label
 .mt40{
   margin-top:40px;
 }
+
+.leaflet-top.leaflet-right{
+    visibility: hidden !important;
+  }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Trip } from '../trips/trip';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-maplist-item',
@@ -11,9 +12,13 @@ export class MaplistItemComponent implements OnInit {
   @Input()
   trip: Trip;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToEndpoint(){
+    this.router.navigate(['trips',this.trip.slug]);
   }
 
 }

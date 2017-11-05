@@ -7,6 +7,7 @@ export class NextSession {
   date: string;
   content: string;
   club: boolean;
+  membersonly: boolean;
   temp: string;
   weather: number;
   tide: Array<TideTime>;

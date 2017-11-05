@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@asymmetrik/ngx-leaflet": "^2.5.0",
-    "@asymmetrik/ngx-leaflet-draw": "^2.6.0",
     "@types/leaflet": "^1.0.60",
     "@types/leaflet-draw": "^0.4.9",
     "angular-calendar": "https://github.com/samsath/angular-calendar/releases/download/v0.15.2a/angular-calendar-0.15.2a.tar.gz",
