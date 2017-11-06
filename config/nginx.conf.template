@@ -16,8 +16,7 @@ server {
     listen 443 ssl;
     server_tokens off;
 
-
-    server_name chiswickcanoeclub.co.uk www.chiswickcanoeclub.co.uk chiswickcanoe.co.uk www.chiswickcanoe.co.uk staging.chiswickcanoe.co.uk;
+    server_name www.chiswickcanoeclub.co.uk;
 
     access_log /var/log/nginx/%(PROJECT_NAME)s.access.log;
     client_max_body_size 100m;
