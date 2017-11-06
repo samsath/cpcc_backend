@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_ENDPOINT: 'http://www.chiswickcanoeclub.co.uk/api/v1/'
+  API_ENDPOINT: 'https://www.chiswickcanoeclub.co.uk/api/v1/'
 };

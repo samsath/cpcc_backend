@@ -13,10 +13,20 @@ server {
     }
 }
 server {
+    listen 443 ssl;
+    server_tokens off;
+
+
     server_name chiswickcanoeclub.co.uk www.chiswickcanoeclub.co.uk chiswickcanoe.co.uk www.chiswickcanoe.co.uk staging.chiswickcanoe.co.uk;
 
     access_log /var/log/nginx/%(PROJECT_NAME)s.access.log;
     client_max_body_size 100m;
+
+    ssl_certificate /etc/letsencrypt/live/chiswickcanoeclub.co.uk/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/chiswickcanoeclub.co.uk/privkey.pem;
+
+    ssl_protocols SSLv2 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
 
     gzip on;
     gzip_min_length 1100;
@@ -121,4 +131,12 @@ server {
         gzip_vary on;
     }
 
+}
+
+server {
+    listen 80;
+    server_tokens off;
+
+    server_name chiswickcanoeclub.co.uk www.chiswickcanoeclub.co.uk chiswickcanoe.co.uk www.chiswickcanoe.co.uk staging.chiswickcanoe.co.uk;
+    rewrite ^(.*) https://www.chiswickcanoeclub.co.uk$1 permanent;
 }
