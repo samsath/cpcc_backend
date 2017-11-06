@@ -49,11 +49,11 @@ def plaimport(jo):
             pla.description = jo['EventDescription']
         if 'EventClubName' in jo:
             pla.club_name = jo['EventClubName']
-        if 'EventClubLatitude' in jo:
+        if 'EventClubLatitude' in jo and jo['EventClubLatitude'] is not None and jo['EventClubLongitude'] is not None:
             pla.club_location = GEOSGeometry('POINT('+str(jo['EventClubLatitude'])+' '+str(jo['EventClubLongitude'])+')')
         if 'EventFromName' in jo:
             pla.from_name = jo['EventFromName']
-        if 'EventFromLatitude' in jo:
+        if 'EventFromLatitude' in jo and jo['EventFromLatitude'] is not None and jo['EventFromLongitude'] is not None:
             pla.from_location = GEOSGeometry('POINT('+str(jo['EventFromLatitude'])+' '+str(jo['EventFromLongitude'])+')')
         if 'EventFromDescription' in jo:
             pla.from_description = jo['EventFromDescription']
