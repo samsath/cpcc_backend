@@ -13,7 +13,7 @@ server {
     }
 }
 server {
-    server_name %(DOMAIN)s staging.chiswickcanoe.co.uk chiswickcanoeclub.co.uk;
+    server_name chiswickcanoeclub.co.uk www.chiswickcanoeclub.co.uk chiswickcanoe.co.uk www.chiswickcanoe.co.uk staging.chiswickcanoe.co.uk;
 
     access_log /var/log/nginx/%(PROJECT_NAME)s.access.log;
     client_max_body_size 100m;
@@ -23,6 +23,10 @@ server {
     gzip_buffers 4 32k;
     gzip_types text/plain application/x-javascript text/xml text/css;
     gzip_vary on;
+
+    location ~ /.well-known {
+            allow all;
+    }
 
     location /fonts/ {
         alias %(PATH)s/frontend/_bower_components/font-awesome/fonts/;
@@ -120,8 +124,4 @@ server {
 
 
     error_page 404 index.html;
-}
-server {
-    server_name www.%(DOMAIN)s www.staging.chiswickcanoe.co.uk www.chiswickcanoeclub.co.uk;
-    rewrite ^(.*) http://chiswickcanoeclub.co.uk$1 permanent;
 }
