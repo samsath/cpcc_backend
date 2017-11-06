@@ -112,7 +112,7 @@ server {
     location / {
         root %(PATH)s/frontend/dist;
         index index.html index.htm;
-        try_files $uri$args $uri$args/ $uri $uri/ /index.html =404;
+        try_files $uri$args $uri$args/ $uri $uri/ /index.html;
 
         gzip on;
         gzip_min_length 1100;
@@ -121,7 +121,4 @@ server {
         gzip_vary on;
     }
 
-
-
-    error_page 404 index.html;
 }
