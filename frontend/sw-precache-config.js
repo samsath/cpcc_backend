@@ -14,5 +14,14 @@ module.exports = {
   ],
   root: 'dist',
   stripPrefix: 'dist/',
-  navigateFallback: '/index.html'
+  navigateFallback: '/admin',
+  navigateFallbackWhitelist: [/^\/?!admin\//],
+  runtimeCaching: [{
+    urlPattern: /^https:\/\/www.chiswickcanoeclub\.co.uk\/admin/,
+    handler: 'networkOnly'
+  },
+  {
+    urlPattern: /^https:\/\/www.chiswickcanoeclub\.co.uk\/api/,
+    handler: 'networkFirst'
+  }]
 };
