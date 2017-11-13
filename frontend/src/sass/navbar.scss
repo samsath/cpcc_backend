@@ -12,6 +12,10 @@
       p{
         margin: 2px 66px;
         color:$darkblue;
+
+        .mobile{
+          display:none;
+        }
       }
 
       span.logoelement{
@@ -60,4 +64,17 @@
 }
 
 
+@media only screen and (max-width: 992px) {
 
+}
+
+@media only screen and (max-width: 690px) {
+  .brand-logo{
+    .nomible{
+      display:none !important;
+    }
+    .mobile{
+      display:block !important;
+    }
+  }
+}
