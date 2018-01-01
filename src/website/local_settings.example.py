@@ -36,8 +36,8 @@ DEFAULT_FROM_EMAIL = 'chiswickcanoe@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'chiswickcanoe@gmail.com'
-EMAIL_HOST_PASSWORD = 'CPCC26OCt2017website'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 
 #EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
