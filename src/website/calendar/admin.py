@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django import forms
 from mediastore.admin import ModelAdmin
+from .imports import calendarinput, calendarStartEndTide
 
 
 class WeatherTypeAdmin(TinyMCEAdminMixin,admin.ModelAdmin):
@@ -122,9 +123,19 @@ class PlaEventAdmin(admin.ModelAdmin):
     filter_horizontal = ('calendar',)
 
 
+def load_in_data(modeladmin, request, queryset):
+    for instance in queryset:
+        calendarinput(instance)
+        calendarStartEndTide(instance)
+
+
+load_in_data.short_description = 'Load the uploaded file to the System'
+
+
 class TideDataAdmin(admin.ModelAdmin):
-    list_display = ('file', 'created',)
+    list_display = ('id','file', 'created',)
     readonly_fields = ('inputted','converted',)
+    actions = [load_in_data]
 
 
 admin.site.register(WeatherTypes, WeatherTypeAdmin)

@@ -14,6 +14,7 @@ import math
 class TideData(models.Model):
     file = models.FileField(upload_to='tides/%Y/')
     inputted = models.BooleanField(_('Inputed data'), default=False)
+    year = models.CharField(_('Year'), max_length=4, blank=True, null=True)
     converted = ArrayField(ArrayField(models.FloatField(null=True, blank=True)), default=[],null=True, blank=True)
     created = CreationDateTimeField()
     modified = ModificationDateTimeField()

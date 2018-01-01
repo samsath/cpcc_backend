@@ -155,13 +155,16 @@ def calendarinput(Tideobject):
     tides_times = []
     tides_levels = []
     tides_combined = []
+    year = Tideobject.year
+    if not year:
+        year = datetime.now().year
 
     for page in input1.pages:
         page_data = page.extractText()
         date = None
         for item in page_data.split('\n'):
             if re_date.match(item):
-                date = datetime.strptime(item.replace(' ', '') + '2017', '%a%d%b%Y')
+                date = datetime.strptime(item.replace(' ', '') + year, '%a%d%b%Y')
             if re_time.match(item):
                 time = datetime.strptime(item, '%H:%M').time()
                 date_item = datetime.combine(date, time)
