@@ -13,6 +13,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts';
 import { LightboxModule } from 'angular2-lightbox';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 // services
 import { TidelevelDataService } from './shared/tidelevel-data.service';
@@ -121,7 +123,8 @@ const appRoutes: Routes = [
     HttpModule,
     LazyLoadImageModule,
     ChartsModule,
-    LightboxModule
+    LightboxModule,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
   providers: [
     TidelevelDataService,

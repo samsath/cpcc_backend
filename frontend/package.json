@@ -29,6 +29,7 @@
     "angular-calendar": "https://github.com/samsath/angular-calendar/releases/download/v0.15.2a/angular-calendar-0.15.2a.tar.gz",
     "angular2-lightbox": "^1.1.2",
     "angular2-materialize": "^15.1.10",
+    "angulartics2": "^4.1.3",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
