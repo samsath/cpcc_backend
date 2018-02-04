@@ -223,7 +223,7 @@ class ImageAdmin(ImageCroppingMixin, MediaAdmin):
         context = {
             'title': _('Add multiple %s') % str(opts.verbose_name_plural),
             'adminform': adminForm,
-            'is_popup': request.GET.has_key('_popup'),
+            'is_popup': '_popup' in request.GET,
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
