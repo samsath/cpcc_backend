@@ -8,18 +8,21 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.core.exceptions import PermissionDenied
 from django.db import transaction
-from django.contrib.gis import admin
+from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django import template
+from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from functools import update_wrapper
 from taggit.forms import TagField
 from mediastore.admin import MediaAdmin
 from mediastore.conf import settings
 from mediastore.mediatypes.image.models import Image
+from image_cropping import ImageCroppingMixin, ImageCropWidget
+
 
 try:
     from io import StringIO
@@ -81,7 +84,7 @@ class BatchUploadForm(forms.Form):
         name_scheme = self.cleaned_data['name_scheme']
         if not name_scheme:
             return filename
-        return name_scheme.replace('#', count)
+        return name_scheme.replace('#', force_unicode(count))
 
     def extract_to_file(self, filename, destdir):
         try:
@@ -103,8 +106,8 @@ class BatchUploadForm(forms.Form):
             outfile = '%s_%s' % (name, ext)
         dirname = os.path.dirname(outfile)
         if not os.path.exists(dirname):
-            os.makedirs(dirname, oct('0775'))
-        photofile = file(outfile, 'wb')
+            os.makedirs(dirname, b'0775')
+        photofile = open(outfile, 'wb')
         photofile.write(file_data.getvalue())
         photofile.close()
         if outfile.startswith(settings.MEDIA_ROOT):
@@ -136,7 +139,7 @@ class BatchUploadForm(forms.Form):
         return object_list
 
 
-class ImageAdmin(MediaAdmin):
+class ImageAdmin(ImageCroppingMixin, MediaAdmin):
     list_display = (
         'id',
         'preview',
@@ -144,7 +147,11 @@ class ImageAdmin(MediaAdmin):
         'width',
         'height',
         'mimetype',
-        'created')
+        'created',
+        'small_crop',
+        'medium_crop',
+        'large_crop',
+        'service_list_crop',)
     list_filter = ('mimetype',)
 
     add_many_form = BatchUploadForm
@@ -179,13 +186,12 @@ class ImageAdmin(MediaAdmin):
             'save_as': False,
             'save_on_top': False,
         })
-        context_instance = template.RequestContext(request,
-            current_app=self.admin_site.name)
-        return render_to_response(self.change_form_template or [
+
+        return render(request, self.change_form_template or [
             "admin/%s/%s/add_many_form.html" % (app_label, opts.object_name.lower()),
             "admin/%s/add_many_form.html" % app_label,
             "admin/add_many_form.html"
-        ], context, context_instance=context_instance)
+        ], context)
 
     def add_many_view(self, request, form_url='', extra_context=None):
         "The 'add' admin view for this model."
@@ -204,7 +210,8 @@ class ImageAdmin(MediaAdmin):
                 self.message_user(request, _(
                     '%(count)d %(verbose_name_plural)s were added successfully.') % {
                         'count': len(object_list),
-                        'verbose_name_plural': opts.verbose_name_plural})
+                        'verbose_name_plural': force_unicode(
+                            opts.verbose_name_plural)})
                 if self.has_change_permission(request, None):
                     post_url = '../'
                 else:
@@ -219,9 +226,9 @@ class ImageAdmin(MediaAdmin):
         inline_admin_formsets = []
 
         context = {
-            'title': _('Add multiple %s') % opts.verbose_name_plural,
+            'title': _('Add multiple %s') % force_unicode(opts.verbose_name_plural),
             'adminform': adminForm,
-            'is_popup': '_popup' in request.POST,
+            'is_popup': request.GET.has_key('_popup'),
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
