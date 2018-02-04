@@ -14,7 +14,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django import template
-from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from functools import update_wrapper
 from taggit.forms import TagField
@@ -84,7 +83,7 @@ class BatchUploadForm(forms.Form):
         name_scheme = self.cleaned_data['name_scheme']
         if not name_scheme:
             return filename
-        return name_scheme.replace('#', force_unicode(count))
+        return name_scheme.replace('#', str(count))
 
     def extract_to_file(self, filename, destdir):
         try:
@@ -210,7 +209,7 @@ class ImageAdmin(ImageCroppingMixin, MediaAdmin):
                 self.message_user(request, _(
                     '%(count)d %(verbose_name_plural)s were added successfully.') % {
                         'count': len(object_list),
-                        'verbose_name_plural': force_unicode(
+                        'verbose_name_plural': str(
                             opts.verbose_name_plural)})
                 if self.has_change_permission(request, None):
                     post_url = '../'
@@ -226,7 +225,7 @@ class ImageAdmin(ImageCroppingMixin, MediaAdmin):
         inline_admin_formsets = []
 
         context = {
-            'title': _('Add multiple %s') % force_unicode(opts.verbose_name_plural),
+            'title': _('Add multiple %s') % str(opts.verbose_name_plural),
             'adminform': adminForm,
             'is_popup': request.GET.has_key('_popup'),
             'show_delete': False,
