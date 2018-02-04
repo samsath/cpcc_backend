@@ -221,7 +221,7 @@ class ImageAdmin(MediaAdmin):
         context = {
             'title': _('Add multiple %s') % opts.verbose_name_plural,
             'adminform': adminForm,
-            'is_popup': '_popup' in request.REQUEST,
+            'is_popup': '_popup' in request.POST,
             'show_delete': False,
             'media': mark_safe(media),
             'inline_admin_formsets': inline_admin_formsets,
