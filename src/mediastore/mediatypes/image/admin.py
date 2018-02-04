@@ -146,11 +146,7 @@ class ImageAdmin(ImageCroppingMixin, MediaAdmin):
         'width',
         'height',
         'mimetype',
-        'created',
-        'small_crop',
-        'medium_crop',
-        'large_crop',
-        'service_list_crop',)
+        'created',)
     list_filter = ('mimetype',)
 
     add_many_form = BatchUploadForm
