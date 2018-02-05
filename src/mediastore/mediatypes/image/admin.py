@@ -24,9 +24,9 @@ from image_cropping import ImageCroppingMixin, ImageCropWidget
 
 
 try:
-    from io import StringIO
+    from io import StringIO, BytesIO
 except ImportError:
-    from io import StringIO
+    from io import StringIO, BytesIO
 
 
 class BatchUploadForm(forms.Form):
@@ -50,7 +50,7 @@ class BatchUploadForm(forms.Form):
     )
 
     def clean_archive(self):
-        zip1 = StringIO()
+        zip1 = BytesIO()
         for line in self.cleaned_data['archive'].chunks():
             zip1.write(line)
         try:
@@ -93,7 +93,7 @@ class BatchUploadForm(forms.Form):
 
         archive = self.cleaned_data['archive']
         data = archive.read(filename)
-        file_data = StringIO(data)
+        file_data = BytesIO(data)
         try:
             Image.open(file_data)
         except:
