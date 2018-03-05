@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/materialize-css/dist/css/materialize.css",
+        "materialize.scss",
         "../node_modules/leaflet/dist/leaflet.css",
         "../node_modules/angular-calendar/dist/css/angular-calendar.css",
         "../node_modules/angular2-lightbox/lightbox.css",

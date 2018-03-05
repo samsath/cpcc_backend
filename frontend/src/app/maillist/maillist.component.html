@@ -1,0 +1,29 @@
+<div class="card session-card">
+  <form class="card-content" [formGroup]="mailForm" (ngSubmit)="mailsend(mailForm.value)">
+    <span class="card-title">Subscribe to the Mailing list</span>
+    <p *ngIf="mailcomplete">Thank you for signing up, you should receive a email shortly.</p>
+    <div class="input-field">
+      <input id="sub_email" type="email" class="validate" name="email" [formControl]="mailForm.controls['email']" required>
+      <label for="sub_email">Email</label>
+    </div>
+
+    <div class="input-field">
+      <input id="sub_name" type="text" class="validate" name="name" [formControl]="mailForm.controls['name']" required>
+      <label for="sub_name">First Name</label>
+    </div>
+
+    <div class="input-field">
+      <input id="sub_lastname" type="text" class="validate" name="lastname" [formControl]="mailForm.controls['lastname']" required>
+      <label for="sub_lastname">Last Name</label>
+    </div>
+
+    <div class="hidden">
+      <input name="b_608521f94ccfeee308925028f_1068db21b2" tabindex="-1" value="" [formControl]="mailForm.controls['b_608521f94ccfeee308925028f_1068db21b2']" type="hidden">
+    </div>
+
+    <div class="input-field">
+      <button class="waves-effect waves-light btn" type="submit">Send</button>
+    </div>
+  </form>
+</div>
+

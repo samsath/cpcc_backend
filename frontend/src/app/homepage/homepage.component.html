@@ -7,7 +7,9 @@
   <div class="row">
 
     <app-content-area [column]="1" [title]="home.title" [content]="home.description" [paginate]="False" *ngFor="let home of homepage"></app-content-area>
-    <app-next-session></app-next-session>
+    <div class="col s12 m12 l3">
+      <app-next-session></app-next-session>
+    </div>
     <app-content-area *ngFor="let notif of notification" [paginate]="False" [column]="1" [title]="notif.title" [content]="notif.message"></app-content-area>
 
   </div>

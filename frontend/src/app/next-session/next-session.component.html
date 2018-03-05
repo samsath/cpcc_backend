@@ -1,15 +1,13 @@
-<div class="col s12 m12 l3">
-  <div class="card session-card">
-    <div class="card-content">
-      <span class="card-title">Next Session</span>
-      <p class="locationsection" *ngIf="session?.club">at Chiswick Pier</p>
-      <p class="locationsection" *ngIf="!session?.club">at the Pool</p>
-      <p class="date">{{(session)?.date}}</p>
-      <p class="brief">{{(session)?.content}}</p>
-    </div>
-    <div class="card-action">
-      <a href="/session">Find us</a>
-      <a href="/faq">FAQ</a>
-    </div>
+<div class="card session-card">
+  <div class="card-content">
+    <span class="card-title">Next Session</span>
+    <p class="locationsection" *ngIf="session?.club">at Chiswick Pier</p>
+    <p class="locationsection" *ngIf="!session?.club">at the Pool</p>
+    <p class="date">{{(session)?.date}}</p>
+    <p class="brief">{{(session)?.content}}</p>
+  </div>
+  <div class="card-action">
+    <a href="/session">Find us</a>
+    <a href="/faq">FAQ</a>
   </div>
 </div>

@@ -56,6 +56,7 @@ import { GallerylistComponent } from './gallery/gallerylist/gallerylist.componen
 import { GallerydetailComponent } from './gallery/gallerydetail/gallerydetail.component';
 import { EventlistComponent } from './events/eventlist/eventlist.component';
 import { EvetndetailComponent } from './events/evetndetail/evetndetail.component';
+import { MaillistComponent} from "./maillist/maillist.component";
 
 
 const appRoutes: Routes = [
@@ -110,6 +111,7 @@ const appRoutes: Routes = [
     GallerydetailComponent,
     EventlistComponent,
     EvetndetailComponent,
+    MaillistComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

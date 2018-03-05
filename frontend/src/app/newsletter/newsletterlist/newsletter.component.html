@@ -11,7 +11,7 @@
         <h1>Newsletter</h1>
         <p></p>
         <div class="collection" >
-          <a routerLink="/newsletter/{{ news.slug }}"class="collection-item" *ngFor="let news of newsletters">
+          <a routerLink="/newsletter/{{ news.slug }}" class="collection-item" *ngFor="let news of newsletters">
             <div class="col s2">
               {{ news.number}}
             </div>
@@ -26,6 +26,9 @@
         </div>
       </div>
     </div>
-    <app-next-session></app-next-session>
+    <div class="col s12 m12 l3">
+      <app-next-session></app-next-session>
+      <app-mailist></app-mailist>
+    </div>
   </div>
 </div>
