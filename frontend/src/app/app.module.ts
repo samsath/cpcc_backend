@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, XSRFStrategy, CookieXSRFStrategy } from '@angular/http';
+import { HttpModule, XSRFStrategy, JsonpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -118,6 +118,7 @@ const appRoutes: Routes = [
     CalendarModule.forRoot(),
     LeafletModule.forRoot(),
     MaterializeModule,
+    JsonpModule,
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,

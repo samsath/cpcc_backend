@@ -45,7 +45,7 @@ export class MaillistComponent implements OnInit {
     headers.append('Access-Control-Allow-Origin', '*');
     let url ='//chiswickcanoeclub.us10.list-manage.com/subscribe/post-json?u=608521f94ccfeee308925028f&amp;id=1068db21b2&subscribe=Subscribe&EMAIL='
       + form.email + '&FNAME=' + form.name + '&LNAME=' + form.last_name + '&b_608521f94ccfeee308925028f_1068db21b2='
-      + form.b_608521f94ccfeee308925028f_1068db21b2 + '&c=JSONP_CALLBACK';
+      + form.b_608521f94ccfeee308925028f_1068db21b2 + '&callback=JSONP_CALLBACK';
     this.jsonp.request(url, {method: 'Get'}).subscribe( ret_data => {
         console.log(ret_data);
         this.mailcomplete = true;
