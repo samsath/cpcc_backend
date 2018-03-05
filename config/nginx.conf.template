@@ -37,7 +37,7 @@ server {
             allow all;
     }
 
-    if ($host !~* ^(www.chiswickcanoeclub.co.uk | chiswickcanoeclub.co.uk)$ ){
+    if ($host !~* ^(www.chiswickcanoeclub.co.uk|chiswickcanoeclub.co.uk)$ ){
         return 444;
     }
 
