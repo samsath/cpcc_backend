@@ -41,6 +41,7 @@ export class MaillistComponent implements OnInit {
     headers.append('Access-Control-Allow-Headers', 'Content-Type');
     headers.append('Access-Control-Allow-Methods', 'GET');
     headers.append('Access-Control-Allow-Methods', 'POST');
+    headers.append('Access-Control-Allow-Methods', 'OPTIONS');
     headers.append('Access-Control-Allow-Origin', '*');
     this.http
       .post('//chiswickcanoeclub.us10.list-manage.com/subscribe/post?u=608521f94ccfeee308925028f&amp;id=1068db21b2',
