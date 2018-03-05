@@ -37,6 +37,10 @@ server {
             allow all;
     }
 
+    if ($host !~* ^(www.chiswickcanoeclub.co.uk | chiswickcanoeclub.co.uk)$ ){
+        return 444;
+    }
+
     location /fonts/ {
         alias %(PATH)s/frontend/_bower_components/font-awesome/fonts/;
         access_log off;
@@ -122,6 +126,10 @@ server {
         root %(PATH)s/frontend/dist;
         index index.html index.htm;
         try_files $uri$args $uri$args/ $uri $uri/ /index.html;
+
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
 
         gzip on;
         gzip_min_length 1100;
