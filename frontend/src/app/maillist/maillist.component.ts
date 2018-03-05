@@ -16,7 +16,7 @@ export class MaillistComponent implements OnInit {
   mailForm: FormGroup;
   mailcomplete = false;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private jsonp: Jsonp) {}
 
   ngOnInit(): void {
     this.mailForm = new FormGroup({
@@ -43,10 +43,10 @@ export class MaillistComponent implements OnInit {
     headers.append('Access-Control-Allow-Methods', 'POST');
     headers.append('Access-Control-Allow-Methods', 'OPTIONS');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.http
-      .post('//chiswickcanoeclub.us10.list-manage.com/subscribe/post?u=608521f94ccfeee308925028f&amp;id=1068db21b2',
-        JSON.stringify({ EMAIL: form.email, FNAME: form.name, LNAME: form.last_name, b_608521f94ccfeee308925028f_1068db21b2: form.b_608521f94ccfeee308925028f_1068db21b2  }),{headers: headers})
-      .subscribe( ret_data => {
+    let url ='//chiswickcanoeclub.us10.list-manage.com/subscribe/post-json?u=608521f94ccfeee308925028f&amp;id=1068db21b2&subscribe=Subscribe&EMAIL='
+      + form.email + '&FNAME=' + form.name + '&LNAME=' + form.last_name + '&b_608521f94ccfeee308925028f_1068db21b2='
+      + form.b_608521f94ccfeee308925028f_1068db21b2 + '&c=JSONP_CALLBACK';
+    this.jsonp.request(url, {method: 'Get'}).subscribe( ret_data => {
         console.log(ret_data);
         this.mailcomplete = true;
         this.mailForm.reset();
