@@ -12,6 +12,11 @@ from fabric.colors import blue, green, red, white, yellow, magenta
 from fabric.api import abort, cd, local, env, settings, sudo, get, put, hide
 from fabric.contrib import files
 from fabric.contrib.console import confirm
+import logging
+
+logging.basicConfig()
+paramiko_logger = logging.getLogger("paramiko.transport")
+paramiko_logger.disabled = True
 
 
 SPACE_SEPERATED_CONFIG_VALUES = [
